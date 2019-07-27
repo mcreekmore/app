@@ -50,9 +50,7 @@
                           </a>
                         </li>
                         <li>
-                          <a
-                            href="https://demos.creative-tim.com/vue-material-kit/documentation/"
-                          >
+                          <a href="https://demos.creative-tim.com/vue-material-kit/documentation/">
                             <i class="material-icons">content_paste</i>
                             <p>Documentation</p>
                           </a>
@@ -121,35 +119,20 @@
                 </a>
               </li>
 
-              <md-list-item
-                href="https://twitter.com/CreativeTim"
-                target="_blank"
-              >
+              <md-list-item href="https://twitter.com/CreativeTim" target="_blank">
                 <i class="fab fa-twitter"></i>
                 <p class="hidden-lg">Twitter</p>
-                <md-tooltip md-direction="bottom"
-                  >Follow us on Twitter</md-tooltip
-                >
+                <md-tooltip md-direction="bottom">Follow us on Twitter</md-tooltip>
               </md-list-item>
-              <md-list-item
-                href="https://www.facebook.com/CreativeTim"
-                target="_blank"
-              >
+              <md-list-item href="https://www.facebook.com/CreativeTim" target="_blank">
                 <i class="fab fa-facebook-square"></i>
                 <p class="hidden-lg">Facebook</p>
-                <md-tooltip md-direction="bottom"
-                  >Like us on Facebook</md-tooltip
-                >
+                <md-tooltip md-direction="bottom">Like us on Facebook</md-tooltip>
               </md-list-item>
-              <md-list-item
-                href="https://www.instagram.com/CreativeTimOfficial"
-                target="_blank"
-              >
+              <md-list-item href="https://www.instagram.com/CreativeTimOfficial" target="_blank">
                 <i class="fab fa-instagram"></i>
                 <p class="hidden-lg">Instagram</p>
-                <md-tooltip md-direction="bottom"
-                  >Follow us on Instagram</md-tooltip
-                >
+                <md-tooltip md-direction="bottom">Follow us on Instagram</md-tooltip>
               </md-list-item>
             </md-list>
           </div>
