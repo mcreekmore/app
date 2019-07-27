@@ -10,7 +10,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "serve": "nodemon server.js"
   },
   "author": "",
   "license": "ISC"
