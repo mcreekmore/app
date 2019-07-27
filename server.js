@@ -4,10 +4,10 @@ const cors = require("cors");
 
 app.use(cors());
 
-PORT = process.env.PORT || 8080;
+PORT = process.env.PORT || 3000;
 
 app.get("/", function(req, res) {
-  return res.send("Hello world");
+  return res.send("Hello world!");
 });
 
 console.log(`Listening on port ${PORT}`);
