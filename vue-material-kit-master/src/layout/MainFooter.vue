@@ -8,31 +8,19 @@
       <nav>
         <ul>
           <li>
-            <a href="https://www.creative-tim.com">
-              Creative Tim
-            </a>
+            <a href="https://www.linkedin.com/in/creekmore/">LinkedIn</a>
           </li>
           <li>
-            <a href="https:///presentation.creative-tim.com">
-              About Us
-            </a>
+            <a href="https://github.com/mcreekmore/">GitHub</a>
           </li>
           <li>
-            <a href="https:///blog.creative-tim.com">
-              Blog
-            </a>
-          </li>
-          <li>
-            <a href="https://www.creative-tim.com/license">
-              Licenses
-            </a>
+            <a href="https://www.instagram.com/matthewcreekmore/">Instagram</a>
           </li>
         </ul>
       </nav>
       <div class="copyright">
-        &copy; {{ year }}, made with <md-icon>favorite</md-icon> by
-        <a href="https://www.creative-tim.com/" target="_blank">Creative Tim</a>
-        for a better web.
+        &copy; {{ year }}, made by
+        <a href="https://www.google.com/" target="_blank">Matt Creekmore</a>
       </div>
     </div>
   </footer>

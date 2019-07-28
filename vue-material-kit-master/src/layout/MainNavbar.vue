@@ -8,7 +8,7 @@
   >
     <div class="md-toolbar-row md-collapse-lateral">
       <div class="md-toolbar-section-start">
-        <h3 class="md-title">Vue Material Kit</h3>
+        <h3 class="md-title">Matt Creekmore</h3>
       </div>
       <div class="md-toolbar-section-end">
         <md-button
@@ -27,7 +27,7 @@
               <!-- Here you can add your items from the section-start of your toolbar -->
             </mobile-menu>
             <md-list>
-              <li class="md-list-item" v-if="!showDownload">
+              <!-- <li class="md-list-item" v-if="!showDownload">
                 <a
                   href="javascript:void(0)"
                   class="md-list-item-router md-list-item-container md-button-clean dropdown"
@@ -59,27 +59,25 @@
                     </drop-down>
                   </div>
                 </a>
-              </li>
+              </li>-->
 
               <md-list-item
                 href="https://demos.creative-tim.com/vue-material-kit/documentation/"
                 target="_blank"
-                v-if="showDownload"
               >
+                <!-- v-if="showDownload" -->
                 <i class="material-icons">content_paste</i>
                 <p>Documentation</p>
               </md-list-item>
 
-              <md-list-item
-                href="javascript:void(0)"
-                @click="scrollToElement()"
-                v-if="showDownload"
-              >
+              <md-list-item href="javascript:void(0)" @click="scrollToElement()">
+                <!--v-if="showDownload"-->
                 <i class="material-icons">cloud_download</i>
                 <p>Download</p>
               </md-list-item>
 
-              <li class="md-list-item" v-else>
+              <li class="md-list-item">
+                <!-- v-else -->
                 <a
                   href="javascript:void(0)"
                   class="md-list-item-router md-list-item-container md-button-clean dropdown"
@@ -119,20 +117,20 @@
                 </a>
               </li>
 
-              <md-list-item href="https://twitter.com/CreativeTim" target="_blank">
-                <i class="fab fa-twitter"></i>
-                <p class="hidden-lg">Twitter</p>
-                <md-tooltip md-direction="bottom">Follow us on Twitter</md-tooltip>
+              <md-list-item href="https://www.linkedin.com/in/creekmore/" target="_blank">
+                <i class="fab fa-linkedin"></i>
+                <p class="hidden-lg">LinkedIn</p>
+                <md-tooltip md-direction="bottom">Connect with me on LinkedIn</md-tooltip>
               </md-list-item>
-              <md-list-item href="https://www.facebook.com/CreativeTim" target="_blank">
-                <i class="fab fa-facebook-square"></i>
-                <p class="hidden-lg">Facebook</p>
-                <md-tooltip md-direction="bottom">Like us on Facebook</md-tooltip>
+              <md-list-item href="https://github.com/mcreekmore/" target="_blank">
+                <i class="fab fa-github"></i>
+                <p class="hidden-lg">GitHub</p>
+                <md-tooltip md-direction="bottom">Chek me out on GitHub</md-tooltip>
               </md-list-item>
-              <md-list-item href="https://www.instagram.com/CreativeTimOfficial" target="_blank">
+              <md-list-item href="https://www.instagram.com/matthewcreekmore/" target="_blank">
                 <i class="fab fa-instagram"></i>
                 <p class="hidden-lg">Instagram</p>
-                <md-tooltip md-direction="bottom">Follow us on Instagram</md-tooltip>
+                <md-tooltip md-direction="bottom">Follow me on Instagram</md-tooltip>
               </md-list-item>
             </md-list>
           </div>
@@ -188,12 +186,12 @@ export default {
       toggledClass: false
     };
   },
-  computed: {
-    showDownload() {
-      const excludedRoutes = ["login", "landing", "profile"];
-      return excludedRoutes.every(r => r !== this.$route.name);
-    }
-  },
+  // computed: {
+  //   showDownload() {
+  //     const excludedRoutes = ["login", "landing", "profile"];
+  //     return excludedRoutes.every(r => r !== this.$route.name);
+  //   }
+  // },
   methods: {
     bodyClick() {
       let bodyClick = document.getElementById("bodyClick");
