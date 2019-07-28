@@ -1,9 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
-
 import IndexOriginal from "./views/Index.vue";
 import Index from "./views/Main.vue"; // my custom page
-
 import Landing from "./views/Landing.vue";
 import Login from "./views/Login.vue";
 import Profile from "./views/Profile.vue";

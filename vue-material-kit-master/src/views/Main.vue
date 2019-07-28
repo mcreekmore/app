@@ -104,7 +104,8 @@
 
                     <md-card-content>
                       <p class="card-description">
-                        Thanks for visiting my page! I am an undergraduate studying at the University of North Carolina Wilmington.
+                        Thanks for visiting my page! I am an undergraduate studying Management Information Systems and Business Analytics
+                        at the University of North Carolina Wilmington.
                         I've always had a passion for technology and learning new things.
                         This website is the central location for me to test out projects and new features.
                       </p>
@@ -139,7 +140,7 @@
         </div>
       </div>
 
-      <div class="section text-center">
+      <div class="section text-center" id="projectStack">
         <div class="container">
           <h2 class="title">Project Stack</h2>
           <div class="team">
@@ -158,13 +159,11 @@
 
                     <md-card-content>
                       <p class="card-description">
-                        You can write here details about one of your team
-                        members. You can give more details about what they do.
-                        Feel free to add some
+                        Thanks to the developers of
+                        <a href="https://vuejs.org/">Vue</a> and
                         <a
-                          href="#"
-                        >links</a> for people
-                        to be able to follow them outside the site.
+                          href="https://www.creative-tim.com/product/vue-material-kit"
+                        >Vue Material Kit</a>, the front end dev felt effortless.
                       </p>
                     </md-card-content>
                   </md-card>
@@ -184,13 +183,10 @@
 
                     <md-card-content>
                       <p class="card-description">
-                        You can write here details about one of your team
-                        members. You can give more details about what they do.
-                        Feel free to add some
+                        "Node.js is an open-source, cross-platform JavaScript run-time environment that executes JavaScript code outside of a browser." -
                         <a
-                          href="#"
-                        >links</a> for people
-                        to be able to follow them outside the site.
+                          href="https://en.wikipedia.org/wiki/Node.js"
+                        >Wikipedia</a>
                       </p>
                     </md-card-content>
                   </md-card>
@@ -210,13 +206,12 @@
 
                     <md-card-content>
                       <p class="card-description">
-                        You can write here details about one of your team
-                        members. You can give more details about what they do.
-                        Feel free to add some
+                        All API requests are directed to /api and are asynchronous.
+                        This project is using
                         <a
-                          href="#"
-                        >links</a> for people
-                        to be able to follow them outside the site.
+                          href="https://mongoosejs.com/"
+                        >mongoose</a> to interface with mongo.
+                        Depending on how the project evolves, I may add a SQL database.
                       </p>
                     </md-card-content>
                   </md-card>
@@ -236,13 +231,10 @@
 
                     <md-card-content>
                       <p class="card-description">
-                        You can write here details about one of your team
-                        members. You can give more details about what they do.
-                        Feel free to add some
+                        MongoDB is classified as a 'nosql' database that houses all incoming messages and
                         <a
-                          href="#"
-                        >links</a> for people
-                        to be able to follow them outside the site.
+                          href="#/login"
+                        >user profiles</a> (coming soon)
                       </p>
                     </md-card-content>
                   </md-card>
@@ -261,6 +253,9 @@
               <h4
                 class="text-center description"
               >Ask a question. Share something interesting. Tell me a secret...</h4>
+              <h4
+                class="text-center description"
+              >Hold your horses, buckaroo. This doesn't work quite yet.</h4>
               <form class="contact-form">
                 <div class="md-layout">
                   <div class="md-layout-item md-size-50">

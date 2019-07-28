@@ -232,7 +232,7 @@ export default {
       resizeThrottler(this.handleScroll);
     },
     scrollToElement() {
-      let element_id = document.getElementById("downloadSection");
+      let element_id = document.getElementById("projectStack");
       if (element_id) {
         element_id.scrollIntoView({ block: "end", behavior: "smooth" });
       }
