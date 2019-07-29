@@ -61,24 +61,29 @@
                 </a>
               </li>-->
 
-              <md-list-item
+              <md-list-item href="#/login">
+                <i class="material-icons">perm_identity</i>
+                <p>Login</p>
+              </md-list-item>
+
+              <!-- <md-list-item
                 href="https://demos.creative-tim.com/vue-material-kit/documentation/"
                 target="_blank"
-              >
-                <!-- v-if="showDownload" -->
-                <i class="material-icons">content_paste</i>
+              >-->
+              <!-- v-if="showDownload" -->
+              <!-- <i class="material-icons">content_paste</i>
                 <p>Documentation</p>
-              </md-list-item>
+              </md-list-item>-->
 
-              <md-list-item href="javascript:void(0)" @click="scrollToElement()">
-                <!--v-if="showDownload"-->
-                <i class="material-icons">cloud_download</i>
+              <!-- <md-list-item href="javascript:void(0)" @click="scrollToElement()"> -->
+              <!--v-if="showDownload"-->
+              <!-- <i class="material-icons">cloud_download</i>
                 <p>Download</p>
-              </md-list-item>
+              </md-list-item>-->
 
-              <li class="md-list-item">
-                <!-- v-else -->
-                <a
+              <!-- <li class="md-list-item"> -->
+              <!-- v-else -->
+              <!-- <a
                   href="javascript:void(0)"
                   class="md-list-item-router md-list-item-container md-button-clean dropdown"
                 >
@@ -115,7 +120,7 @@
                     </drop-down>
                   </div>
                 </a>
-              </li>
+              </li>-->
 
               <md-list-item href="https://www.linkedin.com/in/creekmore/" target="_blank">
                 <i class="fab fa-linkedin"></i>
