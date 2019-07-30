@@ -240,6 +240,29 @@
                   </md-card>
                 </div>
               </div>
+              <div class="md-layout-item md-medium-size-33 md-small-size-100">
+                <div class="team-player">
+                  <md-card class="md-card-plain">
+                    <div class="md-layout-item md-size-50 mx-auto">
+                      <img :src="nginxImg" alt="Thumbnail Image" class="img-fluid" />
+                    </div>
+                    <h4 class="card-title">
+                      NGINX
+                      <br />
+                      <small class="card-description text-muted">Web server</small>
+                    </h4>
+
+                    <md-card-content>
+                      <p class="card-description">
+                        Hosting from a Raspberry Pi 3 Model B.
+                        <a
+                          href="https://letsencrypt.org/"
+                        >Let's Encrypt</a> made adding and automatic renewal of an SSL certificate extremely easy.
+                      </p>
+                    </md-card-content>
+                  </md-card>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -316,6 +339,10 @@ export default {
     mongodbImg: {
       type: String,
       default: require("@/assets/img/stack/mongodb.png")
+    },
+    nginxImg: {
+      type: String,
+      default: require("@/assets/img/stack/nginx.jpg")
     }
   },
   data() {
