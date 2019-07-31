@@ -1,30 +1,11 @@
 <template>
-  <div id="app">
-    <!-- <div id="nav">
-      <header />
-      <router-link to="/">Home</router-link>|
-      <router-link to="/about">About</router-link>
-    </div>-->
-    <headerVue />
-    <router-view />
+  <div id="material-kit">
+    <div :class="{ 'nav-open': NavbarStore.showNavbar }">
+      <router-view name="header" />
+      <div>
+        <router-view />
+      </div>
+      <router-view name="footer" />
+    </div>
   </div>
 </template>
-
-<script>
-import headerVue from "./components/headerVue";
-export default {
-  components: {
-    headerVue
-  }
-};
-</script>
-
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-</style>
