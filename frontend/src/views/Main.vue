@@ -381,7 +381,7 @@ export default {
           message
         })
         //.then(res => (this.message = res.data))
-        .then(res => console.log(res))
+        .then(res => console.log(res.data))
         .catch(err => console.log(err));
       this.name = null;
       this.email = null;
