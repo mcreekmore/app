@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const nodeMailer = require("nodemailer"); //mail
-const validator = require("email-validator");
 
 // Messages Model
 const Message = require("../../models/Message");

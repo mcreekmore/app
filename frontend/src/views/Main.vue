@@ -346,7 +346,8 @@
                   <div class="alert-icon">
                     <md-icon>warning</md-icon>
                   </div>
-                  <b>Warning</b> : All fields are required.
+                  <b>Warning</b>
+                  : {{ warningAlertMessage }}
                 </div>
               </div>
               <div class="alert alert-danger" id="emailErrorAlert" v-show="showErrorAlert">
@@ -376,6 +377,8 @@
 
 <script>
 import axios from "axios";
+//const validator = require("email-validator");
+import * as EmailValidator from "email-validator";
 export default {
   bodyClass: "landing-page",
   props: {
@@ -416,7 +419,8 @@ export default {
       nameAlert: null,
       showSuccessAlert: false,
       showWarningAlert: false,
-      showErrorAlert: false
+      showErrorAlert: false,
+      warningAlertMessage: ""
     };
   },
   computed: {
@@ -433,10 +437,16 @@ export default {
       this.showWarningAlert = false;
       this.showErrorAlert = false;
 
-      if ((name == null) | (email == null) | (message == null))
-        return (this.showWarningAlert = true);
-      else if (!isEmailValid()) return (this.showWarningAlert = true);
-
+      if ((name == null) | (email == null) | (message == null)) {
+        this.showWarningAlert = true;
+        this.warningAlertMessage = "All fields are required";
+        return;
+      } else if (!this.isEmailValid(email)) {
+        this.showWarningAlert = true;
+        this.warningAlertMessage = "Must be a valid Email";
+        this.email = null;
+        return;
+      }
       axios
         .post("/api/messages", {
           name,
@@ -472,13 +482,10 @@ export default {
       this.showSuccessAlert = false;
       this.showWarningAlert = false;
       this.showErrorAlert = false;
+      this.warningAlertMessage = "";
     },
-    isEmailValid: function() {
-      return this.email == ""
-        ? ""
-        : this.reg.test(this.email)
-        ? "has-success"
-        : "has-error";
+    isEmailValid(email) {
+      return EmailValidator.validate(email);
     }
   }
 };
