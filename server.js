@@ -2,12 +2,16 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const messages = require("./routes/api/messages");
+const email = require("./routes/api/email");
 
 const app = express();
 
 // middleware
 app.use(cors());
 app.use(express.json());
+// email middleware
+app.use(express.static("src"));
+app.use(express.urlencoded({ extended: true }));
 
 // DB config
 const db = require("./config/keys").mongoURI;
@@ -20,6 +24,8 @@ mongoose
 
 // Use messages route
 app.use("/api/messages", messages);
+// Use email route
+app.use("/api/email", email);
 
 port = process.env.PORT || 3000;
 

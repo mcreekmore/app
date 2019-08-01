@@ -285,9 +285,7 @@
               <h4
                 class="text-center description"
               >Ask a question. Share something interesting. Tell me a secret...</h4>
-              <h4
-                class="text-center description"
-              >Hold your horses, buckaroo. This doesn't work quite yet.</h4>
+
               <form class="contact-form">
                 <div class="md-layout">
                   <div class="md-layout-item md-size-50">
@@ -315,7 +313,59 @@
                     >Send Message</md-button>
                   </div>
                 </div>
+                <br />
               </form>
+              <div class="alert alert-success" id="emailAlert" v-show="showSuccessAlert">
+                <div class="container">
+                  <button
+                    type="button"
+                    aria-hidden="true"
+                    class="close"
+                    @click="event => removeNotify()"
+                  >
+                    <md-icon>clear</md-icon>
+                  </button>
+                  <div class="alert-icon">
+                    <md-icon>check</md-icon>
+                  </div>
+
+                  <b>Email Sent Successfully</b>
+                  : Thank you {{ nameAlert }} for submitting a message!
+                </div>
+              </div>
+              <div class="alert alert-warning" v-show="showWarningAlert">
+                <div class="container">
+                  <button
+                    type="button"
+                    aria-hidden="true"
+                    class="close"
+                    @click="event => removeNotify()"
+                  >
+                    <md-icon>clear</md-icon>
+                  </button>
+                  <div class="alert-icon">
+                    <md-icon>warning</md-icon>
+                  </div>
+                  <b>Warning</b> : All fields are required.
+                </div>
+              </div>
+              <div class="alert alert-danger" id="emailErrorAlert" v-show="showErrorAlert">
+                <div class="container">
+                  <button
+                    type="button"
+                    aria-hidden="true"
+                    class="close"
+                    @click="event => removeNotify()"
+                  >
+                    <md-icon>clear</md-icon>
+                  </button>
+                  <div class="alert-icon">
+                    <md-icon>info_outline</md-icon>
+                  </div>
+                  <b>Error sending email</b>
+                  : Sorry {{ name }}, but something went wrong. Please try again.
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -362,7 +412,11 @@ export default {
     return {
       name: null,
       email: null,
-      message: null
+      message: null,
+      nameAlert: null,
+      showSuccessAlert: false,
+      showWarningAlert: false,
+      showErrorAlert: false
     };
   },
   computed: {
@@ -374,18 +428,57 @@ export default {
   },
   methods: {
     createMessage(name, email, message) {
+      // clear alerts on submission
+      this.showSuccessAlert = false;
+      this.showWarningAlert = false;
+      this.showErrorAlert = false;
+
+      if ((name == null) | (email == null) | (message == null))
+        return (this.showWarningAlert = true);
+      else if (!isEmailValid()) return (this.showWarningAlert = true);
+
       axios
         .post("/api/messages", {
           name,
           email,
           message
         })
-        //.then(res => (this.message = res.data))
-        .then(res => console.log(res.data))
-        .catch(err => console.log(err));
-      this.name = null;
-      this.email = null;
-      this.message = "";
+        .then(res => {
+          //console.log(res.data);
+          //console.log(res.status);
+          if (res.status == 200) {
+            this.nameAlert = name;
+            this.showSuccessAlert = true;
+            this.showErrorAlert = false;
+            this.name = null;
+            this.email = null;
+            this.message = null;
+          } // else if (!res.body.email) { // Warning
+          //   console.log("bad email");
+          //   this.showWarningAlert = true;
+          // }
+          else {
+            this.nameAlert = name;
+            this.showErrorAlert = true;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          this.nameAlert = name;
+          this.showErrorAlert = true;
+        });
+    },
+    removeNotify() {
+      this.showSuccessAlert = false;
+      this.showWarningAlert = false;
+      this.showErrorAlert = false;
+    },
+    isEmailValid: function() {
+      return this.email == ""
+        ? ""
+        : this.reg.test(this.email)
+        ? "has-success"
+        : "has-error";
     }
   }
 };
