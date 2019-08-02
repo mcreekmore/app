@@ -8,6 +8,7 @@ const app = express();
 
 // middleware
 app.use(cors());
+app.options("*", cors());
 app.use(express.json());
 // email middleware
 app.use(express.static("src"));

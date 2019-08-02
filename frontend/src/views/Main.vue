@@ -447,8 +447,11 @@ export default {
         this.email = null;
         return;
       }
+
+      console.log(process.env.API_URL);
+
       axios
-        .post("/api/messages", {
+        .post("http://localhost:3000/api/messages", {
           name,
           email,
           message

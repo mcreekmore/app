@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  client:
+    build: ./frontend
+    ports:
+      - 8080:8080
+    volumes:
+      - ./frontend:/data
+    environment:
+      - API_URL=http://server:3000
+    depends_on:
+      - server
+    network_mode: host
+
+  server:
+    build: ./backend
+    ports:
+      # - 8081:8181
+      - 3000:3000
+    expose:
+      - "3000"
+    volumes:
+      - ./backend:/data
+    depends_on:
+      - mongo
+    environment:
+      - DATABASE_URL=server-database:27017
+
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./db:/data/db
