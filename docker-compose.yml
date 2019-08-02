@@ -16,7 +16,6 @@ services:
   server:
     build: ./backend
     ports:
-      # - 8081:8181
       - 3000:3000
     expose:
       - "3000"
