@@ -448,7 +448,7 @@ export default {
         return;
       }
 
-      console.log(process.env.API_URL);
+      console.log(process.env.VUE_APP_API_URL);
 
       axios
         .post("http://localhost:3000/api/messages", {

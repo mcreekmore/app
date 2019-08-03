@@ -2,13 +2,13 @@ version: "3"
 
 services:
   client:
+    environment:
+      - VUE_APP_API_URL="server:3000"
     build: ./frontend
     ports:
-      - 8080:8080
+      - 80:80
     volumes:
       - ./frontend:/data
-    environment:
-      - API_URL=http://server:3000
     depends_on:
       - server
     network_mode: host
