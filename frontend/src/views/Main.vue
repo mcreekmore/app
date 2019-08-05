@@ -364,7 +364,8 @@
                     <md-icon>info_outline</md-icon>
                   </div>
                   <b>Error sending email</b>
-                  : Sorry {{ name }}, but something went wrong. Please try again.
+                  : Sorry {{ name }}, but something went wrong. Please try
+                  again.
                 </div>
               </div>
             </div>
@@ -449,6 +450,7 @@ export default {
       }
 
       console.log(process.env.VUE_APP_API_URL);
+      console.log(process.env);
 
       axios
         .post("http://localhost:3000/api/messages", {
