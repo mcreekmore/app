@@ -3,7 +3,9 @@
     <parallax class="section page-header header-filter" :style="headerStyle">
       <div class="container">
         <div class="md-layout">
-          <div class="md-layout-item md-size-50 md-small-size-70 md-xsmall-size-100">
+          <div
+            class="md-layout-item md-size-50 md-small-size-70 md-xsmall-size-100"
+          >
             <h1 class="title">Matt Creekmore</h1>
             <h4>
               Welcome to my page. I'm an aspiring software developer interested
@@ -100,7 +102,9 @@
                     <h4 class="card-title">
                       Matt Creekmore
                       <br />
-                      <small class="card-description text-muted">Developer in training</small>
+                      <small class="card-description text-muted"
+                        >Developer in training</small
+                      >
                     </h4>
 
                     <md-card-content>
@@ -112,6 +116,7 @@
                         learning new things. This website is the central
                         location for me to test out projects and new features.
                       </p>
+                      <p>Its not quite finished yet</p>
                     </md-card-content>
 
                     <md-card-actions class="text-center">
@@ -152,12 +157,18 @@
                 <div class="team-player">
                   <md-card class="md-card-plain">
                     <div class="md-layout-item md-size-50 mx-auto">
-                      <img :src="vueImg" alt="Thumbnail Image" class="img-fluid" />
+                      <img
+                        :src="vueImg"
+                        alt="Thumbnail Image"
+                        class="img-fluid"
+                      />
                     </div>
                     <h4 class="card-title">
                       Vue
                       <br />
-                      <small class="card-description text-muted">Frontend framework</small>
+                      <small class="card-description text-muted"
+                        >Frontend framework</small
+                      >
                     </h4>
 
                     <md-card-content>
@@ -166,7 +177,8 @@
                         <a href="https://vuejs.org/">Vue</a> and
                         <a
                           href="https://www.creative-tim.com/product/vue-material-kit"
-                        >Vue Material Kit</a>, the front end dev felt effortless.
+                          >Vue Material Kit</a
+                        >, the front end dev felt effortless.
                       </p>
                     </md-card-content>
                   </md-card>
@@ -176,7 +188,11 @@
                 <div class="team-player">
                   <md-card class="md-card-plain">
                     <div class="md-layout-item md-size-50 mx-auto">
-                      <img :src="nodeImg" alt="Thumbnail Image" class="img-fluid" />
+                      <img
+                        :src="nodeImg"
+                        alt="Thumbnail Image"
+                        class="img-fluid"
+                      />
                     </div>
                     <h4 class="card-title">
                       Node
@@ -189,9 +205,9 @@
                         "Node.js is an open-source, cross-platform JavaScript
                         run-time environment that executes JavaScript code
                         outside of a browser." -
-                        <a
-                          href="https://en.wikipedia.org/wiki/Node.js"
-                        >Wikipedia</a>
+                        <a href="https://en.wikipedia.org/wiki/Node.js"
+                          >Wikipedia</a
+                        >
                       </p>
                     </md-card-content>
                   </md-card>
@@ -201,21 +217,25 @@
                 <div class="team-player">
                   <md-card class="md-card-plain">
                     <div class="md-layout-item md-size-50 mx-auto">
-                      <img :src="expressImg" alt="Thumbnail Image" class="img-fluid" />
+                      <img
+                        :src="expressImg"
+                        alt="Thumbnail Image"
+                        class="img-fluid"
+                      />
                     </div>
                     <h4 class="card-title">
                       Express
                       <br />
-                      <small class="card-description text-muted">API framework</small>
+                      <small class="card-description text-muted"
+                        >API framework</small
+                      >
                     </h4>
 
                     <md-card-content>
                       <p class="card-description">
                         All API requests are directed to /api and are
                         asynchronous. This project is using
-                        <a
-                          href="https://mongoosejs.com/"
-                        >mongoose</a> to
+                        <a href="https://mongoosejs.com/">mongoose</a> to
                         interface with mongo. Depending on how the project
                         evolves, I may add a SQL database.
                       </p>
@@ -227,21 +247,25 @@
                 <div class="team-player">
                   <md-card class="md-card-plain">
                     <div class="md-layout-item md-size-50 mx-auto">
-                      <img :src="mongodbImg" alt="Thumbnail Image" class="img-fluid" />
+                      <img
+                        :src="mongodbImg"
+                        alt="Thumbnail Image"
+                        class="img-fluid"
+                      />
                     </div>
                     <h4 class="card-title">
                       MongoDB
                       <br />
-                      <small class="card-description text-muted">Database</small>
+                      <small class="card-description text-muted"
+                        >Database</small
+                      >
                     </h4>
 
                     <md-card-content>
                       <p class="card-description">
                         MongoDB is classified as a 'nosql' database that houses
                         all incoming messages and
-                        <a
-                          href="#/login"
-                        >user profiles</a> (coming soon)
+                        <a href="#/login">user profiles</a> (coming soon)
                       </p>
                     </md-card-content>
                   </md-card>
@@ -251,20 +275,24 @@
                 <div class="team-player">
                   <md-card class="md-card-plain">
                     <div class="md-layout-item md-size-50 mx-auto">
-                      <img :src="nginxImg" alt="Thumbnail Image" class="img-fluid" />
+                      <img
+                        :src="nginxImg"
+                        alt="Thumbnail Image"
+                        class="img-fluid"
+                      />
                     </div>
                     <h4 class="card-title">
                       NGINX
                       <br />
-                      <small class="card-description text-muted">Web server</small>
+                      <small class="card-description text-muted"
+                        >Web server</small
+                      >
                     </h4>
 
                     <md-card-content>
                       <p class="card-description">
                         Hosting from a Raspberry Pi 3 Model B.
-                        <a
-                          href="https://letsencrypt.org/"
-                        >Let's Encrypt</a>
+                        <a href="https://letsencrypt.org/">Let's Encrypt</a>
                         made adding and automatic renewal of an SSL certificate
                         extremely easy.
                       </p>
@@ -276,15 +304,41 @@
           </div>
         </div>
       </div>
-
+      <div class="section section-contacts">
+        <div class="container">
+          <div class="md-layout">
+            <div class="md-layout-item md-size-66 md-xsmall-size-100 mx-auto">
+              <h2 class="text-center title">TODO...</h2>
+              <h4 class="text-center description">
+                Theres lots more to add. Things coming soon:
+              </h4>
+              <ul class="description">
+                <li>
+                  Express backend message/emailing support (done, waiting on
+                  docker-compose implementation)
+                </li>
+                <li>
+                  Docker-compose nginx, backend, mongo images (nearly done)
+                </li>
+                <ul>
+                  <li>Eventually I'd like to have Kubernetes support</li>
+                </ul>
+                <li>Add Relevant Course work</li>
+                <li>Add Skills</li>
+                <li>Logon feature, password hashing, JWT authentication</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="section section-contacts">
         <div class="container">
           <div class="md-layout">
             <div class="md-layout-item md-size-66 md-xsmall-size-100 mx-auto">
               <h2 class="text-center title">Contact Me</h2>
-              <h4
-                class="text-center description"
-              >Ask a question. Share something interesting. Tell me a secret...</h4>
+              <h4 class="text-center description">
+                Ask a question. Share something interesting. Tell me a secret...
+              </h4>
 
               <form class="contact-form">
                 <div class="md-layout">
@@ -310,12 +364,17 @@
                     <md-button
                       class="md-success"
                       v-on:click="createMessage(name, email, message)"
-                    >Send Message</md-button>
+                      >Send Message</md-button
+                    >
                   </div>
                 </div>
                 <br />
               </form>
-              <div class="alert alert-success" id="emailAlert" v-show="showSuccessAlert">
+              <div
+                class="alert alert-success"
+                id="emailAlert"
+                v-show="showSuccessAlert"
+              >
                 <div class="container">
                   <button
                     type="button"
@@ -350,7 +409,11 @@
                   : {{ warningAlertMessage }}
                 </div>
               </div>
-              <div class="alert alert-danger" id="emailErrorAlert" v-show="showErrorAlert">
+              <div
+                class="alert alert-danger"
+                id="emailErrorAlert"
+                v-show="showErrorAlert"
+              >
                 <div class="container">
                   <button
                     type="button"
@@ -449,7 +512,7 @@ export default {
         return;
       }
 
-      console.log(process.env.VUE_APP_API_URL);
+      // console.log(process.env.VUE_APP_API_URL);
       console.log(process.env);
 
       axios
