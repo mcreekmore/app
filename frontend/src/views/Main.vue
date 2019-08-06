@@ -516,7 +516,7 @@ export default {
       console.log(process.env);
 
       axios
-        .post("http://localhost:3000/api/messages", {
+        .post("http://creekmore.io/api/messages", {
           name,
           email,
           message
