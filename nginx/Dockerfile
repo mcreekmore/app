@@ -7,6 +7,9 @@ FROM arm32v7/nginx
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
+RUN sudo apt-get install certbot python-certbot-nginx -y
+RUN sudo certbot --nginx -y
+
 #EXPOSE 80
 
 #STOPSIGNAL SIGTERM
