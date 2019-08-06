@@ -1,4 +1,4 @@
-FROM nginx:alpine
+FROM arm32v7/nginx
 #alpine:3.7
 
 #LABEL maintainer="NGINX Docker Maintainers <docker-maint@nginx.com>"
