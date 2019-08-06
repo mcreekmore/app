@@ -1,6 +1,8 @@
 module.exports = {
-  mongoURI: "mongodb://mongo:27017/app",
+  // MONGO URI IMAGE
+  //mongoURI: "mongodb://mongo:27017/app",
   emailKey: "ktyjnppdnblyrspw",
-  mongoURIatlas:
+  // MONGO URI ATLAS
+  mongoURI:
     "mongodb+srv://server:server@cluster0-y75ds.mongodb.net/test?retryWrites=true&w=majority"
 };

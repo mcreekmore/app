@@ -31,21 +31,20 @@ services:
     image: mattcreekmore/backend
     volumes:
       - ./backend:/data
-    depends_on:
-      - mongo
+    #depends_on:
+    #  - mongo
     ports:
       - "3000:3000"
     expose:
       - "3000"
     environment:
       - DATABASE_URL=mongo:27017
-
-  mongo:
-    image: mongo
-    ports:
-      - 27017:27017
-    volumes:
-      - ./db:/data/db
+  # mongo:
+  #   image: mongo
+  #   ports:
+  #     - 27017:27017
+  #   volumes:
+  #     - ./db:/data/db
   # client:
   #   build: ./frontend
   #   image: mattcreekmore/client
