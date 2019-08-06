@@ -3,6 +3,7 @@ version: "3"
 services:
   nginx:
     build: ./nginx
+    image: mattcreekmore/nginx
     links:
       - backend
     ports:
