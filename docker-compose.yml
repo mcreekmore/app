@@ -11,6 +11,8 @@ services:
       #- "3000:3000"
     volumes:
       - ./frontend/dist:/usr/share/nginx/html
+      # DEV: nginx.dev.conf
+      # PROD: nginx.ssh.conf
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       # CERTBOT
       - ./data/certbot/conf:/etc/letsencrypt
