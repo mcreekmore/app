@@ -1,4 +1,4 @@
-FROM arm32v7/nginx
+FROM nginx
 #alpine:3.7
 
 #LABEL maintainer="NGINX Docker Maintainers <docker-maint@nginx.com>"
@@ -8,9 +8,9 @@ FROM arm32v7/nginx
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY backports.list /etc/apt/sources.list.d/
 
-RUN apt-get update
-RUN apt-get install certbot python-certbot-nginx -t buster-backports 
-RUN certbot --nginx
+#RUN apt-get update
+#RUN apt-get install certbot python-certbot-nginx -t buster-backports 
+#RUN certbot --nginx
 
 #EXPOSE 80
 
