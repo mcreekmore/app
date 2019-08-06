@@ -9,8 +9,8 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY backports.list /etc/apt/sources.list.d/
 
 RUN apt-get update
-RUN apt-get install certbot python-certbot-nginx -t stretch-backports -y
-RUN certbot --nginx -y
+RUN apt-get install certbot python-certbot-nginx -t stretch-backports 
+RUN certbot --nginx
 
 #EXPOSE 80
 
