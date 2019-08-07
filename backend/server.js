@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const messages = require("./routes/api/messages");
-const email = require("./routes/api/email");
+const user = require("./routes/api/users");
 
 const app = express();
 
@@ -10,7 +10,7 @@ const app = express();
 app.use(cors());
 app.options("*", cors());
 app.use(express.json());
-// email middleware
+// email
 app.use(express.static("src"));
 app.use(express.urlencoded({ extended: true }));
 
@@ -25,8 +25,8 @@ mongoose
 
 // Use messages route
 app.use("/api/messages", messages);
-// Use email route
-app.use("/api/email", email);
+// Use user route
+app.use("/api/users", user);
 
 port = process.env.PORT || 3000;
 
