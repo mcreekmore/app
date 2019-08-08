@@ -116,7 +116,9 @@
                         learning new things. This website is the central
                         location for me to test out projects and new features.
                       </p>
-                      <p>Its not quite finished yet</p>
+                      <p class="card-description">
+                        Its not quite finished yet...
+                      </p>
                     </md-card-content>
 
                     <md-card-actions class="text-center">
@@ -202,12 +204,9 @@
 
                     <md-card-content>
                       <p class="card-description">
-                        "Node.js is an open-source, cross-platform JavaScript
-                        run-time environment that executes JavaScript code
-                        outside of a browser." -
-                        <a href="https://en.wikipedia.org/wiki/Node.js"
-                          >Wikipedia</a
-                        >
+                        <a href="https://nodejs.org/en/">Node.js</a> is running
+                        on its own container, using nginx as a reverse proxy to
+                        route /api/ requests.
                       </p>
                     </md-card-content>
                   </md-card>
@@ -291,10 +290,12 @@
 
                     <md-card-content>
                       <p class="card-description">
-                        Hosting from a Raspberry Pi 3 Model B.
+                        Previously hosted from a Raspberry Pi 3 Model B. Now I'm
+                        using a DigitalOcean droplet. The pi's ARMv7 cpu was
+                        causing a lot of incompatibility with dokcer images.
                         <a href="https://letsencrypt.org/">Let's Encrypt</a>
-                        made adding and automatic renewal of an SSL certificate
-                        extremely easy.
+                        is giving me problems within docker. https coming
+                        soon...
                       </p>
                     </md-card-content>
                   </md-card>
@@ -313,19 +314,24 @@
                 Theres lots more to add. Things coming soon:
               </h4>
               <ul class="description">
+                <li>Migrate from docker-compose to Kubernetes</li>
                 <li>
-                  Express backend message/emailing support (done, waiting on
-                  docker-compose implementation)
+                  SSL certificates (this is being really finicky with docker)
                 </li>
                 <li>
-                  Docker-compose nginx, backend, mongo images (nearly done)
+                  Login/user features
+                  <ul>
+                    <li>User dashboard</li>
+                    <li>Password Hasing</li>
+                    <li>JWT authentication</li>
+                    <li>Protected routes</li>
+                  </ul>
                 </li>
-                <ul>
-                  <li>Eventually I'd like to have Kubernetes support</li>
-                </ul>
-                <li>Add Relevant Course work</li>
-                <li>Add Skills</li>
-                <li>Logon feature, password hashing, JWT authentication</li>
+                <li>Add relevant course work</li>
+                <li>Add skills</li>
+                <li>Add experience</li>
+                <li>Eat lunch</li>
+                <li>More personable pictures/backgrounds</li>
               </ul>
             </div>
           </div>
@@ -338,6 +344,10 @@
               <h2 class="text-center title">Contact Me</h2>
               <h4 class="text-center description">
                 Ask a question. Share something interesting. Tell me a secret...
+              </h4>
+              <h4 class="text-center description">
+                This form will send me an email with your message! I'll respond
+                to you as soon as possible.
               </h4>
 
               <form class="contact-form">

@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const nodeMailer = require("nodemailer"); //mail
+const config = require("config");
 
 // Messages Model
 const Message = require("../../models/Message");
 
 // Email Key
-const key = require("../../config/keys").emailKey;
+const key = config.get("emailKey");
 
 // @route   GET api/messages
 // @desc    Get all messages
@@ -27,12 +28,6 @@ router.post("/", (req, res) => {
     message: req.body.message,
     email: true
   });
-
-  // if (!validator.validate(req.body.email)) {
-  //   //return res.json({ email: false });
-  //   newMessage.email = false;
-  //   return res.sendStatus(400);
-  // }
 
   async function email() {
     let transporter = nodeMailer.createTransport({
