@@ -31,6 +31,7 @@ router.post("/", (req, res) => {
     //   password
     // });
     // hash pass and save in db
+
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(req.body.password, salt, (err, hash) => {
         const newUser = new User({

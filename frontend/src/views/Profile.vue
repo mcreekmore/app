@@ -5,36 +5,27 @@
       :style="headerStyle"
     ></parallax>
     <div class="main main-raised">
-      <div class="section profile-content">
+      <ProfileComp />
+      <!-- <div class="section profile-content">
         <div class="container">
           <div class="md-layout">
             <div class="md-layout-item md-size-50 mx-auto">
               <div class="profile">
                 <div class="avatar">
-                  <img
-                    :src="img"
-                    alt="Circle Image"
-                    class="img-raised rounded-circle img-fluid"
-                  />
+                  <img :src="img" alt="Circle Image" class="img-raised rounded-circle img-fluid" />
                 </div>
                 <div class="name">
                   <h3 class="title">Carla Hortensia</h3>
                   <h6>Designer</h6>
-                  <md-button
-                    href="javascript:void(0)"
-                    class="md-just-icon md-simple md-dribbble"
-                    ><i class="fab fa-dribbble"></i
-                  ></md-button>
-                  <md-button
-                    href="javascript:void(0)"
-                    class="md-just-icon md-simple md-twitter"
-                    ><i class="fab fa-twitter"></i
-                  ></md-button>
-                  <md-button
-                    href="javascript:void(0)"
-                    class="md-just-icon md-simple md-pinterest"
-                    ><i class="fab fa-pinterest"></i
-                  ></md-button>
+                  <md-button href="javascript:void(0)" class="md-just-icon md-simple md-dribbble">
+                    <i class="fab fa-dribbble"></i>
+                  </md-button>
+                  <md-button href="javascript:void(0)" class="md-just-icon md-simple md-twitter">
+                    <i class="fab fa-twitter"></i>
+                  </md-button>
+                  <md-button href="javascript:void(0)" class="md-just-icon md-simple md-pinterest">
+                    <i class="fab fa-pinterest"></i>
+                  </md-button>
                 </div>
               </div>
             </div>
@@ -55,7 +46,7 @@
               nav-pills-icons
               color-button="success"
             >
-              <!-- here you can add your content for tab-content -->
+              
               <template slot="tab-pane-1">
                 <div class="md-layout">
                   <div class="md-layout-item md-size-25 ml-auto">
@@ -97,50 +88,27 @@
             </tabs>
           </div>
         </div>
-      </div>
+      </div>-->
     </div>
   </div>
 </template>
 
 <script>
 import { Tabs } from "@/components";
+import ProfileComp from "../components/ProfileComp";
 export default {
   components: {
-    Tabs
+    Tabs,
+    ProfileComp
   },
   bodyClass: "profile-page",
   data() {
-    return {
-      tabPane1: [
-        { image: require("@/assets/img/examples/studio-1.jpg") },
-        { image: require("@/assets/img/examples/studio-2.jpg") },
-        { image: require("@/assets/img/examples/studio-4.jpg") },
-        { image: require("@/assets/img/examples/studio-5.jpg") }
-      ],
-      tabPane2: [
-        { image: require("@/assets/img/examples/olu-eletu.jpg") },
-        { image: require("@/assets/img/examples/clem-onojeghuo.jpg") },
-        { image: require("@/assets/img/examples/cynthia-del-rio.jpg") },
-        { image: require("@/assets/img/examples/mariya-georgieva.jpg") },
-        { image: require("@/assets/img/examples/clem-onojegaw.jpg") }
-      ],
-      tabPane3: [
-        { image: require("@/assets/img/examples/mariya-georgieva.jpg") },
-        { image: require("@/assets/img/examples/studio-3.jpg") },
-        { image: require("@/assets/img/examples/clem-onojeghuo.jpg") },
-        { image: require("@/assets/img/examples/olu-eletu.jpg") },
-        { image: require("@/assets/img/examples/studio-1.jpg") }
-      ]
-    };
+    return {};
   },
   props: {
     header: {
       type: String,
       default: require("@/assets/img/city-profile.jpg")
-    },
-    img: {
-      type: String,
-      default: require("@/assets/img/faces/christian.jpg")
     }
   },
   computed: {

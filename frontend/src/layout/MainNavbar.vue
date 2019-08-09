@@ -60,9 +60,13 @@
                   </div>
                 </a>
               </li>-->
+              <md-list-item href="#/">
+                <i class="material-icons">home</i>
+                <p>Home</p>
+              </md-list-item>
 
               <md-list-item href="#/login">
-                <i class="material-icons">perm_identity</i>
+                <i class="material-icons">account_circle</i>
                 <p>Login</p>
               </md-list-item>
 

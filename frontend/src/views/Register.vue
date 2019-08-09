@@ -7,34 +7,14 @@
             class="md-layout-item md-size-33 md-small-size-66 md-xsmall-size-100 md-medium-size-40 mx-auto"
           >
             <login-card header-color="green">
-              <h4 slot="title" class="card-title">Login</h4>
-              <md-button
-                slot="buttons"
-                href="javascript:void(0)"
-                class="md-just-icon md-simple md-white"
-              >
-                <i class="fab fa-facebook-square"></i>
-              </md-button>
-              <md-button
-                slot="buttons"
-                href="javascript:void(0)"
-                class="md-just-icon md-simple md-white"
-              >
-                <i class="fab fa-twitter"></i>
-              </md-button>
-              <md-button
-                slot="buttons"
-                href="javascript:void(0)"
-                class="md-just-icon md-simple md-white"
-              >
-                <i class="fab fa-google-plus-g"></i>
-              </md-button>
+              <h4 slot="title" class="card-title">Register</h4>
+
               <p slot="description" class="description">creekmore.io db</p>
-              <!-- <md-field class="md-form-group" slot="inputs">
+              <md-field class="md-form-group" slot="inputs">
                 <md-icon>face</md-icon>
                 <label>First Name...</label>
                 <md-input v-model="name"></md-input>
-              </md-field>-->
+              </md-field>
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>email</md-icon>
                 <label>Email...</label>
@@ -46,20 +26,20 @@
                 <md-input
                   type="password"
                   v-model="password"
-                  @keyup.enter="createUser(email, password)"
+                  @keyup.enter="createUser(name, email, password)"
                 ></md-input>
               </md-field>
               <md-button
-                href="#/register"
+                onclick="history.back()"
                 slot="footer"
                 class="md-simple md-warning md-lg"
-                >Register</md-button
+                >Back</md-button
               >
               <md-button
-                v-on:click="createUser(email, password)"
+                v-on:click="createUser(name, email, password)"
                 slot="footer"
                 class="md-simple md-success md-lg"
-                >Login</md-button
+                >Get Started</md-button
               >
             </login-card>
             <br />
@@ -81,8 +61,10 @@
                   <md-icon>check</md-icon>
                 </div>
 
-                <b>Login Successful</b>
-                <br />Thank you for logging in!
+                <b>Registration Successful</b>
+                <br />
+                Thank you {{ nameAlert }} for creating an account with me! You
+                can now login.
               </div>
             </div>
             <div class="alert alert-warning" v-show="showWarningAlert">
@@ -120,8 +102,9 @@
                 <div class="alert-icon">
                   <md-icon>info_outline</md-icon>
                 </div>
-                <b>Error logging in</b>
-                <br />Invalid Credentials
+                <b>Error sending email</b>
+                <br />
+                Sorry {{ name }}, but something went wrong. Please try again.
               </div>
             </div>
           </div>
@@ -140,6 +123,7 @@ import * as EmailValidator from "email-validator";
 import { mapActions } from "vuex";
 
 export default {
+  name: "Register",
   components: {
     LoginCard
   },
@@ -171,15 +155,15 @@ export default {
   },
   methods: {
     //vuex add user
-    ...mapActions(["loginToken"]),
+    ...mapActions(["addUser"]),
 
-    createUser(email, password) {
+    createUser(name, email, password) {
       // clear alerts on submission
       this.showSuccessAlert = false;
       this.showWarningAlert = false;
       this.showErrorAlert = false;
 
-      if ((email == null) | (password == null)) {
+      if ((name == null) | (email == null) | (password == null)) {
         this.showWarningAlert = true;
         this.warningAlertMessage = "All fields are required";
         return;
@@ -193,23 +177,47 @@ export default {
       // console.log(process.env.VUE_APP_API_URL);
       //console.log(process.env);
 
-      // const headers = {
-      //   "Content-Type": "application/json"
-      // };
+      // this.addUser(user)
+      //   .then(res => {
+      //     //console.log(res.data);
+      //     //console.log(res.status);
+      //     if (res.status == 200) {
+      //       this.nameAlert = name;
+      //       this.showSuccessAlert = true;
+      //       this.showErrorAlert = false;
+      //       this.name = null;
+      //       this.email = null;
+      //       w;
+      //       this.password = null;
+      //     } // else if (!res.body.email) { // Warning
+      //     //   console.log("bad email");
+      //     //   this.showWarningAlert = true;
+      //     // }
+      //     else {
+      //       this.nameAlert = name;
+      //       this.showErrorAlert = true;
+      //     }
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //     this.nameAlert = name;
+      //     this.showErrorAlert = true;
+      //   });
 
       axios
-        .post("http://creekmore.io/api/auth", {
-          email: email,
-          password: password
+        .post("http://creekmore.io/api/users", {
+          name,
+          email,
+          password
         })
         .then(res => {
-          console.log(res);
+          console.log(res.data);
 
           // send token to state
-          this.loginToken(res.data.token);
+
           //console.log(res.status);
           if (res.status == 200) {
-            //this.nameAlert = name;
+            this.nameAlert = name;
             this.showSuccessAlert = true;
             this.showErrorAlert = false;
             this.name = null;
@@ -220,13 +228,13 @@ export default {
           //   this.showWarningAlert = true;
           // }
           else {
-            //this.nameAlert = name;
+            this.nameAlert = name;
             this.showErrorAlert = true;
           }
         })
         .catch(err => {
           console.log(err);
-          //this.nameAlert = name;
+          this.nameAlert = name;
           this.showErrorAlert = true;
         });
     },
