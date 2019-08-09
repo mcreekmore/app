@@ -38,7 +38,7 @@
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>email</md-icon>
                 <label>Email...</label>
-                <md-input v-model="email" type="email"></md-input>
+                <md-input v-model="email" type="email" @keyup.enter="createUser(email, password)"></md-input>
               </md-field>
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>lock_outline</md-icon>
@@ -49,25 +49,15 @@
                   @keyup.enter="createUser(email, password)"
                 ></md-input>
               </md-field>
-              <md-button
-                href="#/register"
-                slot="footer"
-                class="md-simple md-warning md-lg"
-                >Register</md-button
-              >
+              <md-button href="#/register" slot="footer" class="md-simple md-warning md-lg">Register</md-button>
               <md-button
                 v-on:click="createUser(email, password)"
                 slot="footer"
                 class="md-simple md-success md-lg"
-                >Login</md-button
-              >
+              >Login</md-button>
             </login-card>
             <br />
-            <div
-              class="alert alert-success"
-              id="emailAlert"
-              v-show="showSuccessAlert"
-            >
+            <div class="alert alert-success" id="emailAlert" v-show="showSuccessAlert">
               <div class="container">
                 <button
                   type="button"
@@ -103,11 +93,7 @@
                 {{ warningAlertMessage }}
               </div>
             </div>
-            <div
-              class="alert alert-danger"
-              id="emailErrorAlert"
-              v-show="showErrorAlert"
-            >
+            <div class="alert alert-danger" id="emailErrorAlert" v-show="showErrorAlert">
               <div class="container">
                 <button
                   type="button"
@@ -133,7 +119,7 @@
 
 <script>
 import { LoginCard } from "@/components";
-import axios from "axios";
+//import axios from "axios";
 import * as EmailValidator from "email-validator";
 
 // Vuex
@@ -171,7 +157,7 @@ export default {
   },
   methods: {
     //vuex add user
-    ...mapActions(["loginToken"]),
+    ...mapActions(["loginToken", "login"]),
 
     createUser(email, password) {
       // clear alerts on submission
@@ -190,45 +176,52 @@ export default {
         return;
       }
 
-      // console.log(process.env.VUE_APP_API_URL);
-      //console.log(process.env);
+      const user = {
+        email,
+        password
+      };
 
-      // const headers = {
-      //   "Content-Type": "application/json"
-      // };
-
-      axios
-        .post("http://creekmore.io/api/auth", {
-          email: email,
-          password: password
-        })
-        .then(res => {
-          console.log(res);
-
-          // send token to state
-          this.loginToken(res.data.token);
-          //console.log(res.status);
-          if (res.status == 200) {
-            //this.nameAlert = name;
-            this.showSuccessAlert = true;
-            this.showErrorAlert = false;
-            this.name = null;
-            this.email = null;
-            this.password = null;
-          } // else if (!res.body.email) { // Warning
-          //   console.log("bad email");
-          //   this.showWarningAlert = true;
-          // }
-          else {
-            //this.nameAlert = name;
-            this.showErrorAlert = true;
-          }
+      this.login(user)
+        .then(response => {
+          this.$router.push({ name: "profile" });
         })
         .catch(err => {
-          console.log(err);
-          //this.nameAlert = name;
+          //console.log(err);
           this.showErrorAlert = true;
         });
+
+      // axios
+      //   .post("http://creekmore.io/api/auth", {
+      //     email: email,
+      //     password: password
+      //   })
+      //   .then(res => {
+      //     console.log(res);
+
+      //     // send token to state
+      //     this.loginToken(res.data.token);
+      //     //console.log(res.status);
+      //     if (res.status == 200) {
+      //       //this.nameAlert = name;
+      //       this.showSuccessAlert = true;
+      //       this.showErrorAlert = false;
+      //       this.name = null;
+      //       this.email = null;
+      //       this.password = null;
+      //     } // else if (!res.body.email) { // Warning
+      //     //   console.log("bad email");
+      //     //   this.showWarningAlert = true;
+      //     // }
+      //     else {
+      //       //this.nameAlert = name;
+      //       this.showErrorAlert = true;
+      //     }
+      //   })
+      //.catch(err => {
+      // console.log(err);
+      // //this.nameAlert = name;
+      // this.showErrorAlert = true;
+      // });
     },
     removeNotify() {
       this.showSuccessAlert = false;

@@ -65,9 +65,16 @@
                 <p>Home</p>
               </md-list-item>
 
-              <md-list-item href="#/login">
+              <!-- Not Authenticated v-if="!showAuthenticated"-->
+              <md-list-item href="#/login" v-if="!loggedIn">
                 <i class="material-icons">account_circle</i>
                 <p>Login</p>
+              </md-list-item>
+
+              <!-- Authenticated v-if="showAuthenticated"-->
+              <md-list-item href="#/user/profile" v-if="loggedIn">
+                <i class="material-icons">account_circle</i>
+                <p>Profile</p>
               </md-list-item>
 
               <!-- <md-list-item
@@ -126,35 +133,20 @@
                 </a>
               </li>-->
 
-              <md-list-item
-                href="https://www.linkedin.com/in/creekmore/"
-                target="_blank"
-              >
+              <md-list-item href="https://www.linkedin.com/in/creekmore/" target="_blank">
                 <i class="fab fa-linkedin"></i>
                 <p class="hidden-lg">LinkedIn</p>
-                <md-tooltip md-direction="bottom"
-                  >Connect with me on LinkedIn</md-tooltip
-                >
+                <md-tooltip md-direction="bottom">Connect with me on LinkedIn</md-tooltip>
               </md-list-item>
-              <md-list-item
-                href="https://github.com/mcreekmore/"
-                target="_blank"
-              >
+              <md-list-item href="https://github.com/mcreekmore/" target="_blank">
                 <i class="fab fa-github"></i>
                 <p class="hidden-lg">GitHub</p>
-                <md-tooltip md-direction="bottom"
-                  >Chek me out on GitHub</md-tooltip
-                >
+                <md-tooltip md-direction="bottom">Chek me out on GitHub</md-tooltip>
               </md-list-item>
-              <md-list-item
-                href="https://www.instagram.com/matthewcreekmore/"
-                target="_blank"
-              >
+              <md-list-item href="https://www.instagram.com/matthewcreekmore/" target="_blank">
                 <i class="fab fa-instagram"></i>
                 <p class="hidden-lg">Instagram</p>
-                <md-tooltip md-direction="bottom"
-                  >Follow me on Instagram</md-tooltip
-                >
+                <md-tooltip md-direction="bottom">Follow me on Instagram</md-tooltip>
               </md-list-item>
             </md-list>
           </div>
@@ -179,6 +171,7 @@ function resizeThrottler(actualResizeHandler) {
 }
 
 import MobileMenu from "@/layout/MobileMenu";
+import { mapGetters, mapActions } from "vuex";
 export default {
   components: {
     MobileMenu
@@ -207,16 +200,15 @@ export default {
   data() {
     return {
       extraNavClasses: "",
-      toggledClass: false
+      toggledClass: false,
+      auth: false
     };
   },
-  // computed: {
-  //   showDownload() {
-  //     const excludedRoutes = ["login", "landing", "profile"];
-  //     return excludedRoutes.every(r => r !== this.$route.name);
-  //   }
-  // },
+  computed: {
+    ...mapGetters(["getAuthenticatedUser", "loggedIn"])
+  },
   methods: {
+    ...mapActions(["authUser"]),
     bodyClick() {
       let bodyClick = document.getElementById("bodyClick");
 
@@ -264,6 +256,9 @@ export default {
   },
   mounted() {
     document.addEventListener("scroll", this.scrollListener);
+  },
+  created() {
+    this.authUser();
   },
   beforeDestroy() {
     document.removeEventListener("scroll", this.scrollListener);

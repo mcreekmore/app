@@ -13,12 +13,12 @@
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>face</md-icon>
                 <label>First Name...</label>
-                <md-input v-model="name"></md-input>
+                <md-input v-model="name" @keyup.enter="createUser(email, password)"></md-input>
               </md-field>
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>email</md-icon>
                 <label>Email...</label>
-                <md-input v-model="email" type="email"></md-input>
+                <md-input v-model="email" type="email" @keyup.enter="createUser(email, password)"></md-input>
               </md-field>
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>lock_outline</md-icon>
@@ -33,21 +33,15 @@
                 onclick="history.back()"
                 slot="footer"
                 class="md-simple md-warning md-lg"
-                >Back</md-button
-              >
+              >Back</md-button>
               <md-button
                 v-on:click="createUser(name, email, password)"
                 slot="footer"
                 class="md-simple md-success md-lg"
-                >Get Started</md-button
-              >
+              >Get Started</md-button>
             </login-card>
             <br />
-            <div
-              class="alert alert-success"
-              id="emailAlert"
-              v-show="showSuccessAlert"
-            >
+            <div class="alert alert-success" id="emailAlert" v-show="showSuccessAlert">
               <div class="container">
                 <button
                   type="button"
@@ -85,11 +79,7 @@
                 {{ warningAlertMessage }}
               </div>
             </div>
-            <div
-              class="alert alert-danger"
-              id="emailErrorAlert"
-              v-show="showErrorAlert"
-            >
+            <div class="alert alert-danger" id="emailErrorAlert" v-show="showErrorAlert">
               <div class="container">
                 <button
                   type="button"
@@ -116,7 +106,7 @@
 
 <script>
 import { LoginCard } from "@/components";
-import axios from "axios";
+//import axios from "axios";
 import * as EmailValidator from "email-validator";
 
 // Vuex
@@ -165,6 +155,7 @@ export default {
 
       if ((name == null) | (email == null) | (password == null)) {
         this.showWarningAlert = true;
+        this.password = null;
         this.warningAlertMessage = "All fields are required";
         return;
       } else if (!this.isEmailValid(email)) {
@@ -177,9 +168,33 @@ export default {
       // console.log(process.env.VUE_APP_API_URL);
       //console.log(process.env);
 
-      // this.addUser(user)
+      const user = {
+        name,
+        email,
+        password
+      };
+      const success = "something";
+      this.addUser(user)
+        .then(response => {
+          this.$router.push({ name: "profile" });
+        })
+        .catch(err => {
+          //console.log(err);
+          this.showErrorAlert = true;
+        });
+      console.log("Success: " + success);
+
+      // axios
+      //   .post("http://creekmore.io/api/users", {
+      //     name,
+      //     email,
+      //     password
+      //   })
       //   .then(res => {
-      //     //console.log(res.data);
+      //     console.log(res.data);
+
+      //     // send token to state
+
       //     //console.log(res.status);
       //     if (res.status == 200) {
       //       this.nameAlert = name;
@@ -187,7 +202,6 @@ export default {
       //       this.showErrorAlert = false;
       //       this.name = null;
       //       this.email = null;
-      //       w;
       //       this.password = null;
       //     } // else if (!res.body.email) { // Warning
       //     //   console.log("bad email");
@@ -203,40 +217,6 @@ export default {
       //     this.nameAlert = name;
       //     this.showErrorAlert = true;
       //   });
-
-      axios
-        .post("http://creekmore.io/api/users", {
-          name,
-          email,
-          password
-        })
-        .then(res => {
-          console.log(res.data);
-
-          // send token to state
-
-          //console.log(res.status);
-          if (res.status == 200) {
-            this.nameAlert = name;
-            this.showSuccessAlert = true;
-            this.showErrorAlert = false;
-            this.name = null;
-            this.email = null;
-            this.password = null;
-          } // else if (!res.body.email) { // Warning
-          //   console.log("bad email");
-          //   this.showWarningAlert = true;
-          // }
-          else {
-            this.nameAlert = name;
-            this.showErrorAlert = true;
-          }
-        })
-        .catch(err => {
-          console.log(err);
-          this.nameAlert = name;
-          this.showErrorAlert = true;
-        });
     },
     removeNotify() {
       this.showSuccessAlert = false;
