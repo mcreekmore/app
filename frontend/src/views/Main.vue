@@ -353,7 +353,7 @@
                 <li>
                   SSL certificates (this is being really finicky with docker)
                 </li>
-                <li>
+                <li style="text-decoration: line-through">
                   User features
                   <ul>
                     <li style="text-decoration: line-through">
@@ -368,9 +368,13 @@
                     <li style="text-decoration: line-through">
                       State management with Vuex and localstorage
                     </li>
-                    <li>User dashboard enhancements</li>
-                    <li>Protected routes with JWT and passport</li>
-                    <li>
+                    <li style="text-decoration: line-through">
+                      User dashboard enhancements
+                    </li>
+                    <li style="text-decoration: line-through">
+                      Protected routes with JWT
+                    </li>
+                    <li style="text-decoration: line-through">
                       Dynamic nav items for authenticated and not authenticated
                       state
                     </li>

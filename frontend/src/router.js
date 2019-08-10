@@ -11,7 +11,7 @@ import MainFooter from "./layout/MainFooter.vue";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: "/",
@@ -78,3 +78,21 @@ export default new Router({
     }
   }
 });
+
+// public routes that do not require auth
+const openRoutes = ["login", "register", "index"];
+
+// if route is open, continue
+// if route is private and a token is available, continue
+// else redirect to /login
+router.beforeEach((to, from, next) => {
+  if (openRoutes.includes(to.name)) {
+    next();
+  } else if (localStorage.getItem("token") != null) {
+    next();
+  } else {
+    next("/login");
+  }
+});
+
+export default router;
