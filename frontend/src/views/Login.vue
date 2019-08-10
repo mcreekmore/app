@@ -121,13 +121,15 @@
 import { LoginCard } from "@/components";
 //import axios from "axios";
 import * as EmailValidator from "email-validator";
+import MainNavBar from "../layout/MainNavbar";
 
 // Vuex
 import { mapActions } from "vuex";
 
 export default {
   components: {
-    LoginCard
+    LoginCard,
+    MainNavBar
   },
   bodyClass: "login-page",
   data() {
@@ -145,7 +147,7 @@ export default {
   props: {
     header: {
       type: String,
-      default: require("@/assets/img/profile_city.jpg")
+      default: require("@/assets/img/space-bg.png")
     }
   },
   computed: {
@@ -182,46 +184,12 @@ export default {
       };
 
       this.login(user)
-        .then(response => {
+        .then(() => {
           this.$router.push({ name: "profile" });
         })
-        .catch(err => {
-          //console.log(err);
+        .catch(() => {
           this.showErrorAlert = true;
         });
-
-      // axios
-      //   .post("http://creekmore.io/api/auth", {
-      //     email: email,
-      //     password: password
-      //   })
-      //   .then(res => {
-      //     console.log(res);
-
-      //     // send token to state
-      //     this.loginToken(res.data.token);
-      //     //console.log(res.status);
-      //     if (res.status == 200) {
-      //       //this.nameAlert = name;
-      //       this.showSuccessAlert = true;
-      //       this.showErrorAlert = false;
-      //       this.name = null;
-      //       this.email = null;
-      //       this.password = null;
-      //     } // else if (!res.body.email) { // Warning
-      //     //   console.log("bad email");
-      //     //   this.showWarningAlert = true;
-      //     // }
-      //     else {
-      //       //this.nameAlert = name;
-      //       this.showErrorAlert = true;
-      //     }
-      //   })
-      //.catch(err => {
-      // console.log(err);
-      // //this.nameAlert = name;
-      // this.showErrorAlert = true;
-      // });
     },
     removeNotify() {
       this.showSuccessAlert = false;

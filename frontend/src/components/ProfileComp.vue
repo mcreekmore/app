@@ -94,9 +94,7 @@ export default {
   },
   bodyClass: "profile-page",
   data() {
-    return {
-      name: "Mr. Creekmore"
-    };
+    return {};
   },
   props: {
     img: {
@@ -107,18 +105,20 @@ export default {
   methods: {
     ...mapActions(["fetchUsers", "logout"]),
     logoutClick() {
-      this.logout().then(res => {
-        this.$router.push({ name: "index" }).catch(err => {
+      this.logout()
+        .then(() => {
+          this.$router.push({ name: "index" });
+        })
+        .catch(() => {
           this.$router.push({ name: "index" });
         });
-      });
     }
   },
   computed: mapGetters(["allUsers", "getAuthenticatedUser"]),
   created() {
     this.fetchUsers();
-    //let localState = localStorage.getItem("vuex");
-    //console.log("Authenticated User: " + localStorage.getItem("token"));
+    // this.$forceUpdate();
+    // this.$router.go() // don't do this, infinitely loads
   }
 };
 </script>

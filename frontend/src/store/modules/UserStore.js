@@ -50,7 +50,7 @@ const actions = {
         headers: { "x-auth-token": state.token }
       })
       .then(response => {
-        console.log("User Registered:" + response.data);
+        console.log("User Registered:" + response.data.user);
         commit("setAuthenticatedUser", response.data);
       })
       .catch(err => {
@@ -67,6 +67,7 @@ const actions = {
         })
         .then(res => {
           commit("newUser", res.data);
+          commit("setAuthenticatedUser", res.data.user);
           localStorage.setItem("token", res.data.token);
           resolve(res.data);
         })
@@ -85,8 +86,8 @@ const actions = {
         })
         .then(res => {
           console.log(res.data);
-          commit("newUser", res.data);
           localStorage.setItem("token", res.data.token);
+          commit("setAuthenticatedUser", res.data.user);
           resolve(res.data);
         })
         .catch(err => {
@@ -99,7 +100,9 @@ const actions = {
     if (state.token != null) {
       return new Promise((resolve, reject) => {
         axios
-          .post("http://creekmore.io/api/auth/logout")
+          .post("http://creekmore.io/api/auth/logout", {
+            name: "test logout"
+          })
           .then(res => {
             console.log(res.data);
             localStorage.removeItem("token");

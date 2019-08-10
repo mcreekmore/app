@@ -175,7 +175,9 @@
 
                     <md-card-content>
                       <p class="card-description">
-                        Thanks to the developers of
+                        VueJS with Vuex for state-management and vue-router. JWT
+                        (JSON Web Tokens) are used for authentication. Thanks to
+                        the developers of
                         <a href="https://vuejs.org/">Vue</a> and
                         <a
                           href="https://www.creative-tim.com/product/vue-material-kit"
@@ -264,7 +266,8 @@
                       <p class="card-description">
                         MongoDB is classified as a 'nosql' database that houses
                         all incoming messages and
-                        <a href="#/login">user profiles</a> (coming soon)
+                        <a href="#/login">user profiles</a>. All passwords are
+                        hashed.
                       </p>
                     </md-card-content>
                   </md-card>
@@ -296,6 +299,38 @@
                         <a href="https://letsencrypt.org/">Let's Encrypt</a>
                         is giving me problems within docker. https coming
                         soon...
+                      </p>
+                    </md-card-content>
+                  </md-card>
+                </div>
+              </div>
+              <div class="md-layout-item md-medium-size-33 md-small-size-100">
+                <div class="team-player">
+                  <md-card class="md-card-plain">
+                    <div class="md-layout-item md-size-50 mx-auto">
+                      <img
+                        :src="dockerImg"
+                        alt="Thumbnail Image"
+                        class="img-fluid"
+                      />
+                    </div>
+                    <h4 class="card-title">
+                      Docker
+                      <br />
+                      <small class="card-description text-muted"
+                        >Containerization</small
+                      >
+                    </h4>
+
+                    <md-card-content>
+                      <p class="card-description">
+                        <a href="https://www.docker.com/">Docker</a>
+                        is a container virtualization tool that's perfect for a
+                        micro-services architecture. Using docker-compose, I'm
+                        able to seamlessly run multiple containers in-sync on
+                        the same network. Currently, I'm testing a
+                        <a href="https://kubernetes.io/">Kubernetes</a>
+                        implementation
                       </p>
                     </md-card-content>
                   </md-card>
@@ -472,7 +507,7 @@ export default {
   props: {
     header: {
       type: String,
-      default: require("@/assets/img/bg7.jpg")
+      default: require("@/assets/img/space-bg.png")
     },
     mattProfile: {
       type: String,
@@ -497,6 +532,10 @@ export default {
     nginxImg: {
       type: String,
       default: require("@/assets/img/stack/nginx.jpg")
+    },
+    dockerImg: {
+      type: String,
+      default: require("@/assets/img/stack/docker.jpg")
     }
   },
   data() {
