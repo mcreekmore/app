@@ -25,10 +25,12 @@ const getters = {
   loggedIn: state => state.token != null
 };
 
+const API_URL = "https://creekmore.io/api";
+
 const actions = {
   fetchUsers({ commit }) {
     axios
-      .get("http://creekmore.io/api/users")
+      .get(`${API_URL}/users`)
       .then(response => {
         commit("setUsers", response.data);
       })
@@ -46,7 +48,7 @@ const actions = {
   authUser({ commit }) {
     console.log("State token: " + state.token);
     axios
-      .get("http://creekmore.io/api/auth/user", {
+      .get(`${API_URL}/auth/user`, {
         headers: { "x-auth-token": state.token }
       })
       .then(response => {
@@ -60,7 +62,7 @@ const actions = {
   addUser({ commit }, user) {
     return new Promise((resolve, reject) => {
       axios
-        .post("http://creekmore.io/api/users", {
+        .post(`${API_URL}/users`, {
           name: user.name,
           email: user.email,
           password: user.password
@@ -81,7 +83,7 @@ const actions = {
   login({ commit }, user) {
     return new Promise((resolve, reject) => {
       axios
-        .post("http://creekmore.io/api/auth", {
+        .post(`${API_URL}/auth`, {
           email: user.email,
           password: user.password
         })
@@ -102,7 +104,7 @@ const actions = {
     if (state.token != null) {
       return new Promise((resolve, reject) => {
         axios
-          .post("http://creekmore.io/api/auth/logout", {
+          .post(`${API_URL}/auth/logout`, {
             name: "test logout"
           })
           .then(res => {

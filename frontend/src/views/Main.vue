@@ -350,7 +350,7 @@
               </h4>
               <ul class="description">
                 <li>Migrate from docker-compose to Kubernetes</li>
-                <li>
+                <li style="text-decoration: line-through">
                   SSL certificates (this is being really finicky with docker)
                 </li>
                 <li style="text-decoration: line-through">
