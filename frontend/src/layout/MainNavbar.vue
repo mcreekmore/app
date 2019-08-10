@@ -67,7 +67,7 @@
 
               <!-- Not Authenticated v-if="!showAuthenticated"-->
               <md-list-item href="#/login" v-if="!loggedIn">
-                <i class="material-icons">account_circle</i>
+                <i class="material-icons">lock</i>
                 <p>Login</p>
               </md-list-item>
 

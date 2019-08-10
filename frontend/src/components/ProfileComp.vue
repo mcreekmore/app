@@ -19,61 +19,47 @@
       </div>
       <div class="container center">
         <div id="navigation-pills">
-          <div>
-            <h4 class="title text-center">User Info</h4>
+          <div class="title">
+            <h3>Navigation Pills</h3>
           </div>
+
           <div class="md-layout">
             <div>
-              <!-- above: class="md-layout-item md-size-50 md-small-size-100" -->
               <tabs
-                :tab-name="['Dashboard', 'Schedule', 'Users']"
-                :tab-icon="['dashboard', 'schedule', 'perm_identity']"
+                :tab-name="['Dashboard', 'Users', 'Settings']"
+                :tab-icon="['dashboard', 'schedule', 'list']"
                 plain
-                flex-column
                 nav-pills-icons
                 color-button="primary"
               >
                 <!-- here you can add your content for tab-content -->
-                <template slot="tab-pane-1">
-                  Collaboratively administrate empowered markets via
-                  plug-and-play networks. Dynamically procrastinate B2C users
-                  after installed base benefits.
-                  <br />
-                  <br />Dramatically visualize customer directed convergence
-                  without revolutionary ROI.
-                </template>
+                <template slot="tab-pane-1">Dashboard features coming soon...</template>
                 <template slot="tab-pane-2">
-                  Efficiently unleash cross-media information without
-                  cross-media value. Quickly maximize timely deliverables for
-                  real-time schemas.
-                  <br />
-                  <br />Dramatically maintain clicks-and-mortar solutions
-                  without functional solutions.
+                  <h4 class="title text-center">All Users</h4>
+                  <div class="container">
+                    <table>
+                      <tr>
+                        <th align="left">Name</th>
+                        <th align="left">Email</th>
+                      </tr>
+                      <tr v-for="user in allUsers" :key="user.id">
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                      </tr>
+                    </table>
+                  </div>
                 </template>
-                <template slot="tab-pane-3">Going to put the users table here</template>
+
+                <template slot="tab-pane-3">
+                  <input type="file" @change="onFileChanged" />
+                </template>
               </tabs>
             </div>
           </div>
         </div>
-
-        <div>
+        <div style="text-align:center">
           <md-button @click="logoutClick()" class="md-danger">Logout</md-button>
         </div>
-      </div>
-      <h4 class="title text-center">All Users</h4>
-      <div class="container">
-        <table>
-          <tr>
-            <th align="left">ID</th>
-            <th align="left">Name</th>
-            <th align="left">Email</th>
-          </tr>
-          <tr v-for="user in allUsers" :key="user.id">
-            <td>{{ user._id }}</td>
-            <td>{{ user.name }}</td>
-            <td>{{ user.email }}</td>
-          </tr>
-        </table>
       </div>
       <br />
       <br />

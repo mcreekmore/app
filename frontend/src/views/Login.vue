@@ -38,7 +38,11 @@
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>email</md-icon>
                 <label>Email...</label>
-                <md-input v-model="email" type="email" @keyup.enter="createUser(email, password)"></md-input>
+                <md-input
+                  v-model="email"
+                  type="email"
+                  @keyup.enter="createUser(email, password)"
+                ></md-input>
               </md-field>
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>lock_outline</md-icon>
@@ -49,15 +53,25 @@
                   @keyup.enter="createUser(email, password)"
                 ></md-input>
               </md-field>
-              <md-button href="#/register" slot="footer" class="md-simple md-warning md-lg">Register</md-button>
+              <md-button
+                href="#/register"
+                slot="footer"
+                class="md-simple md-warning md-lg"
+                >Register</md-button
+              >
               <md-button
                 v-on:click="createUser(email, password)"
                 slot="footer"
                 class="md-simple md-success md-lg"
-              >Login</md-button>
+                >Login</md-button
+              >
             </login-card>
             <br />
-            <div class="alert alert-success" id="emailAlert" v-show="showSuccessAlert">
+            <div
+              class="alert alert-success"
+              id="emailAlert"
+              v-show="showSuccessAlert"
+            >
               <div class="container">
                 <button
                   type="button"
@@ -93,7 +107,11 @@
                 {{ warningAlertMessage }}
               </div>
             </div>
-            <div class="alert alert-danger" id="emailErrorAlert" v-show="showErrorAlert">
+            <div
+              class="alert alert-danger"
+              id="emailErrorAlert"
+              v-show="showErrorAlert"
+            >
               <div class="container">
                 <button
                   type="button"
