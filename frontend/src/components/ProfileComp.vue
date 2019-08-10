@@ -117,8 +117,6 @@ export default {
   computed: mapGetters(["allUsers", "getAuthenticatedUser"]),
   created() {
     this.fetchUsers();
-    // this.$forceUpdate();
-    // this.$router.go() // don't do this, infinitely loads
   }
 };
 </script>

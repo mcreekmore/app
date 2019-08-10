@@ -207,12 +207,13 @@ export default {
   computed: {
     ...mapGetters(["getAuthenticatedUser", "loggedIn"])
   },
-  watch: {
-    loggedIn: function() {
-      // TODO watched change, re-render?
-      this.$forceUpdate();
-    }
-  },
+  // watch: {
+  //   loggedIn: function(val, oldVal) {
+  //     // TODO watched change, re-render?
+  //     console.log("New val: " + val + " Old Val: " + oldVal);
+  //     //this.$forceUpdate();
+  //   }
+  // },
   methods: {
     ...mapActions(["authUser"]),
     bodyClick() {

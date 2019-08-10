@@ -37,7 +37,7 @@ const actions = {
       });
   },
   // GET TOKEN
-  // Pretty sure i dont need this anymore
+  // pretty sure i dont need this anymore
   async loginToken({ commit }, token) {
     console.log("set token: " + token);
     localStorage.setItem("token", token);
@@ -68,6 +68,7 @@ const actions = {
         .then(res => {
           commit("newUser", res.data);
           commit("setAuthenticatedUser", res.data.user);
+          commit("setToken", res.data.token);
           localStorage.setItem("token", res.data.token);
           resolve(res.data);
         })
@@ -87,6 +88,7 @@ const actions = {
         .then(res => {
           console.log(res.data);
           localStorage.setItem("token", res.data.token);
+          commit("setToken", res.data.token);
           commit("setAuthenticatedUser", res.data.user);
           resolve(res.data);
         })
