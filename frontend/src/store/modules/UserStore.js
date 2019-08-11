@@ -1,5 +1,14 @@
 import axios from "axios";
 
+// Doesn't work
+// if (process.env.NODE_ENV === "production") {
+//   const API_URL = "https://creekmore.io/api";
+// } else {
+//   const API_URL = "http://localhost:3000/api";
+// }
+
+const API_URL = "http://localhost:3000/api";
+
 const state = {
   users: [
     {
@@ -24,8 +33,6 @@ const getters = {
   getAuthenticatedUser: state => state.authenticatedUser,
   loggedIn: state => state.token != null
 };
-
-const API_URL = "https://creekmore.io/api";
 
 const actions = {
   fetchUsers({ commit }) {
@@ -88,14 +95,12 @@ const actions = {
           password: user.password
         })
         .then(res => {
-          console.log(res.data);
           localStorage.setItem("token", res.data.token);
           commit("setToken", res.data.token);
           commit("setAuthenticatedUser", res.data.user);
           resolve(res.data);
         })
         .catch(err => {
-          //console.log(err);
           reject(err);
         });
     });
@@ -104,17 +109,15 @@ const actions = {
     if (state.token != null) {
       return new Promise((resolve, reject) => {
         axios
-          .post(`${API_URL}/auth/logout`, {
-            name: "test logout"
+          .post(`${API_URL}/auth/logout`, null, {
+            headers: { "x-auth-token": state.token }
           })
           .then(res => {
-            console.log(res.data);
             localStorage.removeItem("token");
             commit("logout");
             resolve(res.data);
           })
           .catch(err => {
-            console.log(err);
             localStorage.removeItem("token");
             commit("logout");
             reject(err);

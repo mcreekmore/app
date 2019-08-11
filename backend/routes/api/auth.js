@@ -7,8 +7,10 @@ const config = require("config");
 
 // User Model
 const User = require("../../models/User");
+// Bad Token Model
+const BadToken = require("../../models/BadToken");
 
-// @route   POST api/auth
+// @route   POST /api/auth
 // @desc    Auth user (login)
 // @access  Public
 router.post("/", (req, res) => {
@@ -47,7 +49,20 @@ router.post("/", (req, res) => {
   });
 });
 
-// @route   GET api/auth/user
+// @route   POST /api/auth/logout
+// @desc    Blacklist token (logout)
+// @access  Private
+router.post("/logout", auth, (req, res) => {
+  const token = req.header("x-auth-token");
+  const retiredToken = new BadToken({ token });
+  retiredToken.save().then(() => {
+    res.json({
+      msg: "Logged Out"
+    });
+  });
+});
+
+// @route   GET /api/auth/user
 // @desc    Get user data
 // @access  Private
 router.get("/user", auth, (req, res) => {

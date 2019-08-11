@@ -9,7 +9,7 @@ const Message = require("../../models/Message");
 // Email Key
 const key = config.get("emailKey");
 
-// @route   GET api/messages
+// @route   GET /api/messages
 // @desc    Get all messages
 // @access  Public
 router.get("/", (req, res) => {
@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
     .then(messages => res.json(messages));
 });
 
-// @route   POST api/messages
+// @route   POST /api/messages
 // @desc    Submit a message and send as Email
 // @access  Public
 router.post("/", (req, res) => {

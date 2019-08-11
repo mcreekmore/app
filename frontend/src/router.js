@@ -19,7 +19,8 @@ const router = new Router({
       components: { default: Index, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 },
-        footer: { backgroundColor: "black" }
+        footer: { backgroundColor: "black" },
+        auth: { loggedOut: false }
       }
     },
     {

@@ -7,7 +7,7 @@ const config = require("config");
 // Messages Model
 const User = require("../../models/User");
 
-// @route   GET api/users
+// @route   GET /api/users
 // @desc    Get all users
 // @access  Public
 router.get("/", (req, res) => {
@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
     .then(users => res.json(users));
 });
 
-// @route   POST api/users
+// @route   POST /api/users
 // @desc    create a new user
 // @access  Public
 router.post("/", (req, res) => {
@@ -64,12 +64,12 @@ router.post("/", (req, res) => {
   });
 });
 
-// @route   POST api/users/login
+// @route   POST /api/users/login
 // @desc    authenticates a user
 // @access  Public
 //router.post("/login", (req, res) => {});
 
-// @route   GET api/users/logout
+// @route   GET /api/users/logout
 // @desc    logs out a user
 // @access  Private
 //router.get("/logout", (req, res) => {});

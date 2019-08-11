@@ -509,6 +509,9 @@ import * as EmailValidator from "email-validator";
 export default {
   bodyClass: "landing-page",
   props: {
+    auth: {
+      loggedOut: false
+    },
     header: {
       type: String,
       default: require("@/assets/img/space-bg.png")
@@ -583,7 +586,7 @@ export default {
       console.log(process.env);
 
       axios
-        .post("http://creekmore.io/api/messages", {
+        .post("https://creekmore.io/api/messages", {
           name,
           email,
           message
