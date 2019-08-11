@@ -8,9 +8,9 @@ import axios from "axios";
 // }
 
 // DEV
-const API_URL = "http://localhost:3000/api";
+// const API_URL = "http://localhost:3000/api";
 // PROD
-// const API_URL = "https://creekmore.io/api";
+const API_URL = "https://creekmore.io/api";
 
 const state = {
   users: [
@@ -128,7 +128,7 @@ const actions = {
       });
     }
   },
-  sendEmail({}, messageSent) {
+  sendEmail({ commit }, messageSent) {
     return new Promise((resolve, reject) => {
       axios
         .post(`${API_URL}/messages`, {
@@ -137,6 +137,7 @@ const actions = {
           message: messageSent.message
         })
         .then(res => {
+          commit("emailSent");
           resolve(res);
         })
         .catch(err => {
@@ -151,7 +152,8 @@ const mutations = {
   newUser: (state, user) => (state.users = state.users.unshift(user)),
   setToken: (state, token) => (state.token = token),
   setAuthenticatedUser: (state, user) => (state.authenticatedUser = user),
-  logout: state => (state.token = null)
+  logout: state => (state.token = null),
+  emailSent: state => state // dont ask...
 };
 
 export default {

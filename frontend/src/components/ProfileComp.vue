@@ -5,7 +5,11 @@
         <div class="md-layout-item md-size-50 mx-auto">
           <div class="profile">
             <div class="avatar">
-              <img :src="img" alt="Circle Image" class="img-raised rounded-circle img-fluid" />
+              <img
+                :src="img"
+                alt="Circle Image"
+                class="img-raised rounded-circle img-fluid"
+              />
             </div>
             <div class="name">
               <h3 class="title">{{ getAuthenticatedUser.name }}</h3>
@@ -33,7 +37,9 @@
                 color-button="primary"
               >
                 <!-- here you can add your content for tab-content -->
-                <template slot="tab-pane-1">Dashboard features coming soon...</template>
+                <template slot="tab-pane-1"
+                  >Dashboard features coming soon...</template
+                >
                 <template slot="tab-pane-2">
                   <!-- <h4 class="title text-center">All Users</h4>
                   <div class="container">
