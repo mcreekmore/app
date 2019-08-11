@@ -7,7 +7,10 @@ import axios from "axios";
 //   const API_URL = "http://localhost:3000/api";
 // }
 
+// DEV
 const API_URL = "http://localhost:3000/api";
+// PROD
+// const API_URL = "https://creekmore.io/api";
 
 const state = {
   users: [
@@ -124,6 +127,22 @@ const actions = {
           });
       });
     }
+  },
+  sendEmail({}, messageSent) {
+    return new Promise((resolve, reject) => {
+      axios
+        .post(`${API_URL}/messages`, {
+          name: messageSent.name,
+          email: messageSent.email,
+          message: messageSent.message
+        })
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
   }
 };
 

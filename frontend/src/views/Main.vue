@@ -3,9 +3,7 @@
     <parallax class="section page-header header-filter" :style="headerStyle">
       <div class="container">
         <div class="md-layout">
-          <div
-            class="md-layout-item md-size-50 md-small-size-70 md-xsmall-size-100"
-          >
+          <div class="md-layout-item md-size-50 md-small-size-70 md-xsmall-size-100">
             <h1 class="title">Matt Creekmore</h1>
             <h4>
               Welcome to my page. I'm an aspiring software developer interested
@@ -95,16 +93,14 @@
                     <div class="md-layout-item md-size-50 mx-auto">
                       <img
                         :src="mattProfile"
-                        alt="Thumbnail Image"
+                        alt="Matt Creekmore profile image"
                         class="img-raised rounded-circle img-fluid"
                       />
                     </div>
                     <h4 class="card-title">
                       Matt Creekmore
                       <br />
-                      <small class="card-description text-muted"
-                        >Developer in training</small
-                      >
+                      <small class="card-description text-muted">Developer in training</small>
                     </h4>
 
                     <md-card-content>
@@ -116,9 +112,7 @@
                         learning new things. This website is the central
                         location for me to test out projects and new features.
                       </p>
-                      <p class="card-description">
-                        Its not quite finished yet...
-                      </p>
+                      <p class="card-description">Its not quite finished yet...</p>
                     </md-card-content>
 
                     <md-card-actions class="text-center">
@@ -159,18 +153,12 @@
                 <div class="team-player">
                   <md-card class="md-card-plain">
                     <div class="md-layout-item md-size-50 mx-auto">
-                      <img
-                        :src="vueImg"
-                        alt="Thumbnail Image"
-                        class="img-fluid"
-                      />
+                      <img :src="vueImg" alt="Image of Vue Java Script" class="img-fluid" />
                     </div>
                     <h4 class="card-title">
                       Vue
                       <br />
-                      <small class="card-description text-muted"
-                        >Frontend framework</small
-                      >
+                      <small class="card-description text-muted">Frontend framework</small>
                     </h4>
 
                     <md-card-content>
@@ -178,11 +166,12 @@
                         VueJS with Vuex for state-management and vue-router. JWT
                         (JSON Web Tokens) are used for authentication. Thanks to
                         the developers of
-                        <a href="https://vuejs.org/">Vue</a> and
+                        <a
+                          href="https://vuejs.org/"
+                        >Vue</a> and
                         <a
                           href="https://www.creative-tim.com/product/vue-material-kit"
-                          >Vue Material Kit</a
-                        >, the front end dev felt effortless.
+                        >Vue Material Kit</a>, the front end dev felt effortless.
                       </p>
                     </md-card-content>
                   </md-card>
@@ -192,11 +181,7 @@
                 <div class="team-player">
                   <md-card class="md-card-plain">
                     <div class="md-layout-item md-size-50 mx-auto">
-                      <img
-                        :src="nodeImg"
-                        alt="Thumbnail Image"
-                        class="img-fluid"
-                      />
+                      <img :src="nodeImg" alt="Image of Node Java Script" class="img-fluid" />
                     </div>
                     <h4 class="card-title">
                       Node
@@ -218,25 +203,21 @@
                 <div class="team-player">
                   <md-card class="md-card-plain">
                     <div class="md-layout-item md-size-50 mx-auto">
-                      <img
-                        :src="expressImg"
-                        alt="Thumbnail Image"
-                        class="img-fluid"
-                      />
+                      <img :src="expressImg" alt="Image of Express Java Script" class="img-fluid" />
                     </div>
                     <h4 class="card-title">
                       Express
                       <br />
-                      <small class="card-description text-muted"
-                        >API framework</small
-                      >
+                      <small class="card-description text-muted">API framework</small>
                     </h4>
 
                     <md-card-content>
                       <p class="card-description">
                         All API requests are directed to /api and are
                         asynchronous. This project is using
-                        <a href="https://mongoosejs.com/">mongoose</a> to
+                        <a
+                          href="https://mongoosejs.com/"
+                        >mongoose</a> to
                         interface with mongo. Depending on how the project
                         evolves, I may add a SQL database.
                       </p>
@@ -248,25 +229,21 @@
                 <div class="team-player">
                   <md-card class="md-card-plain">
                     <div class="md-layout-item md-size-50 mx-auto">
-                      <img
-                        :src="mongodbImg"
-                        alt="Thumbnail Image"
-                        class="img-fluid"
-                      />
+                      <img :src="mongodbImg" alt="Image of Mongo Database " class="img-fluid" />
                     </div>
                     <h4 class="card-title">
                       MongoDB
                       <br />
-                      <small class="card-description text-muted"
-                        >Database</small
-                      >
+                      <small class="card-description text-muted">Database</small>
                     </h4>
 
                     <md-card-content>
                       <p class="card-description">
                         MongoDB is classified as a 'nosql' database that houses
                         all incoming messages and
-                        <a href="#/login">user profiles</a>. All passwords are
+                        <a
+                          href="#/login"
+                        >user profiles</a>. All passwords are
                         hashed.
                       </p>
                     </md-card-content>
@@ -279,16 +256,14 @@
                     <div class="md-layout-item md-size-50 mx-auto">
                       <img
                         :src="nginxImg"
-                        alt="Thumbnail Image"
+                        alt="Image of Nginx (pronounced engine X)"
                         class="img-fluid"
                       />
                     </div>
                     <h4 class="card-title">
                       NGINX
                       <br />
-                      <small class="card-description text-muted"
-                        >Web server</small
-                      >
+                      <small class="card-description text-muted">Web server</small>
                     </h4>
 
                     <md-card-content>
@@ -296,7 +271,9 @@
                         Previously hosted from a Raspberry Pi 3 Model B. Now I'm
                         using a DigitalOcean droplet. The pi's ARMv7 cpu was
                         causing a lot of incompatibility with dokcer images.
-                        <a href="https://letsencrypt.org/">Let's Encrypt</a>
+                        <a
+                          href="https://letsencrypt.org/"
+                        >Let's Encrypt</a>
                         is giving me problems within docker. https coming
                         soon...
                       </p>
@@ -310,16 +287,14 @@
                     <div class="md-layout-item md-size-50 mx-auto">
                       <img
                         :src="dockerImg"
-                        alt="Thumbnail Image"
+                        alt="Image of Docker, the containerization software"
                         class="img-fluid"
                       />
                     </div>
                     <h4 class="card-title">
                       Docker
                       <br />
-                      <small class="card-description text-muted"
-                        >Containerization</small
-                      >
+                      <small class="card-description text-muted">Containerization</small>
                     </h4>
 
                     <md-card-content>
@@ -329,7 +304,9 @@
                         micro-services architecture. Using docker-compose, I'm
                         able to seamlessly run multiple containers in-sync on
                         the same network. Currently, I'm testing a
-                        <a href="https://kubernetes.io/">Kubernetes</a>
+                        <a
+                          href="https://kubernetes.io/"
+                        >Kubernetes</a>
                         implementation
                       </p>
                     </md-card-content>
@@ -345,35 +322,23 @@
           <div class="md-layout">
             <div class="md-layout-item md-size-66 md-xsmall-size-100 mx-auto">
               <h2 class="text-center title">TODO...</h2>
-              <h4 class="text-center description">
-                Theres lots more to add. Things coming soon:
-              </h4>
+              <h4 class="text-center description">Theres lots more to add. Things coming soon:</h4>
               <ul class="description">
                 <li>Migrate from docker-compose to Kubernetes</li>
-                <li style="text-decoration: line-through">
-                  SSL certificates (this is being really finicky with docker)
-                </li>
+                <li
+                  style="text-decoration: line-through"
+                >SSL certificates (this is being really finicky with docker)</li>
                 <li style="text-decoration: line-through">
                   User features
                   <ul>
-                    <li style="text-decoration: line-through">
-                      Login and create account
-                    </li>
-                    <li style="text-decoration: line-through">
-                      Password Hasing
-                    </li>
-                    <li style="text-decoration: line-through">
-                      JWT authentication
-                    </li>
-                    <li style="text-decoration: line-through">
-                      State management with Vuex and localstorage
-                    </li>
-                    <li style="text-decoration: line-through">
-                      User dashboard enhancements
-                    </li>
-                    <li style="text-decoration: line-through">
-                      Protected routes with JWT
-                    </li>
+                    <li style="text-decoration: line-through">Login and create account</li>
+                    <li style="text-decoration: line-through">Password Hasing</li>
+                    <li style="text-decoration: line-through">JWT authentication</li>
+                    <li
+                      style="text-decoration: line-through"
+                    >State management with Vuex and localstorage</li>
+                    <li style="text-decoration: line-through">User dashboard enhancements</li>
+                    <li style="text-decoration: line-through">Protected routes with JWT</li>
                     <li style="text-decoration: line-through">
                       Dynamic nav items for authenticated and not authenticated
                       state
@@ -395,9 +360,9 @@
           <div class="md-layout">
             <div class="md-layout-item md-size-66 md-xsmall-size-100 mx-auto">
               <h2 class="text-center title">Contact Me</h2>
-              <h4 class="text-center description">
-                Ask a question. Share something interesting. Tell me a secret...
-              </h4>
+              <h4
+                class="text-center description"
+              >Ask a question. Share something interesting. Tell me a secret...</h4>
               <h4 class="text-center description">
                 This form will send me an email with your message! I'll respond
                 to you as soon as possible.
@@ -427,17 +392,12 @@
                     <md-button
                       class="md-success"
                       v-on:click="createMessage(name, email, message)"
-                      >Send Message</md-button
-                    >
+                    >Send Message</md-button>
                   </div>
                 </div>
                 <br />
               </form>
-              <div
-                class="alert alert-success"
-                id="emailAlert"
-                v-show="showSuccessAlert"
-              >
+              <div class="alert alert-success" id="emailAlert" v-show="showSuccessAlert">
                 <div class="container">
                   <button
                     type="button"
@@ -472,11 +432,7 @@
                   : {{ warningAlertMessage }}
                 </div>
               </div>
-              <div
-                class="alert alert-danger"
-                id="emailErrorAlert"
-                v-show="showErrorAlert"
-              >
+              <div class="alert alert-danger" id="emailErrorAlert" v-show="showErrorAlert">
                 <div class="container">
                   <button
                     type="button"
@@ -506,6 +462,9 @@
 import axios from "axios";
 //const validator = require("email-validator");
 import * as EmailValidator from "email-validator";
+
+// Vuex
+import { mapActions } from "vuex";
 export default {
   bodyClass: "landing-page",
   props: {
@@ -565,6 +524,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(["sendEmail"]),
     createMessage(name, email, message) {
       // clear alerts on submission
       this.showSuccessAlert = false;
@@ -582,15 +542,13 @@ export default {
         return;
       }
 
-      // console.log(process.env.VUE_APP_API_URL);
-      console.log(process.env);
+      const messageSent = {
+        name,
+        email,
+        message
+      };
 
-      axios
-        .post("https://creekmore.io/api/messages", {
-          name,
-          email,
-          message
-        })
+      this.sendEmail(messageSent)
         .then(res => {
           //console.log(res.data);
           //console.log(res.status);

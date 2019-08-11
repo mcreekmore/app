@@ -8,19 +8,27 @@
       <nav>
         <ul>
           <li>
-            <a href="https://www.linkedin.com/in/creekmore/">LinkedIn</a>
+            <a href="https://www.linkedin.com/in/creekmore/" target="_blank" rel="noopener">LinkedIn</a>
           </li>
           <li>
-            <a href="https://github.com/mcreekmore/">GitHub</a>
+            <a href="https://github.com/mcreekmore/" target="_blank" rel="noopener">GitHub</a>
           </li>
           <li>
-            <a href="https://www.instagram.com/matthewcreekmore/">Instagram</a>
+            <a
+              href="https://www.instagram.com/matthewcreekmore/"
+              target="_blank"
+              rel="noopener"
+            >Instagram</a>
           </li>
         </ul>
       </nav>
       <div class="copyright">
         &copy; {{ year }}, made by
-        <a href="https://www.google.com/" target="_blank">Matt Creekmore</a>
+        <a
+          href="https://www.linkedin.com/in/creekmore/"
+          target="_blank"
+          rel="noopener"
+        >Matt Creekmore</a>
       </div>
     </div>
   </footer>

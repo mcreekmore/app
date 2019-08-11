@@ -13,19 +13,12 @@
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>face</md-icon>
                 <label>First Name...</label>
-                <md-input
-                  v-model="name"
-                  @keyup.enter="createUser(email, password)"
-                ></md-input>
+                <md-input v-model="name" @keyup.enter="createUser(email, password)"></md-input>
               </md-field>
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>email</md-icon>
                 <label>Email...</label>
-                <md-input
-                  v-model="email"
-                  type="email"
-                  @keyup.enter="createUser(email, password)"
-                ></md-input>
+                <md-input v-model="email" type="email" @keyup.enter="createUser(email, password)"></md-input>
               </md-field>
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>lock_outline</md-icon>
@@ -40,21 +33,15 @@
                 onclick="history.back()"
                 slot="footer"
                 class="md-simple md-warning md-lg"
-                >Back</md-button
-              >
+              >Back</md-button>
               <md-button
                 v-on:click="createUser(name, email, password)"
                 slot="footer"
                 class="md-simple md-success md-lg"
-                >Get Started</md-button
-              >
+              >Get Started</md-button>
             </login-card>
             <br />
-            <div
-              class="alert alert-success"
-              id="emailAlert"
-              v-show="showSuccessAlert"
-            >
+            <div class="alert alert-success" id="emailAlert" v-show="showSuccessAlert">
               <div class="container">
                 <button
                   type="button"
@@ -92,11 +79,7 @@
                 {{ warningAlertMessage }}
               </div>
             </div>
-            <div
-              class="alert alert-danger"
-              id="emailErrorAlert"
-              v-show="showErrorAlert"
-            >
+            <div class="alert alert-danger" id="emailErrorAlert" v-show="showErrorAlert">
               <div class="container">
                 <button
                   type="button"
@@ -195,7 +178,7 @@ export default {
         .catch(() => {
           this.showErrorAlert = true;
         });
-      console.log("Success: " + success);
+      //console.log("Success: " + success);
     },
     removeNotify() {
       this.showSuccessAlert = false;
