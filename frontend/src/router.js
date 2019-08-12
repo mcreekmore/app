@@ -81,7 +81,7 @@ const router = new Router({
 });
 
 // public routes that do not require auth
-const openRoutes = ["login", "register", "index"];
+const openRoutes = ["login", "register", "index", "eSports"];
 
 // if route is open, continue
 // if route is private and a token is available, continue

@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="description text-center">
-        <p>This is your private page</p>
+        <p>{{ getAuthenticatedUser.bio }}</p>
       </div>
       <div class="container center">
         <div id="navigation-pills">
