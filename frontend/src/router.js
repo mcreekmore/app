@@ -3,6 +3,7 @@ import Router from "vue-router";
 import IndexOriginal from "./views/Index.vue";
 import Index from "./views/Main.vue"; // my custom page
 import Landing from "./views/Landing.vue";
+import About from "./views/About.vue"; // about
 import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
 import Profile from "./views/Profile.vue";
@@ -69,6 +70,15 @@ const router = new Router({
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: "black" }
       }
+    },
+    {
+      path: "/about",
+      name: "about",
+      components: { default: About, header: MainNavbar, footer: MainFooter },
+      props: {
+        header: { colorOnScroll: 400 },
+        footer: { backgroundColor: "black" }
+      }
     }
   ],
   scrollBehavior: to => {
@@ -81,7 +91,7 @@ const router = new Router({
 });
 
 // public routes that do not require auth
-const openRoutes = ["login", "register", "index", "eSports"];
+const openRoutes = ["login", "register", "index", "eSports", "about"];
 
 // if route is open, continue
 // if route is private and a token is available, continue

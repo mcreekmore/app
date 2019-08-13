@@ -17,15 +17,11 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-// twitter
-import twitter from "vue-twitter";
-
 import MaterialKit from "./plugins/material-kit";
 
 Vue.config.productionTip = false;
 
 Vue.use(MaterialKit);
-Vue.use(twitter);
 
 const NavbarStore = {
   showNavbar: false

@@ -8,9 +8,9 @@ import axios from "axios";
 // }
 
 // DEV
-const API_URL = "http://localhost:3000/api";
+// const API_URL = "http://localhost:3000/api";
 // PROD
-// const API_URL = "https://creekmore.io/api";
+const API_URL = "https://creekmore.io/api";
 
 const state = {
   users: [
