@@ -36,7 +36,11 @@ End with an example of getting some data out of the system or using it for a lit
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+Backend is using PM2, check:
+
+```
+pm2 list
+```
 
 ## License
 
