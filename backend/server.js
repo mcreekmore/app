@@ -3,16 +3,17 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const messages = require("./routes/api/messages");
 const user = require("./routes/api/users");
+const locations = require("./routes/api/locations");
 const config = require("config");
-const https = require("https");
-const http = require("http");
+// const https = require("https");
+// const http = require("http");
 const fs = require("fs");
 
 // SSL certs
-const options = {
-  key: fs.readFileSync("./certs/domain.key"),
-  cert: fs.readFileSync("./certs/domain.crt")
-};
+// const options = {
+//   key: fs.readFileSync("./certs/domain.key"),
+//   cert: fs.readFileSync("./certs/domain.crt")
+// };
 
 const app = express();
 
@@ -40,6 +41,10 @@ app.use("/api/messages", messages);
 app.use("/api/users", user);
 // Use auth route
 app.use("/api/auth", require("./routes/api/auth"));
+
+// MOVES
+// Use locations route
+app.use("/api/locations", locations);
 
 port = process.env.PORT || 3000;
 
