@@ -35,6 +35,14 @@ const LocationSchema = new Schema({
     type: String,
     required: true
   },
+  lat: {
+    type: Number,
+    required: true
+  },
+  lon: {
+    type: Number,
+    required: true
+  },
   email: {
     type: String,
     required: true
@@ -48,7 +56,7 @@ const LocationSchema = new Schema({
     required: false
   },
   approved: {
-    type: String,
+    type: Boolean,
     required: true
   }
 });
