@@ -30,7 +30,7 @@ router.get("/approved", (req, res) => {
     .sort({ date: -1 }) // sorts descending
     .then(locations => {
       var approvedLocations = locations.filter(e => {
-        return e["approved"] == "true";
+        return e["approved"] == true;
       });
       console.log(approvedLocations);
       res.json(approvedLocations);
