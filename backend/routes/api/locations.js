@@ -44,7 +44,7 @@ router.post("/", (req, res) => {
   const {
     name,
     description,
-    type,
+    types,
     country,
     region,
     city,
@@ -69,7 +69,7 @@ router.post("/", (req, res) => {
     const newLocation = new Location({
       name,
       description,
-      type,
+      types,
       country,
       region,
       city,

@@ -11,8 +11,8 @@ const LocationSchema = new Schema({
     type: String,
     required: false
   },
-  type: {
-    type: String,
+  types: {
+    type: Array,
     required: true
   },
   country: {
