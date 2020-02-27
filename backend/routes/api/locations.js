@@ -9,6 +9,7 @@ const config = require("config");
 
 // Messages Model
 const Location = require("../../models/Location");
+const LocationUpdate = require("../../models/LocationUpdate");
 
 // Email Key
 const key = config.get("emailKey");
@@ -32,7 +33,7 @@ router.get("/approved", (req, res) => {
       var approvedLocations = locations.filter(e => {
         return e["approved"] == true;
       });
-      console.log(approvedLocations);
+      //console.log(approvedLocations);
       res.json(approvedLocations);
     });
 });
@@ -153,13 +154,59 @@ router.post("/", (req, res) => {
             "</b> <br >"
         });
 
-        console.log("Message sent: %s", info.messageId);
+        //console.log("Message sent: %s", info.messageId);
       }
 
       email().catch(console.error);
     });
     // .catch(() => res.sendStatus(400));
   });
+  //.catch(() => res.sendStatus(400));
+});
+
+// @route   POST /api/locations
+// @desc    create a new location
+// @access  Public
+router.post("/update", (req, res) => {
+  const {
+    locationID,
+    date,
+    // bar info
+    bar_wait,
+    bar_cover_bool,
+    bar_cover_charge,
+    bar_specials,
+    bar_styles,
+    //basic location info
+    location_occupancy,
+    location_rating
+  } = req.body;
+
+  const newUpdate = new LocationUpdate({
+    locationID,
+    date,
+    // bar info
+    bar_wait,
+    bar_cover_bool,
+    bar_cover_charge,
+    bar_specials,
+    bar_styles,
+    //basic location info
+    location_occupancy,
+    location_rating
+  });
+  newUpdate.save().then(newUpdate => {
+    // email function
+
+    res.json({
+      Update: {
+        id: newUpdate.id,
+        name: newUpdate.name
+      }
+    });
+  });
+  // .catch(() => res.sendStatus(400));
+
   //.catch(() => res.sendStatus(400));
 });
 
