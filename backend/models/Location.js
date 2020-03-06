@@ -58,6 +58,32 @@ const LocationSchema = new Schema({
   approved: {
     type: Boolean,
     required: true
+  },
+  update_info: {
+    bar_update_info: {
+      bar_cover_charge_average: {
+        type: String
+      },
+      bar_cover_charge_percent: {
+        type: String
+      },
+      bar_specials_list: {
+        type: Array
+      },
+      bar_wait_average: {
+        type: String
+      },
+      bar_styles_list: [
+        {
+          style: {
+            type: String
+          },
+          percent: {
+            type: String
+          }
+        }
+      ]
+    }
   }
 });
 

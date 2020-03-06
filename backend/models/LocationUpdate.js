@@ -12,20 +12,22 @@ const LocationUpdateSchema = new Schema({
     required: true
   },
   // bar updates
-  bar_wait: {
-    type: String
-  },
-  bar_cover_bool: {
-    type: Boolean
-  },
-  bar_cover_charge: {
-    type: String
-  },
-  bar_specials: {
-    type: String
-  },
-  bar_styles: {
-    type: Array
+  bar_update: {
+    bar_wait: {
+      type: String
+    },
+    bar_cover_bool: {
+      type: Boolean
+    },
+    bar_cover_charge: {
+      type: String
+    },
+    bar_specials: {
+      type: String
+    },
+    bar_styles: {
+      type: Array
+    }
   },
   // basic location info
   location_occupancy: {
