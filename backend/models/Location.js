@@ -59,7 +59,16 @@ const LocationSchema = new Schema({
     type: Boolean,
     required: true
   },
+
   update_info: {
+    location_update_info: {
+      open_hour_percent: {
+        type: Number
+      },
+      open_day_percent: {
+        type: Number
+      }
+    },
     bar_update_info: {
       bar_cover_charge_average: {
         type: String

@@ -35,6 +35,9 @@ const LocationUpdateSchema = new Schema({
   },
   location_rating: {
     type: Number
+  },
+  location_open_bool: {
+    type: Boolean
   }
 });
 

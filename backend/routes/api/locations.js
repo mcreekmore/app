@@ -173,7 +173,8 @@ router.post("/update", (req, res) => {
     bar_styles,
     //basic location info
     location_occupancy,
-    location_rating
+    location_rating,
+    location_open_bool
   } = req.body;
 
   // bar_wait = parseInt(bar_wait);
@@ -194,7 +195,8 @@ router.post("/update", (req, res) => {
     },
     //basic location info
     location_occupancy,
-    location_rating
+    location_rating,
+    location_open_bool
   });
   newUpdate.save().then(newUpdate => {
     // response
@@ -218,10 +220,81 @@ function processUpdate(locationID) {
   console.log("Processing Info");
   Location.findOne({ _id: locationID }).then(location => {
     location.types.forEach(type => {
+      processLocationUpdate(location);
+      // bar update
       if (type.toString() == "Bar") {
         processBarUpdate(location);
       }
     });
+  });
+}
+
+function processLocationUpdate(location) {
+  LocationUpdate.find({ locationID: location._id }).then(updates => {
+    var ONE_HOUR = 60 * 60 * 1000; /* ms */
+    var ONE_DAY = 24 * 60 * 60 * 1000;
+
+    let location_open_hour_bool_count = 0;
+    let location_open_hour_bool_true_count = 0;
+    let location_open_day_bool_count = 0;
+    let location_open_day_bool_true_count = 0;
+
+    updates.forEach(update => {
+      var updateDate = new Date(update.date);
+      // if within 24 hours
+      if (new Date() - updateDate < ONE_DAY) {
+        //location_open_bool
+        if (update.location_open_bool != null) {
+          location_open_day_bool_count++;
+          if (update.location_open_bool == true) {
+            location_open_day_bool_true_count++;
+          }
+        }
+      }
+      // if within 1 hour
+      if (new Date() - updateDate < ONE_HOUR) {
+        //location_open_bool
+        if (update.location_open_bool != null) {
+          location_open_hour_bool_count++;
+          if (update.location_open_bool == true) {
+            location_open_hour_bool_true_count++;
+          }
+        }
+      }
+      // regardless of time (all time)
+    });
+
+    // find average
+    open_hour_percent =
+      (
+        location_open_hour_bool_true_count / location_open_hour_bool_count
+      ).toFixed(2) * 100;
+    open_day_percent =
+      (
+        location_open_day_bool_true_count / location_open_day_bool_count
+      ).toFixed(2) * 100;
+
+    // Update location document
+    Location.findOneAndUpdate(
+      { _id: location._id },
+      {
+        $set: {
+          update_info: {
+            location_update_info: {
+              open_hour_percent: open_hour_percent,
+              open_day_percent: open_day_percent
+            }
+          }
+        }
+      },
+      { new: true },
+      (err, doc) => {
+        if (err) {
+          console.log(err);
+        }
+        console.log(doc);
+      }
+    );
   });
 }
 
@@ -328,16 +401,6 @@ function processBarUpdate(location) {
       { style: "Cocktail Bar", percent: cocktailBar / bar_styles_count },
       { style: "Irish Pub", percent: irishPub / bar_styles_count }
     ];
-
-    //compile info into array
-    // bar_update_info = {
-    //   bar_cover_charge_average,
-    //   bar_specials_list,
-    //   bar_wait_average,
-    //   bar_styles_list
-    // };
-
-    //return bar_update_info;
 
     // Update location document
     Location.findOneAndUpdate(
