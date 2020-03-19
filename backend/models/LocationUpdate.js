@@ -29,6 +29,27 @@ const LocationUpdateSchema = new Schema({
       type: Array
     }
   },
+  // grocery updates
+  grocery_update: {
+    grocery_water_bool: {
+      type: Boolean
+    },
+    grocery_perishable_bool: {
+      type: Boolean
+    },
+    grocery_non_perishable_bool: {
+      type: Boolean
+    },
+    grocery_toilet_paper_bool: {
+      type: Boolean
+    },
+    grocery_disinfectants_bool: {
+      type: Boolean
+    },
+    grocery_feminine_bool: {
+      type: Boolean
+    }
+  },
   // basic location info
   location_occupancy: {
     type: String

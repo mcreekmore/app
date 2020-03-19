@@ -92,6 +92,44 @@ const LocationSchema = new Schema({
           }
         }
       ]
+    },
+    grocery_update_info: {
+      grocery_water_percent_day: {
+        type: Number
+      },
+      grocery_perishable_percent_day: {
+        type: Number
+      },
+      grocery_non_perishable_percent_day: {
+        type: Number
+      },
+      grocery_toilet_paper_percent_day: {
+        type: Number
+      },
+      grocery_disinfectants_percent_day: {
+        type: Number
+      },
+      grocery_feminine_percent_day: {
+        type: Number
+      },
+      grocery_water_percent_hour: {
+        type: Number
+      },
+      grocery_perishable_percent_hour: {
+        type: Number
+      },
+      grocery_non_perishable_percent_hour: {
+        type: Number
+      },
+      grocery_toilet_paper_percent_hour: {
+        type: Number
+      },
+      grocery_disinfectants_percent_hour: {
+        type: Number
+      },
+      grocery_feminine_percent_hour: {
+        type: Number
+      }
     }
   }
 });
