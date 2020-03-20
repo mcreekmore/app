@@ -216,7 +216,7 @@ router.post("/update", (req, res) => {
     location_open_bool
   });
 
-  console.log(newUpdate.bar_update.bar_cover_bool);
+  //console.log(newUpdate.bar_update.bar_cover_bool);
   newUpdate.save().then(newUpdate => {
     // response
     res.json({
@@ -233,13 +233,18 @@ router.post("/update", (req, res) => {
 module.exports = router;
 
 // Looks at all types and delegates function for each update type
-function processUpdate(locationID) {
-  update_info = [];
+async function processUpdate(locationID) {
+  update_info = {
+    location_update_info: {}
+  };
 
   console.log("Processing Info");
   Location.findOne({ _id: locationID }).then(location => {
     location.types.forEach(type => {
+      //console.log(processLocationUpdate(location));
+      //console.log(location);
       processLocationUpdate(location);
+      //console.log(location);
       // bar update
       if (type.toString() == "Bar") {
         //console.log("it is a bar");
@@ -251,76 +256,101 @@ function processUpdate(locationID) {
         processGroceryUpdate(location);
       }
     });
+    //console.log(location);
+    //location.save();
   });
 }
 
-function processLocationUpdate(location) {
-  LocationUpdate.find({ locationID: location._id }).then(updates => {
-    var ONE_HOUR = 60 * 60 * 1000; /* ms */
-    var ONE_DAY = 24 * 60 * 60 * 1000;
+async function processLocationUpdate(location) {
+  location = await LocationUpdate.find({ locationID: location._id }).then(
+    updates => {
+      var ONE_HOUR = 60 * 60 * 1000; /* ms */
+      var ONE_DAY = 24 * 60 * 60 * 1000;
 
-    let location_open_hour_bool_count = 0;
-    let location_open_hour_bool_true_count = 0;
-    let location_open_day_bool_count = 0;
-    let location_open_day_bool_true_count = 0;
+      let update_count_hour = 0;
+      let update_count_day = 0;
+      let location_open_hour_bool_count = 0;
+      let location_open_hour_bool_true_count = 0;
+      let location_open_day_bool_count = 0;
+      let location_open_day_bool_true_count = 0;
 
-    updates.forEach(update => {
-      var updateDate = new Date(update.date);
-      // if within 24 hours
-      if (new Date() - updateDate < ONE_DAY) {
-        //location_open_bool
-        if (update.location_open_bool != null) {
-          location_open_day_bool_count++;
-          if (update.location_open_bool == true) {
-            location_open_day_bool_true_count++;
-          }
-        }
-      }
-      // if within 1 hour
-      if (new Date() - updateDate < ONE_HOUR) {
-        //location_open_bool
-        if (update.location_open_bool != null) {
-          location_open_hour_bool_count++;
-          if (update.location_open_bool == true) {
-            location_open_hour_bool_true_count++;
-          }
-        }
-      }
-      // regardless of time (all time)
-    });
+      updates.forEach(update => {
+        var updateDate = new Date(update.date);
+        // if within 24 hours
+        if (new Date() - updateDate < ONE_DAY) {
+          update_count_day++;
 
-    // find average
-    open_hour_percent =
-      (
-        location_open_hour_bool_true_count / location_open_hour_bool_count
-      ).toFixed(2) * 100;
-    open_day_percent =
-      (
-        location_open_day_bool_true_count / location_open_day_bool_count
-      ).toFixed(2) * 100;
-
-    // Update location document
-    Location.findOneAndUpdate(
-      { _id: location._id },
-      {
-        $set: {
-          update_info: {
-            location_update_info: {
-              open_hour_percent: open_hour_percent,
-              open_day_percent: open_day_percent
+          //location_open_bool
+          if (update.location_open_bool != null) {
+            location_open_day_bool_count++;
+            if (update.location_open_bool == true) {
+              location_open_day_bool_true_count++;
             }
           }
         }
-      },
-      { new: true },
-      (err, doc) => {
-        if (err) {
-          console.log(err);
+        // if within 1 hour
+        if (new Date() - updateDate < ONE_HOUR) {
+          update_count_hour++;
+
+          //location_open_bool
+          if (update.location_open_bool != null) {
+            location_open_hour_bool_count++;
+            if (update.location_open_bool == true) {
+              location_open_hour_bool_true_count++;
+            }
+          }
         }
-        //console.log(doc);
-      }
-    );
-  });
+        // regardless of time (all time)
+      });
+
+      // find average
+      if (location_open_hour_bool_count > 0) {
+        open_hour_percent =
+          (
+            location_open_hour_bool_true_count / location_open_hour_bool_count
+          ).toFixed(2) * 100;
+      } else open_hour_percent = null;
+
+      if (location_open_day_bool_count > 0) {
+        open_day_percent =
+          (
+            location_open_day_bool_true_count / location_open_day_bool_count
+          ).toFixed(2) * 100;
+      } else open_day_percent = null;
+
+      console.log(update_count_day);
+      console.log(update_count_hour);
+
+      location.update_info.location_update_info = {
+        open_hour_percent: open_hour_percent,
+        open_day_percent: open_day_percent,
+        update_count_day: update_count_day,
+        update_count_hour: update_count_hour
+      };
+
+      //console.log(location);
+
+      // Update location document
+      Location.findOneAndUpdate(
+        { _id: location._id },
+        {
+          $set: {
+            update_info: location.update_info
+          }
+        },
+        { new: true },
+
+        (err, doc) => {
+          if (err) {
+            console.log(err);
+          }
+          //console.log(doc);
+        }
+      );
+      return location;
+    }
+  );
+  return location;
 }
 
 // Bar Update Proccessing
@@ -427,20 +457,20 @@ function processBarUpdate(location) {
       { style: "Irish Pub", percent: irishPub / bar_styles_count }
     ];
 
+    location.update_info.bar_update_info = {
+      bar_cover_charge_average,
+      bar_cover_charge_percent,
+      bar_specials_list,
+      bar_wait_average,
+      bar_styles_list
+    };
+
     // Update location document
     Location.findOneAndUpdate(
       { _id: location._id },
       {
         $set: {
-          update_info: {
-            bar_update_info: {
-              bar_cover_charge_average: bar_cover_charge_average,
-              bar_cover_charge_percent,
-              bar_specials_list: bar_specials_list,
-              bar_wait_average: bar_wait_average,
-              bar_styles_list: bar_styles_list
-            }
-          }
+          update_info: location.update_info
         }
       },
       { new: true },
@@ -453,239 +483,308 @@ function processBarUpdate(location) {
       }
     );
   });
+  return location;
 }
 
 function processGroceryUpdate(location) {
-  LocationUpdate.find({ locationID: location._id }).then(updates => {
-    var ONE_HOUR = 60 * 60 * 1000; /* ms */
-    var ONE_DAY = 24 * 60 * 60 * 1000;
+  //console.log(location);
+  LocationUpdate.find({ locationID: location._id }).then(
+    updates => {
+      var ONE_HOUR = 60 * 60 * 1000; /* ms */
+      var ONE_DAY = 24 * 60 * 60 * 1000;
 
-    // last day
-    let grocery_water_bool_count_day = 0;
-    let grocery_water_bool_true_count_day = 0;
-    let grocery_perishable_bool_count_day = 0;
-    let grocery_perishable_bool_true_count_day = 0;
-    let grocery_non_perishable_bool_count_day = 0;
-    let grocery_non_perishable_bool_true_count_day = 0;
-    let grocery_toilet_paper_bool_count_day = 0;
-    let grocery_toilet_paper_bool_true_count_day = 0;
-    let grocery_disinfectants_bool_count_day = 0;
-    let grocery_disinfectants_bool_true_count_day = 0;
-    let grocery_feminine_bool_count_day = 0;
-    let grocery_feminine_bool_true_count_day = 0;
-    // last hour
-    let grocery_water_bool_count_hour = 0;
-    let grocery_water_bool_true_count_hour = 0;
-    let grocery_perishable_bool_count_hour = 0;
-    let grocery_perishable_bool_true_count_hour = 0;
-    let grocery_non_perishable_bool_count_hour = 0;
-    let grocery_non_perishable_bool_true_count_hour = 0;
-    let grocery_toilet_paper_bool_count_hour = 0;
-    let grocery_toilet_paper_bool_true_count_hour = 0;
-    let grocery_disinfectants_bool_count_hour = 0;
-    let grocery_disinfectants_bool_true_count_hour = 0;
-    let grocery_feminine_bool_count_hour = 0;
-    let grocery_feminine_bool_true_count_hour = 0;
+      // last day
+      let grocery_water_bool_count_day = 0;
+      let grocery_water_bool_true_count_day = 0;
+      let grocery_perishable_bool_count_day = 0;
+      let grocery_perishable_bool_true_count_day = 0;
+      let grocery_non_perishable_bool_count_day = 0;
+      let grocery_non_perishable_bool_true_count_day = 0;
+      let grocery_toilet_paper_bool_count_day = 0;
+      let grocery_toilet_paper_bool_true_count_day = 0;
+      let grocery_disinfectants_bool_count_day = 0;
+      let grocery_disinfectants_bool_true_count_day = 0;
+      let grocery_feminine_bool_count_day = 0;
+      let grocery_feminine_bool_true_count_day = 0;
+      // last hour
+      let grocery_water_bool_count_hour = 0;
+      let grocery_water_bool_true_count_hour = 0;
+      let grocery_perishable_bool_count_hour = 0;
+      let grocery_perishable_bool_true_count_hour = 0;
+      let grocery_non_perishable_bool_count_hour = 0;
+      let grocery_non_perishable_bool_true_count_hour = 0;
+      let grocery_toilet_paper_bool_count_hour = 0;
+      let grocery_toilet_paper_bool_true_count_hour = 0;
+      let grocery_disinfectants_bool_count_hour = 0;
+      let grocery_disinfectants_bool_true_count_hour = 0;
+      let grocery_feminine_bool_count_hour = 0;
+      let grocery_feminine_bool_true_count_hour = 0;
 
-    updates.forEach(update => {
-      groceryUpd = update.grocery_update;
-      var updateDate = new Date(update.date);
-      // if within 24 hours
-      if (new Date() - updateDate < ONE_DAY) {
-        //grocery_water_bool
-        if (groceryUpd.grocery_water_bool != null) {
-          grocery_water_bool_count_day++;
-          if (groceryUpd.grocery_water_bool == true) {
-            grocery_water_bool_true_count_day++;
+      updates.forEach(update => {
+        groceryUpd = update.grocery_update;
+        var updateDate = new Date(update.date);
+        // if within 24 hours
+        if (new Date() - updateDate < ONE_DAY) {
+          //grocery_water_bool
+          if (groceryUpd.grocery_water_bool != null) {
+            grocery_water_bool_count_day++;
+            if (groceryUpd.grocery_water_bool == true) {
+              grocery_water_bool_true_count_day++;
+            }
           }
-        }
-        //grocery_perishable_bool
-        if (groceryUpd.grocery_perishable_bool != null) {
-          grocery_perishable_bool_count_day++;
-          if (groceryUpd.grocery_perishable_bool == true) {
-            grocery_perishable_bool_true_count_day++;
+          //grocery_perishable_bool
+          if (groceryUpd.grocery_perishable_bool != null) {
+            grocery_perishable_bool_count_day++;
+            if (groceryUpd.grocery_perishable_bool == true) {
+              grocery_perishable_bool_true_count_day++;
+            }
           }
-        }
-        //grocery_non_perishable_bool
-        if (groceryUpd.grocery_non_perishable_bool != null) {
-          grocery_non_perishable_bool_count_day++;
-          if (groceryUpd.grocery_non_perishable_bool == true) {
-            grocery_non_perishable_bool_true_count_day++;
+          //grocery_non_perishable_bool
+          if (groceryUpd.grocery_non_perishable_bool != null) {
+            grocery_non_perishable_bool_count_day++;
+            if (groceryUpd.grocery_non_perishable_bool == true) {
+              grocery_non_perishable_bool_true_count_day++;
+            }
           }
-        }
-        //grocery_toilet_paper_bool
-        if (groceryUpd.grocery_toilet_paper_bool != null) {
-          grocery_toilet_paper_bool_count_day++;
-          if (groceryUpd.grocery_toilet_paper_bool == true) {
-            grocery_toilet_paper_bool_true_count_day++;
+          //grocery_toilet_paper_bool
+          if (groceryUpd.grocery_toilet_paper_bool != null) {
+            grocery_toilet_paper_bool_count_day++;
+            if (groceryUpd.grocery_toilet_paper_bool == true) {
+              grocery_toilet_paper_bool_true_count_day++;
+            }
           }
-        }
-        //grocery_disinfectants_bool
-        if (groceryUpd.grocery_disinfectants_bool != null) {
-          grocery_disinfectants_bool_count_day++;
-          if (groceryUpd.grocery_disinfectants_bool == true) {
-            grocery_disinfectants_bool_true_count_day++;
+          //grocery_disinfectants_bool
+          if (groceryUpd.grocery_disinfectants_bool != null) {
+            grocery_disinfectants_bool_count_day++;
+            if (groceryUpd.grocery_disinfectants_bool == true) {
+              grocery_disinfectants_bool_true_count_day++;
+            }
           }
-        }
-        //grocery_feminine_bool
-        if (groceryUpd.grocery_feminine_bool != null) {
-          grocery_feminine_bool_count_day++;
-          if (groceryUpd.grocery_feminine_bool == true) {
-            grocery_feminine_bool_true_count_day++;
-          }
-        }
-      }
-      // if within 1 hour
-      if (new Date() - updateDate < ONE_HOUR) {
-        //grocery_water_bool
-        if (groceryUpd.grocery_water_bool != null) {
-          grocery_water_bool_count_hour++;
-          if (groceryUpd.grocery_water_bool == true) {
-            grocery_water_bool_true_count_hour++;
-          }
-        }
-        //grocery_perishable_bool
-        if (groceryUpd.grocery_perishable_bool != null) {
-          grocery_perishable_bool_count_hour++;
-          if (groceryUpd.grocery_perishable_bool == true) {
-            grocery_perishable_bool_true_count_hour++;
-          }
-        }
-        //grocery_non_perishable_bool
-        if (groceryUpd.grocery_non_perishable_bool != null) {
-          grocery_non_perishable_bool_count_hour++;
-          if (groceryUpd.grocery_non_perishable_bool == true) {
-            grocery_non_perishable_bool_true_count_hour++;
-          }
-        }
-        //grocery_toilet_paper_bool
-        if (groceryUpd.grocery_toilet_paper_bool != null) {
-          grocery_toilet_paper_bool_count_hour++;
-          if (groceryUpd.grocery_toilet_paper_bool == true) {
-            grocery_toilet_paper_bool_true_count_hour++;
-          }
-        }
-        //grocery_disinfectants_bool
-        if (groceryUpd.grocery_disinfectants_bool != null) {
-          grocery_disinfectants_bool_count_hour++;
-          if (groceryUpd.grocery_disinfectants_bool == true) {
-            grocery_disinfectants_bool_true_count_hour++;
-          }
-        }
-        //grocery_feminine_bool
-        if (groceryUpd.grocery_feminine_bool != null) {
-          grocery_feminine_bool_count_hour++;
-          if (groceryUpd.grocery_feminine_bool == true) {
-            grocery_feminine_bool_true_count_hour++;
-          }
-        }
-      }
-      // regardless of time (all time)
-      //console.log(update.grocery_update.grocery_toilet_paper_bool);
-    });
-
-    // find average
-    grocery_water_percent_day =
-      (
-        grocery_water_bool_true_count_day / grocery_water_bool_count_day
-      ).toFixed(2) * 100;
-    // console.log(grocery_water_percent_day);
-    // console.log(grocery_water_bool_true_count_day);
-
-    grocery_perishable_percent_day =
-      (
-        grocery_perishable_bool_true_count_day /
-        grocery_perishable_bool_count_day
-      ).toFixed(2) * 100;
-
-    grocery_non_perishable_percent_day =
-      (
-        grocery_non_perishable_bool_true_count_day /
-        grocery_non_perishable_bool_count_day
-      ).toFixed(2) * 100;
-
-    grocery_toilet_paper_percent_day =
-      (
-        grocery_toilet_paper_bool_true_count_day /
-        grocery_toilet_paper_bool_count_day
-      ).toFixed(2) * 100;
-
-    grocery_disinfectants_percent_day =
-      (
-        grocery_disinfectants_bool_true_count_day /
-        grocery_disinfectants_bool_count_day
-      ).toFixed(2) * 100;
-
-    grocery_feminine_percent_day =
-      (
-        grocery_feminine_bool_true_count_day / grocery_feminine_bool_count_day
-      ).toFixed(2) * 100;
-
-    // hour
-    grocery_water_percent_hour =
-      (
-        grocery_water_bool_true_count_hour / grocery_water_bool_count_hour
-      ).toFixed(2) * 100;
-
-    grocery_perishable_percent_hour =
-      (
-        grocery_perishable_bool_true_count_hour /
-        grocery_perishable_bool_count_hour
-      ).toFixed(2) * 100;
-
-    grocery_non_perishable_percent_hour =
-      (
-        grocery_non_perishable_bool_true_count_hour /
-        grocery_non_perishable_bool_count_hour
-      ).toFixed(2) * 100;
-
-    grocery_toilet_paper_percent_hour =
-      (
-        grocery_toilet_paper_bool_true_count_hour /
-        grocery_toilet_paper_bool_count_hour
-      ).toFixed(2) * 100;
-
-    grocery_disinfectants_percent_hour =
-      (
-        grocery_disinfectants_bool_true_count_hour /
-        grocery_disinfectants_bool_count_hour
-      ).toFixed(2) * 100;
-
-    grocery_feminine_percent_hour =
-      (
-        grocery_feminine_bool_true_count_hour / grocery_feminine_bool_count_hour
-      ).toFixed(2) * 100;
-
-    // Update location document
-    Location.findOneAndUpdate(
-      { _id: location._id },
-      {
-        $set: {
-          update_info: {
-            grocery_update_info: {
-              grocery_water_percent_day: grocery_water_percent_day,
-              grocery_perishable_percent_day: grocery_perishable_percent_day,
-              grocery_non_perishable_percent_day: grocery_non_perishable_percent_day,
-              grocery_toilet_paper_percent_day: grocery_toilet_paper_percent_day,
-              grocery_disinfectants_percent_day: grocery_disinfectants_percent_day,
-              grocery_feminine_percent_day: grocery_feminine_percent_day,
-              grocery_water_percent_hour: grocery_water_percent_hour,
-              grocery_perishable_percent_hour: grocery_perishable_percent_hour,
-              grocery_non_perishable_percent_hour: grocery_non_perishable_percent_hour,
-              grocery_toilet_paper_percent_hour: grocery_toilet_paper_percent_hour,
-              grocery_disinfectants_percent_hour: grocery_disinfectants_percent_hour,
-              grocery_feminine_percent_hour: grocery_feminine_percent_hour
+          //grocery_feminine_bool
+          if (groceryUpd.grocery_feminine_bool != null) {
+            grocery_feminine_bool_count_day++;
+            if (groceryUpd.grocery_feminine_bool == true) {
+              grocery_feminine_bool_true_count_day++;
             }
           }
         }
-      },
-      { new: true },
-      (err, doc) => {
-        if (err) {
-          console.log(err);
+        // if within 1 hour
+        if (new Date() - updateDate < ONE_HOUR) {
+          //grocery_water_bool
+          if (groceryUpd.grocery_water_bool != null) {
+            grocery_water_bool_count_hour++;
+            if (groceryUpd.grocery_water_bool == true) {
+              grocery_water_bool_true_count_hour++;
+            }
+          }
+          //grocery_perishable_bool
+          if (groceryUpd.grocery_perishable_bool != null) {
+            grocery_perishable_bool_count_hour++;
+            if (groceryUpd.grocery_perishable_bool == true) {
+              grocery_perishable_bool_true_count_hour++;
+            }
+          }
+          //grocery_non_perishable_bool
+          if (groceryUpd.grocery_non_perishable_bool != null) {
+            grocery_non_perishable_bool_count_hour++;
+            if (groceryUpd.grocery_non_perishable_bool == true) {
+              grocery_non_perishable_bool_true_count_hour++;
+            }
+          }
+          //grocery_toilet_paper_bool
+          if (groceryUpd.grocery_toilet_paper_bool != null) {
+            grocery_toilet_paper_bool_count_hour++;
+            if (groceryUpd.grocery_toilet_paper_bool == true) {
+              grocery_toilet_paper_bool_true_count_hour++;
+            }
+          }
+          //grocery_disinfectants_bool
+          if (groceryUpd.grocery_disinfectants_bool != null) {
+            grocery_disinfectants_bool_count_hour++;
+            if (groceryUpd.grocery_disinfectants_bool == true) {
+              grocery_disinfectants_bool_true_count_hour++;
+            }
+          }
+          //grocery_feminine_bool
+          if (groceryUpd.grocery_feminine_bool != null) {
+            grocery_feminine_bool_count_hour++;
+            if (groceryUpd.grocery_feminine_bool == true) {
+              grocery_feminine_bool_true_count_hour++;
+            }
+          }
         }
-        //console.log(doc);
+        // regardless of time (all time)
+        //console.log(update.grocery_update.grocery_toilet_paper_bool);
+      });
+
+      // find average
+      if (grocery_water_bool_count_day > 0) {
+        grocery_water_percent_day =
+          (
+            grocery_water_bool_true_count_day / grocery_water_bool_count_day
+          ).toFixed(2) * 100;
+      } else grocery_water_percent_day = null;
+      // console.log(grocery_water_percent_day);
+      // console.log(grocery_water_bool_true_count_day);
+
+      if (grocery_perishable_bool_count_day > 0) {
+        grocery_perishable_percent_day =
+          (
+            grocery_perishable_bool_true_count_day /
+            grocery_perishable_bool_count_day
+          ).toFixed(2) * 100;
+      } else grocery_perishable_percent_day = null;
+
+      if (grocery_non_perishable_bool_count_day > 0) {
+        grocery_non_perishable_percent_day =
+          (
+            grocery_non_perishable_bool_true_count_day /
+            grocery_non_perishable_bool_count_day
+          ).toFixed(2) * 100;
+      } else grocery_non_perishable_percent_day = null;
+
+      if (grocery_toilet_paper_bool_count_day > 0) {
+        grocery_toilet_paper_percent_day =
+          (
+            grocery_toilet_paper_bool_true_count_day /
+            grocery_toilet_paper_bool_count_day
+          ).toFixed(2) * 100;
+      } else grocery_toilet_paper_percent_day = null;
+
+      if (grocery_disinfectants_bool_count_day > 0) {
+        grocery_disinfectants_percent_day =
+          (
+            grocery_disinfectants_bool_true_count_day /
+            grocery_disinfectants_bool_count_day
+          ).toFixed(2) * 100;
+      } else grocery_disinfectants_percent_day = null;
+
+      if (grocery_feminine_bool_count_day > 0) {
+        grocery_feminine_percent_day =
+          (
+            grocery_feminine_bool_true_count_day /
+            grocery_feminine_bool_count_day
+          ).toFixed(2) * 100;
+      } else grocery_feminine_percent_day = null;
+
+      // hour
+      if (grocery_water_bool_count_hour > 0) {
+        grocery_water_percent_hour =
+          (
+            grocery_water_bool_true_count_hour / grocery_water_bool_count_hour
+          ).toFixed(2) * 100;
+      } else grocery_water_percent_hour = null;
+
+      if (grocery_perishable_bool_count_hour > 0) {
+        grocery_perishable_percent_hour =
+          (
+            grocery_perishable_bool_true_count_hour /
+            grocery_perishable_bool_count_hour
+          ).toFixed(2) * 100;
+      } else grocery_perishable_percent_hour = null;
+
+      if (grocery_non_perishable_bool_count_hour > 0) {
+        grocery_non_perishable_percent_hour =
+          (
+            grocery_non_perishable_bool_true_count_hour /
+            grocery_non_perishable_bool_count_hour
+          ).toFixed(2) * 100;
+      } else grocery_non_perishable_percent_hour = null;
+
+      if (grocery_toilet_paper_bool_count_hour > 0) {
+        grocery_toilet_paper_percent_hour =
+          (
+            grocery_toilet_paper_bool_true_count_hour /
+            grocery_toilet_paper_bool_count_hour
+          ).toFixed(2) * 100;
+      } else grocery_toilet_paper_percent_hour = null;
+
+      if (grocery_disinfectants_bool_count_hour > 0) {
+        grocery_disinfectants_percent_hour =
+          (
+            grocery_disinfectants_bool_true_count_hour /
+            grocery_disinfectants_bool_count_hour
+          ).toFixed(2) * 100;
+      } else grocery_disinfectants_percent_hour = null;
+
+      if (grocery_feminine_bool_count_hour > 0) {
+        grocery_feminine_percent_hour =
+          (
+            grocery_feminine_bool_true_count_hour /
+            grocery_feminine_bool_count_hour
+          ).toFixed(2) * 100;
+      } else grocery_feminine_percent_hour = null;
+
+      location.update_info.grocery_update_info = {
+        grocery_water_percent_day,
+        grocery_water_percent_hour,
+        grocery_perishable_percent_day,
+        grocery_perishable_percent_hour,
+        grocery_non_perishable_percent_day,
+        grocery_non_perishable_percent_hour,
+        grocery_toilet_paper_percent_day,
+        grocery_toilet_paper_percent_hour,
+        grocery_disinfectants_percent_day,
+        grocery_disinfectants_percent_hour,
+        grocery_feminine_percent_day,
+        grocery_feminine_percent_hour
+      };
+
+      // Update location document
+      Location.findOneAndUpdate(
+        { _id: location._id },
+        {
+          $set: {
+            update_info: location.update_info
+          }
+        },
+        { new: true },
+        (err, doc) => {
+          if (err) {
+            console.log(err);
+          }
+          //console.log(doc);
+        }
+      );
+
+      // // Update location document
+      // Location.findOneAndUpdate(
+      //   { _id: location._id },
+      //   {
+      //     $set: {
+      //       update_info: {
+      //         grocery_update_info: {
+      //           grocery_water_percent_day: grocery_water_percent_day,
+      //           grocery_perishable_percent_day: grocery_perishable_percent_day,
+      //           grocery_non_perishable_percent_day: grocery_non_perishable_percent_day,
+      //           grocery_toilet_paper_percent_day: grocery_toilet_paper_percent_day,
+      //           grocery_disinfectants_percent_day: grocery_disinfectants_percent_day,
+      //           grocery_feminine_percent_day: grocery_feminine_percent_day,
+      //           grocery_water_percent_hour: grocery_water_percent_hour,
+      //           grocery_perishable_percent_hour: grocery_perishable_percent_hour,
+      //           grocery_non_perishable_percent_hour: grocery_non_perishable_percent_hour,
+      //           grocery_toilet_paper_percent_hour: grocery_toilet_paper_percent_hour,
+      //           grocery_disinfectants_percent_hour: grocery_disinfectants_percent_hour,
+      //           grocery_feminine_percent_hour: grocery_feminine_percent_hour
+      //         }
+      //       }
+      //     }
+      //   },
+      //   { new: true },
+      //   (err, doc) => {
+      //     if (err) {
+      //       console.log(err);
+      //     }
+      //     //console.log(doc);
+      //   }
+      // );
+    },
+    (err, doc) => {
+      if (err) {
+        console.log(err);
       }
-    );
-  });
+      //console.log(doc);
+    }
+  );
+  return location;
 }

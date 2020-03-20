@@ -63,72 +63,100 @@ const LocationSchema = new Schema({
   update_info: {
     location_update_info: {
       open_hour_percent: {
-        type: Number
+        type: Number,
+        default: null
       },
       open_day_percent: {
-        type: Number
+        type: Number,
+        default: null
+      },
+      update_count_hour: {
+        type: Number,
+        default: null
+      },
+      update_count_day: {
+        type: Number,
+        default: null
       }
     },
     bar_update_info: {
       bar_cover_charge_average: {
-        type: String
+        type: String,
+        default: null
       },
       bar_cover_charge_percent: {
-        type: String
+        type: String,
+        default: null
       },
       bar_specials_list: {
-        type: Array
+        type: Array,
+        default: null
       },
       bar_wait_average: {
-        type: String
+        type: String,
+        default: null
       },
       bar_styles_list: [
         {
           style: {
-            type: String
+            type: String,
+            default: null
           },
           percent: {
-            type: String
+            type: String,
+            default: null
           }
         }
       ]
     },
     grocery_update_info: {
       grocery_water_percent_day: {
-        type: Number
+        type: Number,
+        default: null
       },
       grocery_perishable_percent_day: {
-        type: Number
+        type: Number,
+        default: null
       },
       grocery_non_perishable_percent_day: {
-        type: Number
+        type: Number,
+        default: null
       },
       grocery_toilet_paper_percent_day: {
-        type: Number
+        type: Number,
+        default: null
       },
       grocery_disinfectants_percent_day: {
-        type: Number
+        type: Number,
+        default: null
       },
       grocery_feminine_percent_day: {
-        type: Number
+        type: Number,
+        default: null
       },
       grocery_water_percent_hour: {
-        type: Number
+        type: Number,
+        default: null
       },
       grocery_perishable_percent_hour: {
-        type: Number
+        type: Number,
+        default: null
       },
       grocery_non_perishable_percent_hour: {
-        type: Number
+        type: Number,
+        default: null
       },
       grocery_toilet_paper_percent_hour: {
-        type: Number
+        type: Number,
+        default: null
       },
       grocery_disinfectants_percent_hour: {
-        type: Number
+        type: Number,
+        default: null
       },
       grocery_feminine_percent_hour: {
-        type: Number
+        type: Number,
+        default: null
       }
     }
   }

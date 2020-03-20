@@ -23,6 +23,7 @@
     "test": "test",
     "start": "node server.js",
     "server": "nodemon server.js",
+    "dev": "nodemon server.js",
     "go": "concurrently --kill-others \"npm run server\" \"cd ../frontend && npm run dev\""
   },
   "author": "",
