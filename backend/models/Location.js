@@ -57,7 +57,8 @@ const LocationSchema = new Schema({
   },
   approved: {
     type: Boolean,
-    required: true
+    required: true,
+    default: true // change in prod!
   },
 
   update_info: {
@@ -75,6 +76,44 @@ const LocationSchema = new Schema({
         default: null
       },
       update_count_day: {
+        type: Number,
+        default: null
+      }
+    },
+    gas_update_info: {
+      gas_regular_percent_day: {
+        type: Number,
+        default: null
+      },
+      gas_plus_percent_day: {
+        type: Number,
+        default: null
+      },
+      gas_premium_percent_day: {
+        type: Number,
+        default: null
+      },
+      gas_diesel_percent_day: {
+        type: Number,
+        default: null
+      },
+      gas_regular_percent_hour: {
+        type: Number,
+        default: null
+      },
+      gas_plus_percent_hour: {
+        type: Number,
+        default: null
+      },
+      gas_premium_percent_hour: {
+        type: Number,
+        default: null
+      },
+      gas_diesel_percent_hour: {
+        type: Number,
+        default: null
+      },
+      gas_air_percent: {
         type: Number,
         default: null
       }
@@ -108,6 +147,36 @@ const LocationSchema = new Schema({
           }
         }
       ]
+    },
+    pharmacy_update_info: {
+      pharmacy_prescription_fill_percent_day: {
+        type: Number,
+        default: null
+      },
+      pharmacy_vaccinations_percent_day: {
+        type: Number,
+        default: null
+      },
+      pharmacy_counseling_percent_day: {
+        type: Number,
+        default: null
+      },
+      pharmacy_prescription_fill_percent_hour: {
+        type: Number,
+        default: null
+      },
+      pharmacy_vaccinations_percent_hour: {
+        type: Number,
+        default: null
+      },
+      pharmacy_counseling_percent_hour: {
+        type: Number,
+        default: null
+      },
+      pharmacy_drive_through_percent: {
+        type: Number,
+        default: null
+      }
     },
     grocery_update_info: {
       grocery_water_percent_day: {

@@ -58,7 +58,7 @@ router.post("/", (req, res) => {
     website
   } = req.body;
 
-  const approved = false;
+  //const approved = false;
 
   // Check for existing user
   Location.findOne({ lat, lon }).then(location => {
@@ -80,8 +80,7 @@ router.post("/", (req, res) => {
       lon,
       email,
       phone,
-      website,
-      approved
+      website
     });
     newLocation.save().then(newLocation => {
       // email function
@@ -178,17 +177,22 @@ router.post("/update", (req, res) => {
     grocery_toilet_paper_bool,
     grocery_disinfectants_bool,
     grocery_feminine_bool,
+    // gas info
+    gas_regular_bool,
+    gas_plus_bool,
+    gas_premium_bool,
+    gas_diesel_bool,
+    gas_air_bool,
+    // pharmacy info
+    pharmacy_prescription_fill_bool,
+    pharmacy_vaccinations_bool,
+    pharmacy_drive_through_bool,
+    pharmacy_counseling_bool,
     //basic location info
     location_occupancy,
     location_rating,
     location_open_bool
   } = req.body;
-
-  //console.log(grocery_water_bool);
-  // bar_wait = parseInt(bar_wait);
-  // bar_cover_charge = parseInt(bar_cover_charge);
-  // console.log(bar_wait);
-  // console.log(bar_cover_charge);
 
   const newUpdate = new LocationUpdate({
     locationID,
@@ -209,6 +213,21 @@ router.post("/update", (req, res) => {
       grocery_toilet_paper_bool: grocery_toilet_paper_bool,
       grocery_disinfectants_bool: grocery_disinfectants_bool,
       grocery_feminine_bool: grocery_feminine_bool
+    },
+    // gas info
+    gas_update: {
+      gas_regular_bool,
+      gas_plus_bool,
+      gas_premium_bool,
+      gas_diesel_bool,
+      gas_air_bool
+    },
+    // pharmacy info
+    pharmacy_update: {
+      pharmacy_prescription_fill_bool,
+      pharmacy_vaccinations_bool,
+      pharmacy_drive_through_bool,
+      pharmacy_counseling_bool
     },
     //basic location info
     location_occupancy,
@@ -254,6 +273,16 @@ async function processUpdate(locationID) {
       if (type.toString() == "Grocery") {
         //console.log("it is a grocery store");
         processGroceryUpdate(location);
+      }
+      // gas update
+      if (type.toString() == "Gas Station") {
+        //console.log("it is a grocery store");
+        processGasUpdate(location);
+      }
+      // gas update
+      if (type.toString() == "Pharmacy") {
+        //console.log("it is a grocery store");
+        processPharmacyUpdate(location);
       }
     });
     //console.log(location);
@@ -345,6 +374,394 @@ async function processLocationUpdate(location) {
             console.log(err);
           }
           //console.log(doc);
+        }
+      );
+      return location;
+    }
+  );
+  return location;
+}
+
+// Gas Update Processing
+async function processGasUpdate(location) {
+  location = await LocationUpdate.find({ locationID: location._id }).then(
+    updates => {
+      var ONE_HOUR = 60 * 60 * 1000; /* ms */
+      var ONE_DAY = 24 * 60 * 60 * 1000;
+
+      // day
+      let gas_regular_bool_count_day = 0;
+      let gas_regular_bool_true_count_day = 0;
+      let gas_plus_bool_count_day = 0;
+      let gas_plus_bool_true_count_day = 0;
+      let gas_premium_bool_count_day = 0;
+      let gas_premium_bool_true_count_day = 0;
+      let gas_diesel_bool_count_day = 0;
+      let gas_diesel_bool_true_count_day = 0;
+
+      // hour
+      let gas_regular_bool_count_hour = 0;
+      let gas_regular_bool_true_count_hour = 0;
+      let gas_plus_bool_count_hour = 0;
+      let gas_plus_bool_true_count_hour = 0;
+      let gas_premium_bool_count_hour = 0;
+      let gas_premium_bool_true_count_hour = 0;
+      let gas_diesel_bool_count_hour = 0;
+      let gas_diesel_bool_true_count_hour = 0;
+
+      // any time
+      let gas_air_bool_count = 0;
+      let gas_air_bool_true_count = 0;
+
+      updates.forEach(update => {
+        var updateDate = new Date(update.date);
+        // if within 24 hours
+        if (new Date() - updateDate < ONE_DAY) {
+          //gas_regular_bool
+          if (update.gas_update.gas_regular_bool != null) {
+            gas_regular_bool_count_day++;
+            if (update.gas_update.gas_regular_bool == true) {
+              gas_regular_bool_true_count_day++;
+            }
+          }
+          //gas_plus_bool
+          if (update.gas_update.gas_plus_bool != null) {
+            gas_plus_bool_count_day++;
+            if (update.gas_update.gas_plus_bool == true) {
+              gas_plus_bool_true_count_day++;
+            }
+          }
+          //gas_premium_bool
+          if (update.gas_update.gas_premium_bool != null) {
+            gas_premium_bool_count_day++;
+            if (update.gas_update.gas_premium_bool == true) {
+              gas_premium_bool_true_count_day++;
+            }
+          }
+          //gas_diesel_bool
+          if (update.gas_update.gas_diesel_bool != null) {
+            gas_diesel_bool_count_day++;
+            if (update.gas_update.gas_diesel_bool == true) {
+              gas_diesel_bool_true_count_day++;
+            }
+          }
+        }
+        // if within 1 hour
+        if (new Date() - updateDate < ONE_HOUR) {
+          //gas_regular_bool
+          if (update.gas_update.gas_regular_bool != null) {
+            gas_regular_bool_count_hour++;
+            if (update.gas_update.gas_regular_bool == true) {
+              gas_regular_bool_true_count_hour++;
+            }
+          }
+          //gas_plus_bool
+          if (update.gas_update.gas_plus_bool != null) {
+            gas_plus_bool_count_hour++;
+            if (update.gas_update.gas_plus_bool == true) {
+              gas_plus_bool_true_count_hour++;
+            }
+          }
+          //gas_premium_bool
+          if (update.gas_update.gas_premium_bool != null) {
+            gas_premium_bool_count_hour++;
+            if (update.gas_update.gas_premium_bool == true) {
+              gas_premium_bool_true_count_hour++;
+            }
+          }
+          //gas_diesel_bool
+          if (update.gas_update.gas_diesel_bool != null) {
+            gas_diesel_bool_count_hour++;
+            if (update.gas_update.gas_diesel_bool == true) {
+              gas_diesel_bool_true_count_hour++;
+            }
+          }
+        }
+        // regardless of time (all time)
+        //gas_air_bool
+        if (update.gas_update.gas_air_bool != null) {
+          gas_air_bool_count++;
+          if (update.gas_update.gas_air_bool == true) {
+            gas_air_bool_true_count++;
+          }
+        }
+      });
+
+      // find average
+      // day
+      if (gas_regular_bool_count_day > 0) {
+        gas_regular_percent_day =
+          (
+            gas_regular_bool_true_count_day / gas_regular_bool_count_day
+          ).toFixed(2) * 100;
+      } else gas_regular_percent_day = null;
+
+      if (gas_plus_bool_count_day > 0) {
+        gas_plus_percent_day =
+          (gas_plus_bool_true_count_day / gas_plus_bool_count_day).toFixed(2) *
+          100;
+      } else gas_plus_percent_day = null;
+
+      if (gas_premium_bool_count_day > 0) {
+        gas_premium_percent_day =
+          (
+            gas_premium_bool_true_count_day / gas_premium_bool_count_day
+          ).toFixed(2) * 100;
+      } else gas_premium_percent_day = null;
+
+      if (gas_diesel_bool_count_day > 0) {
+        gas_diesel_percent_day =
+          (gas_diesel_bool_true_count_day / gas_diesel_bool_count_day).toFixed(
+            2
+          ) * 100;
+      } else gas_diesel_percent_day = null;
+
+      // hour
+      if (gas_regular_bool_count_hour > 0) {
+        gas_regular_percent_hour =
+          (
+            gas_regular_bool_true_count_hour / gas_regular_bool_count_hour
+          ).toFixed(2) * 100;
+      } else gas_regular_percent_hour = null;
+
+      if (gas_plus_bool_count_hour > 0) {
+        gas_plus_percent_hour =
+          (gas_plus_bool_true_count_hour / gas_plus_bool_count_hour).toFixed(
+            2
+          ) * 100;
+      } else gas_plus_percent_hour = null;
+
+      if (gas_premium_bool_count_hour > 0) {
+        gas_premium_percent_hour =
+          (
+            gas_premium_bool_true_count_hour / gas_premium_bool_count_hour
+          ).toFixed(2) * 100;
+      } else gas_premium_percent_hour = null;
+
+      if (gas_diesel_bool_count_hour > 0) {
+        gas_diesel_percent_hour =
+          (
+            gas_diesel_bool_true_count_hour / gas_diesel_bool_count_hour
+          ).toFixed(2) * 100;
+      } else gas_diesel_percent_hour = null;
+
+      // of all time
+      if (gas_air_bool_count > 0) {
+        gas_air_percent =
+          (gas_air_bool_true_count / gas_air_bool_count).toFixed(2) * 100;
+      } else gas_air_percent = null;
+
+      location.update_info.gas_update_info = {
+        gas_regular_percent_day,
+        gas_plus_percent_day,
+        gas_premium_percent_day,
+        gas_diesel_percent_day,
+        gas_regular_percent_hour,
+        gas_plus_percent_hour,
+        gas_premium_percent_hour,
+        gas_diesel_percent_hour,
+        gas_air_percent
+      };
+
+      // Update location document
+      Location.findOneAndUpdate(
+        { _id: location._id },
+        {
+          $set: {
+            update_info: location.update_info
+          }
+        },
+        { new: true },
+
+        (err, doc) => {
+          if (err) {
+            console.log(err);
+          }
+          console.log(doc);
+        }
+      );
+      return location;
+    }
+  );
+  return location;
+}
+
+// Gas Update Processing
+async function processPharmacyUpdate(location) {
+  location = await LocationUpdate.find({ locationID: location._id }).then(
+    updates => {
+      var ONE_HOUR = 60 * 60 * 1000; /* ms */
+      var ONE_DAY = 24 * 60 * 60 * 1000;
+
+      // day
+      let pharmacy_prescription_fill_bool_count_day = 0;
+      let pharmacy_prescription_fill_bool_true_count_day = 0;
+      let pharmacy_vaccinations_bool_count_day = 0;
+      let pharmacy_vaccinations_bool_true_count_day = 0;
+      let pharmacy_counseling_bool_count_day = 0;
+      let pharmacy_counseling_bool_true_count_day = 0;
+
+      // hour
+      let pharmacy_prescription_fill_bool_count_hour = 0;
+      let pharmacy_prescription_fill_bool_true_count_hour = 0;
+      let pharmacy_vaccinations_bool_count_hour = 0;
+      let pharmacy_vaccinations_bool_true_count_hour = 0;
+      let pharmacy_counseling_bool_count_hour = 0;
+      let pharmacy_counseling_bool_true_count_hour = 0;
+
+      // any time
+      let pharmacy_drive_through_bool_count = 0;
+      let pharmacy_drive_through_bool_true_count = 0;
+
+      updates.forEach(update => {
+        var updateDate = new Date(update.date);
+        // if within 24 hours
+        if (new Date() - updateDate < ONE_DAY) {
+          //pharmacy_prescription_fill_bool
+          if (update.pharmacy_update.pharmacy_prescription_fill_bool != null) {
+            pharmacy_prescription_fill_bool_count_day++;
+            if (
+              update.pharmacy_update.pharmacy_prescription_fill_bool == true
+            ) {
+              pharmacy_prescription_fill_bool_true_count_day++;
+            }
+            //pharmacy_prescription_fill_bool
+            if (update.pharmacy_update.pharmacy_vaccinations_bool != null) {
+              pharmacy_vaccinations_bool_count_day++;
+              if (update.pharmacy_update.pharmacy_vaccinations_bool == true) {
+                pharmacy_vaccinations_bool_true_count_day++;
+              }
+            }
+            //pharmacy_prescription_fill_bool
+            if (update.pharmacy_update.pharmacy_counseling_bool != null) {
+              pharmacy_counseling_bool_count_day++;
+              if (update.pharmacy_update.pharmacy_counseling_bool == true) {
+                pharmacy_counseling_bool_true_count_day++;
+              }
+            }
+          }
+        }
+        // if within 1 hour
+        if (new Date() - updateDate < ONE_HOUR) {
+          //pharmacy_prescription_fill_bool
+          if (update.pharmacy_update.pharmacy_prescription_fill_bool != null) {
+            pharmacy_prescription_fill_bool_count_hour++;
+            if (
+              update.pharmacy_update.pharmacy_prescription_fill_bool == true
+            ) {
+              pharmacy_prescription_fill_bool_true_count_hour++;
+            }
+            //pharmacy_prescription_fill_bool
+            if (update.pharmacy_update.pharmacy_vaccinations_bool != null) {
+              pharmacy_vaccinations_bool_count_hour++;
+              if (update.pharmacy_update.pharmacy_vaccinations_bool == true) {
+                pharmacy_vaccinations_bool_true_count_hour++;
+              }
+            }
+            //pharmacy_prescription_fill_bool
+            if (update.pharmacy_update.pharmacy_counseling_bool != null) {
+              pharmacy_counseling_bool_count_hour++;
+              if (update.pharmacy_update.pharmacy_counseling_bool == true) {
+                pharmacy_counseling_bool_true_count_hour++;
+              }
+            }
+          }
+        }
+        // regardless of time (all time)
+        //gas_air_bool
+        if (update.pharmacy_update.pharmacy_drive_through_bool != null) {
+          pharmacy_drive_through_bool_count++;
+          if (update.pharmacy_update.pharmacy_drive_through_bool == true) {
+            pharmacy_drive_through_bool_true_count++;
+          }
+        }
+      });
+
+      // find average
+      // day
+      if (pharmacy_prescription_fill_bool_count_day > 0) {
+        pharmacy_prescription_fill_percent_day =
+          (
+            pharmacy_prescription_fill_bool_true_count_day /
+            pharmacy_prescription_fill_bool_count_day
+          ).toFixed(2) * 100;
+      } else pharmacy_prescription_fill_percent_day = null;
+
+      if (pharmacy_vaccinations_bool_count_day > 0) {
+        pharmacy_vaccinations_percent_day =
+          (
+            pharmacy_vaccinations_bool_true_count_day /
+            pharmacy_vaccinations_bool_count_day
+          ).toFixed(2) * 100;
+      } else pharmacy_vaccinations_percent_day = null;
+
+      if (pharmacy_counseling_bool_count_day > 0) {
+        pharmacy_counseling_percent_day =
+          (
+            pharmacy_counseling_bool_true_count_day /
+            pharmacy_counseling_bool_count_day
+          ).toFixed(2) * 100;
+      } else pharmacy_counseling_percent_day = null;
+
+      // hour
+      if (pharmacy_prescription_fill_bool_count_hour > 0) {
+        pharmacy_prescription_fill_percent_hour =
+          (
+            pharmacy_prescription_fill_bool_true_count_hour /
+            pharmacy_prescription_fill_bool_count_hour
+          ).toFixed(2) * 100;
+      } else pharmacy_prescription_fill_percent_hour = null;
+
+      if (pharmacy_vaccinations_bool_count_hour > 0) {
+        pharmacy_vaccinations_percent_hour =
+          (
+            pharmacy_vaccinations_bool_true_count_hour /
+            pharmacy_vaccinations_bool_count_hour
+          ).toFixed(2) * 100;
+      } else pharmacy_vaccinations_percent_hour = null;
+
+      if (pharmacy_counseling_bool_count_hour > 0) {
+        pharmacy_counseling_percent_hour =
+          (
+            pharmacy_counseling_bool_true_count_hour /
+            pharmacy_counseling_bool_count_hour
+          ).toFixed(2) * 100;
+      } else pharmacy_counseling_percent_hour = null;
+
+      // of all time
+      if (pharmacy_drive_through_bool_count > 0) {
+        pharmacy_drive_through_percent =
+          (
+            pharmacy_drive_through_bool_true_count /
+            pharmacy_drive_through_bool_count
+          ).toFixed(2) * 100;
+      } else pharmacy_drive_through_percent = null;
+
+      location.update_info.pharmacy_update_info = {
+        pharmacy_prescription_fill_percent_day,
+        pharmacy_vaccinations_percent_day,
+        pharmacy_counseling_percent_day,
+        pharmacy_prescription_fill_percent_hour,
+        pharmacy_vaccinations_percent_hour,
+        pharmacy_counseling_percent_hour,
+        pharmacy_drive_through_percent
+      };
+
+      // Update location document
+      Location.findOneAndUpdate(
+        { _id: location._id },
+        {
+          $set: {
+            update_info: location.update_info
+          }
+        },
+        { new: true },
+
+        (err, doc) => {
+          if (err) {
+            console.log(err);
+          }
+          console.log(doc);
         }
       );
       return location;
@@ -746,38 +1163,6 @@ function processGroceryUpdate(location) {
           //console.log(doc);
         }
       );
-
-      // // Update location document
-      // Location.findOneAndUpdate(
-      //   { _id: location._id },
-      //   {
-      //     $set: {
-      //       update_info: {
-      //         grocery_update_info: {
-      //           grocery_water_percent_day: grocery_water_percent_day,
-      //           grocery_perishable_percent_day: grocery_perishable_percent_day,
-      //           grocery_non_perishable_percent_day: grocery_non_perishable_percent_day,
-      //           grocery_toilet_paper_percent_day: grocery_toilet_paper_percent_day,
-      //           grocery_disinfectants_percent_day: grocery_disinfectants_percent_day,
-      //           grocery_feminine_percent_day: grocery_feminine_percent_day,
-      //           grocery_water_percent_hour: grocery_water_percent_hour,
-      //           grocery_perishable_percent_hour: grocery_perishable_percent_hour,
-      //           grocery_non_perishable_percent_hour: grocery_non_perishable_percent_hour,
-      //           grocery_toilet_paper_percent_hour: grocery_toilet_paper_percent_hour,
-      //           grocery_disinfectants_percent_hour: grocery_disinfectants_percent_hour,
-      //           grocery_feminine_percent_hour: grocery_feminine_percent_hour
-      //         }
-      //       }
-      //     }
-      //   },
-      //   { new: true },
-      //   (err, doc) => {
-      //     if (err) {
-      //       console.log(err);
-      //     }
-      //     //console.log(doc);
-      //   }
-      // );
     },
     (err, doc) => {
       if (err) {

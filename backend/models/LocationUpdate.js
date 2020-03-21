@@ -50,6 +50,39 @@ const LocationUpdateSchema = new Schema({
       type: Boolean
     }
   },
+  // gas update
+  gas_update: {
+    gas_regular_bool: {
+      type: Boolean
+    },
+    gas_plus_bool: {
+      type: Boolean
+    },
+    gas_premium_bool: {
+      type: Boolean
+    },
+    gas_diesel_bool: {
+      type: Boolean
+    },
+    gas_air_bool: {
+      type: Boolean
+    }
+  },
+  // pharmacy update
+  pharmacy_update: {
+    pharmacy_prescription_fill_bool: {
+      type: Boolean
+    },
+    pharmacy_vaccinations_bool: {
+      type: Boolean
+    },
+    pharmacy_drive_through_bool: {
+      type: Boolean
+    },
+    pharmacy_counseling_bool: {
+      type: Boolean
+    }
+  },
   // basic location info
   location_occupancy: {
     type: String
