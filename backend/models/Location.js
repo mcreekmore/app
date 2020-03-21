@@ -82,6 +82,44 @@ const LocationSchema = new Schema({
         default: null
       }
     },
+    restaurant_update_info: {
+      restaurant_inside_seating_percent_day: {
+        type: Number,
+        default: null
+      },
+      restaurant_outside_seating_percent_day: {
+        type: Number,
+        default: null
+      },
+      restaurant_take_out_percent_day: {
+        type: Number,
+        default: null
+      },
+      restaurant_curb_side_percent_day: {
+        type: Number,
+        default: null
+      },
+      restaurant_inside_seating_percent_hour: {
+        type: Number,
+        default: null
+      },
+      restaurant_outside_seating_percent_hour: {
+        type: Number,
+        default: null
+      },
+      restaurant_take_out_percent_hour: {
+        type: Number,
+        default: null
+      },
+      restaurant_curb_side_percent_hour: {
+        type: Number,
+        default: null
+      },
+      restaurant_wait_average: {
+        type: Number,
+        default: null
+      }
+    },
     gas_update_info: {
       gas_regular_percent_day: {
         type: Number,
