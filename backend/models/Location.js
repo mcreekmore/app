@@ -9,7 +9,8 @@ const LocationSchema = new Schema({
   },
   description: {
     type: String,
-    required: false
+    required: false,
+    default: null
   },
   types: {
     type: Array,
@@ -53,7 +54,8 @@ const LocationSchema = new Schema({
   },
   website: {
     type: String,
-    required: false
+    required: false,
+    default: null
   },
   approved: {
     type: Boolean,

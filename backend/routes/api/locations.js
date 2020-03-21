@@ -42,7 +42,7 @@ router.get("/approved", (req, res) => {
 // @desc    create a new location
 // @access  Public
 router.post("/", (req, res) => {
-  const {
+  let {
     name,
     description,
     types,
@@ -58,12 +58,21 @@ router.post("/", (req, res) => {
     website
   } = req.body;
 
+  // fixes urls
+  if (website != null) {
+    if (!website.startsWith("http://")) {
+      if (!website.startsWith("https://")) {
+        website = "http://" + website;
+      }
+    }
+  }
+
   //const approved = false;
 
   // Check for existing user
   Location.findOne({ lat, lon }).then(location => {
     if (location) {
-      //console.log(location);
+      console.log("Location already registered");
       return res.status(400).json({ msg: "Location already registered" });
     }
 
@@ -82,6 +91,7 @@ router.post("/", (req, res) => {
       phone,
       website
     });
+
     newLocation.save().then(newLocation => {
       // email function
 
