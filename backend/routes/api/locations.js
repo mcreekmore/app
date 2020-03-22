@@ -198,6 +198,13 @@ router.post("/update", (req, res) => {
     pharmacy_vaccinations_bool,
     pharmacy_drive_through_bool,
     pharmacy_counseling_bool,
+    //restaurant info
+    restaurant_wait,
+    restaurant_specials,
+    restaurant_inside_seating_bool,
+    restaurant_outside_seating_bool,
+    restaurant_take_out_bool,
+    restaurant_curb_side_bool,
     //basic location info
     location_occupancy,
     location_rating,
@@ -214,6 +221,14 @@ router.post("/update", (req, res) => {
       bar_cover_charge: bar_cover_charge,
       bar_specials: bar_specials,
       bar_styles: bar_styles
+    },
+    restaurant_update: {
+      restaurant_wait,
+      restaurant_specials,
+      restaurant_inside_seating_bool,
+      restaurant_outside_seating_bool,
+      restaurant_take_out_bool,
+      restaurant_curb_side_bool
     },
     // grocery info
     grocery_update: {
@@ -289,10 +304,15 @@ async function processUpdate(locationID) {
         //console.log("it is a grocery store");
         processGasUpdate(location);
       }
-      // gas update
+      // pharmacy update
       if (type.toString() == "Pharmacy") {
         //console.log("it is a grocery store");
         processPharmacyUpdate(location);
+      }
+      // restaurant update
+      if (type.toString() == "Restaurant") {
+        //console.log("it is a grocery store");
+        processRestaurantUpdate(location);
       }
     });
     //console.log(location);
@@ -384,6 +404,231 @@ async function processLocationUpdate(location) {
             console.log(err);
           }
           //console.log(doc);
+        }
+      );
+      return location;
+    }
+  );
+  return location;
+}
+
+// Restaurant Update Processing
+async function processRestaurantUpdate(location) {
+  location = await LocationUpdate.find({ locationID: location._id }).then(
+    updates => {
+      var ONE_HOUR = 60 * 60 * 1000; /* ms */
+      var ONE_DAY = 24 * 60 * 60 * 1000;
+
+      // day
+      let restaurant_inside_seating_bool_count_day = 0;
+      let restaurant_inside_seating_bool_true_count_day = 0;
+      let restaurant_outside_seating_bool_count_day = 0;
+      let restaurant_outside_seating_bool_true_count_day = 0;
+      let restaurant_take_out_bool_count_day = 0;
+      let restaurant_take_out_bool_true_count_day = 0;
+      let restaurant_curb_side_bool_count_day = 0;
+      let restaurant_curb_side_bool_true_count_day = 0;
+
+      // hour
+      let restaurant_wait_sum = 0;
+      let restaurant_wait_count = 0;
+      let restaurant_inside_seating_bool_count_hour = 0;
+      let restaurant_inside_seating_bool_true_count_hour = 0;
+      let restaurant_outside_seating_bool_count_hour = 0;
+      let restaurant_outside_seating_bool_true_count_hour = 0;
+      let restaurant_take_out_bool_count_hour = 0;
+      let restaurant_take_out_bool_true_count_hour = 0;
+      let restaurant_curb_side_bool_count_hour = 0;
+      let restaurant_curb_side_bool_true_count_hour = 0;
+
+      // any time
+
+      updates.forEach(update => {
+        var updateDate = new Date(update.date);
+        // if within 24 hours
+        if (new Date() - updateDate < ONE_DAY) {
+          //restaurant_inside_seating_bool
+          if (update.restaurant_update.restaurant_inside_seating_bool != null) {
+            restaurant_inside_seating_bool_count_day++;
+            if (
+              update.restaurant_update.restaurant_inside_seating_bool == true
+            ) {
+              restaurant_inside_seating_bool_true_count_day++;
+            }
+          }
+          //restaurant_outside_seating_bool
+          if (
+            update.restaurant_update.restaurant_outside_seating_bool != null
+          ) {
+            restaurant_outside_seating_bool_count_day++;
+            if (
+              update.restaurant_update.restaurant_outside_seating_bool == true
+            ) {
+              restaurant_outside_seating_bool_true_count_day++;
+            }
+          }
+          //restaurant_take_out_bool
+          if (update.restaurant_update.restaurant_take_out_bool != null) {
+            restaurant_take_out_bool_count_day++;
+            if (update.restaurant_update.restaurant_take_out_bool == true) {
+              restaurant_take_out_bool_true_count_day++;
+            }
+          }
+          //restaurant_curb_side_bool
+          if (update.restaurant_update.restaurant_curb_side_bool != null) {
+            restaurant_curb_side_bool_count_day++;
+            if (update.restaurant_update.restaurant_curb_side_bool == true) {
+              restaurant_curb_side_bool_true_count_day++;
+            }
+          }
+        }
+        // if within 1 hour
+        if (new Date() - updateDate < ONE_HOUR) {
+          //restaurant_wait
+          if (update.restaurant_update.restaurant_wait != null) {
+            restaurant_wait_count++;
+            restaurant_wait_sum += update.restaurant_update.restaurant_wait;
+          }
+
+          //restaurant_inside_seating_bool
+          if (update.restaurant_update.restaurant_inside_seating_bool != null) {
+            restaurant_inside_seating_bool_count_hour++;
+            if (
+              update.restaurant_update.restaurant_inside_seating_bool == true
+            ) {
+              restaurant_inside_seating_bool_true_count_hour++;
+            }
+          }
+          //restaurant_outside_seating_bool
+          if (
+            update.restaurant_update.restaurant_outside_seating_bool != null
+          ) {
+            restaurant_outside_seating_bool_count_hour++;
+            if (
+              update.restaurant_update.restaurant_outside_seating_bool == true
+            ) {
+              restaurant_outside_seating_bool_true_count_hour++;
+            }
+          }
+          //restaurant_take_out_bool
+          if (update.restaurant_update.restaurant_take_out_bool != null) {
+            restaurant_take_out_bool_count_hour++;
+            if (update.restaurant_update.restaurant_take_out_bool == true) {
+              restaurant_take_out_bool_true_count_hour++;
+            }
+          }
+          //restaurant_curb_side_bool
+          if (update.restaurant_update.restaurant_curb_side_bool != null) {
+            restaurant_curb_side_bool_count_hour++;
+            if (update.restaurant_update.restaurant_curb_side_bool == true) {
+              restaurant_curb_side_bool_true_count_hour++;
+            }
+          }
+        }
+        // regardless of time (all time)
+      });
+
+      // find average
+      // day
+      if (restaurant_inside_seating_bool_count_day > 0) {
+        restaurant_inside_seating_percent_day =
+          (
+            restaurant_inside_seating_bool_true_count_day /
+            restaurant_inside_seating_bool_count_day
+          ).toFixed(2) * 100;
+      } else restaurant_inside_seating_percent_day = null;
+
+      if (restaurant_outside_seating_bool_count_day > 0) {
+        restaurant_outside_seating_percent_day =
+          (
+            restaurant_outside_seating_bool_true_count_day /
+            restaurant_outside_seating_bool_count_day
+          ).toFixed(2) * 100;
+      } else restaurant_outside_seating_percent_day = null;
+
+      if (restaurant_take_out_bool_count_day > 0) {
+        restaurant_take_out_percent_day =
+          (
+            restaurant_take_out_bool_true_count_day /
+            restaurant_take_out_bool_count_day
+          ).toFixed(2) * 100;
+      } else restaurant_outside_seating_percent_day = null;
+
+      if (restaurant_curb_side_bool_count_day > 0) {
+        restaurant_curb_side_percent_day =
+          (
+            restaurant_curb_side_bool_true_count_day /
+            restaurant_curb_side_bool_count_day
+          ).toFixed(2) * 100;
+      } else restaurant_outside_seating_percent_day = null;
+
+      // hour
+      if (restaurant_inside_seating_bool_count_hour > 0) {
+        restaurant_inside_seating_percent_hour =
+          (
+            restaurant_inside_seating_bool_true_count_hour /
+            restaurant_inside_seating_bool_count_hour
+          ).toFixed(2) * 100;
+      } else restaurant_inside_seating_percent_hour = null;
+
+      if (restaurant_outside_seating_bool_count_hour > 0) {
+        restaurant_outside_seating_percent_hour =
+          (
+            restaurant_outside_seating_bool_true_count_hour /
+            restaurant_outside_seating_bool_count_hour
+          ).toFixed(2) * 100;
+      } else restaurant_outside_seating_percent_hour = null;
+
+      if (restaurant_take_out_bool_count_hour > 0) {
+        restaurant_take_out_percent_hour =
+          (
+            restaurant_take_out_bool_true_count_hour /
+            restaurant_take_out_bool_count_hour
+          ).toFixed(2) * 100;
+      } else restaurant_outside_seating_percent_hour = null;
+
+      if (restaurant_curb_side_bool_count_hour > 0) {
+        restaurant_curb_side_percent_hour =
+          (
+            restaurant_curb_side_bool_true_count_hour /
+            restaurant_curb_side_bool_count_hour
+          ).toFixed(2) * 100;
+      } else restaurant_outside_seating_percent_hour = null;
+
+      if (restaurant_wait_count > 0) {
+        restaurant_wait_average = restaurant_wait_sum / restaurant_wait_count;
+      }
+
+      // any time
+
+      // update object
+      location.update_info.restaurant_update_info = {
+        restaurant_inside_seating_percent_day,
+        restaurant_outside_seating_percent_day,
+        restaurant_take_out_percent_day,
+        restaurant_curb_side_percent_day,
+        restaurant_inside_seating_percent_hour,
+        restaurant_outside_seating_percent_hour,
+        restaurant_take_out_percent_hour,
+        restaurant_curb_side_percent_hour,
+        restaurant_wait_average
+      };
+
+      // Update location document
+      Location.findOneAndUpdate(
+        { _id: location._id },
+        {
+          $set: {
+            update_info: location.update_info
+          }
+        },
+        { new: true },
+
+        (err, doc) => {
+          if (err) {
+            console.log(err);
+          }
+          console.log(doc);
         }
       );
       return location;

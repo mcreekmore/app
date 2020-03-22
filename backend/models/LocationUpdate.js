@@ -83,6 +83,27 @@ const LocationUpdateSchema = new Schema({
       type: Boolean
     }
   },
+  // restaurant update
+  restaurant_update: {
+    restaurant_wait: {
+      type: Number
+    },
+    restaurant_specials: {
+      type: String
+    },
+    restaurant_inside_seating_bool: {
+      type: Boolean
+    },
+    restaurant_outside_seating_bool: {
+      type: Boolean
+    },
+    restaurant_take_out_bool: {
+      type: Boolean
+    },
+    restaurant_curb_side_bool: {
+      type: Boolean
+    }
+  },
   // basic location info
   location_occupancy: {
     type: String
