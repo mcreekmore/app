@@ -1034,7 +1034,7 @@ function processBarUpdate(location) {
     let bar_cover_charge_sum = 0.0;
     let bar_cover_charge_count = 0;
     let bar_specials_list = [];
-    let bar_wait_sum = 0.0;
+    let bar_wait_sum = 0;
     let bar_wait_count = 0;
     let collegeBar = 0.0;
     let sportsBar = 0.0;
@@ -1074,7 +1074,7 @@ function processBarUpdate(location) {
         //bar_wait
         if (update.bar_update.bar_wait != "") {
           //console.log(update.bar_update.bar_wait);
-          bar_wait_sum += parseInt(update.bar_update.bar_wait);
+          bar_wait_sum += update.bar_update.bar_wait;
           bar_wait_count++;
         }
         //
@@ -1108,14 +1108,29 @@ function processBarUpdate(location) {
     });
 
     // find average
-    let bar_cover_charge_average =
-      bar_cover_charge_sum / bar_cover_charge_count;
-    let bar_wait_average = bar_wait_sum / bar_wait_count;
-    let bar_cover_charge_percent =
-      bar_cover_bool_true_count / bar_cover_bool_count;
-    bar_cover_charge_percent = bar_cover_charge_percent.toFixed(2) * 100;
-    bar_cover_charge_average = bar_cover_charge_average.toFixed(0);
-    bar_wait_average = bar_wait_average.toFixed(0);
+    if (bar_cover_charge_count != 0) {
+      bar_cover_charge_average = (
+        bar_cover_charge_sum / bar_cover_charge_count
+      ).toFixed(0);
+    } else {
+      bar_cover_charge_average = null;
+    }
+    if (bar_wait_count != 0) {
+      bar_wait_average = bar_wait_sum / bar_wait_count;
+      bar_wait_average = bar_wait_average.toFixed(0);
+    } else {
+      bar_wait_average = null;
+    }
+    if (bar_cover_bool_count != 0) {
+      bar_cover_charge_percent =
+        bar_cover_bool_true_count / bar_cover_bool_count;
+      bar_cover_charge_percent = bar_cover_charge_percent.toFixed(2) * 100;
+    } else {
+      bar_cover_charge_percent = null;
+    }
+
+    console.log(bar_wait_average);
+
     let bar_styles_list = [
       {
         style: "College Bar",
