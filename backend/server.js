@@ -35,6 +35,9 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
 
+// fixes deprecation warning
+mongoose.set("useFindAndModify", false);
+
 // Use messages route
 app.use("/api/messages", messages);
 // Use user route
