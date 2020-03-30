@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const nodeMailer = require("nodemailer"); //mail
 const config = require("config");
+const schedule = require("node-schedule");
 
 // const bcrypt = require("bcryptjs");
 // const jwt = require("jsonwebtoken");
@@ -275,6 +276,16 @@ router.post("/update", (req, res) => {
 });
 
 module.exports = router;
+
+// updates all locations every 10 minutes
+var j = schedule.scheduleJob("*/10 * * * *", async function() {
+  Location.find().then(locations => {
+    //console.log(locations[0]);
+    locations.forEach(location => {
+      processUpdate(location._id);
+    });
+  });
+});
 
 // Looks at all types and delegates function for each update type
 async function processUpdate(locationID) {
