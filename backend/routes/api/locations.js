@@ -172,6 +172,7 @@ router.post("/", (req, res) => {
 // @desc    create a new location
 // @access  Public
 router.post("/update", (req, res) => {
+  console.log("User submitted update processing...");
   const {
     locationID,
     date,
@@ -278,14 +279,18 @@ router.post("/update", (req, res) => {
 module.exports = router;
 
 // updates all locations every 10 minutes
-var j = schedule.scheduleJob("*/10 * * * *", async function() {
-  Location.find().then(locations => {
-    //console.log(locations[0]);
-    locations.forEach(location => {
-      processUpdate(location._id);
+var updateEveryTenMinutes = schedule.scheduleJob(
+  "*/10 * * * *",
+  async function() {
+    console.log("Executing 10min update CRON...");
+    Location.find().then(locations => {
+      //console.log(locations[0]);
+      locations.forEach(location => {
+        processUpdate(location._id);
+      });
     });
-  });
-});
+  }
+);
 
 // Looks at all types and delegates function for each update type
 async function processUpdate(locationID) {
@@ -293,40 +298,31 @@ async function processUpdate(locationID) {
     location_update_info: {}
   };
 
-  console.log("Processing Info");
+  //console.log("Processing Info");
   Location.findOne({ _id: locationID }).then(location => {
     location.types.forEach(type => {
-      //console.log(processLocationUpdate(location));
-      //console.log(location);
       processLocationUpdate(location);
-      //console.log(location);
       // bar update
       if (type.toString() == "Bar") {
-        //console.log("it is a bar");
         processBarUpdate(location);
       }
       // grocery update
       if (type.toString() == "Grocery") {
-        //console.log("it is a grocery store");
         processGroceryUpdate(location);
       }
       // gas update
       if (type.toString() == "Gas Station") {
-        //console.log("it is a grocery store");
         processGasUpdate(location);
       }
       // pharmacy update
       if (type.toString() == "Pharmacy") {
-        //console.log("it is a grocery store");
         processPharmacyUpdate(location);
       }
       // restaurant update
       if (type.toString() == "Restaurant") {
-        //console.log("it is a grocery store");
         processRestaurantUpdate(location);
       }
     });
-    //console.log(location);
     //location.save();
   });
 }
@@ -388,8 +384,8 @@ async function processLocationUpdate(location) {
           ).toFixed(2) * 100;
       } else open_day_percent = null;
 
-      console.log(update_count_day);
-      console.log(update_count_hour);
+      // console.log(update_count_day);
+      // console.log(update_count_hour);
 
       location.update_info.location_update_info = {
         open_hour_percent: open_hour_percent,
@@ -397,8 +393,6 @@ async function processLocationUpdate(location) {
         update_count_day: update_count_day,
         update_count_hour: update_count_hour
       };
-
-      //console.log(location);
 
       // Update location document
       Location.findOneAndUpdate(
@@ -563,7 +557,7 @@ async function processRestaurantUpdate(location) {
             restaurant_take_out_bool_true_count_day /
             restaurant_take_out_bool_count_day
           ).toFixed(2) * 100;
-      } else restaurant_outside_seating_percent_day = null;
+      } else restaurant_take_out_percent_day = null;
 
       if (restaurant_curb_side_bool_count_day > 0) {
         restaurant_curb_side_percent_day =
@@ -571,7 +565,7 @@ async function processRestaurantUpdate(location) {
             restaurant_curb_side_bool_true_count_day /
             restaurant_curb_side_bool_count_day
           ).toFixed(2) * 100;
-      } else restaurant_outside_seating_percent_day = null;
+      } else restaurant_curb_side_percent_day = null;
 
       // hour
       if (restaurant_inside_seating_bool_count_hour > 0) {
@@ -596,7 +590,7 @@ async function processRestaurantUpdate(location) {
             restaurant_take_out_bool_true_count_hour /
             restaurant_take_out_bool_count_hour
           ).toFixed(2) * 100;
-      } else restaurant_outside_seating_percent_hour = null;
+      } else restaurant_take_out_percent_hour = null;
 
       if (restaurant_curb_side_bool_count_hour > 0) {
         restaurant_curb_side_percent_hour =
@@ -604,11 +598,11 @@ async function processRestaurantUpdate(location) {
             restaurant_curb_side_bool_true_count_hour /
             restaurant_curb_side_bool_count_hour
           ).toFixed(2) * 100;
-      } else restaurant_outside_seating_percent_hour = null;
+      } else restaurant_curb_side_percent_hour = null;
 
       if (restaurant_wait_count > 0) {
         restaurant_wait_average = restaurant_wait_sum / restaurant_wait_count;
-      }
+      } else restaurant_wait_average = null;
 
       // any time
 
@@ -639,7 +633,7 @@ async function processRestaurantUpdate(location) {
           if (err) {
             console.log(err);
           }
-          console.log(doc);
+          //console.log(doc);
         }
       );
       return location;
@@ -843,7 +837,7 @@ async function processGasUpdate(location) {
           if (err) {
             console.log(err);
           }
-          console.log(doc);
+          //console.log(doc);
         }
       );
       return location;
@@ -1027,7 +1021,7 @@ async function processPharmacyUpdate(location) {
           if (err) {
             console.log(err);
           }
-          console.log(doc);
+          // console.log(doc);
         }
       );
       return location;
@@ -1140,7 +1134,7 @@ function processBarUpdate(location) {
       bar_cover_charge_percent = null;
     }
 
-    console.log(bar_wait_average);
+    //console.log(bar_wait_average);
 
     let bar_styles_list = [
       {
