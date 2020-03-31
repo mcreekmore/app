@@ -175,7 +175,7 @@ router.post("/update", (req, res) => {
   console.log("User submitted update processing...");
   const {
     locationID,
-    date,
+    //date,
     // bar info
     bar_wait,
     bar_cover_bool,
@@ -212,6 +212,9 @@ router.post("/update", (req, res) => {
     location_rating,
     location_open_bool
   } = req.body;
+
+  // replaces device date with server date to fix time zone discrepancies
+  let date = new Date();
 
   const newUpdate = new LocationUpdate({
     locationID,
