@@ -21,7 +21,7 @@ const key = config.get("emailKey");
 router.get("/", (req, res) => {
   Location.find()
     .sort({ date: -1 }) // sorts descending
-    .then(locations => res.json(locations));
+    .then((locations) => res.json(locations));
 });
 
 // @route   GET /api/locations/approved
@@ -30,8 +30,8 @@ router.get("/", (req, res) => {
 router.get("/approved", (req, res) => {
   Location.find()
     .sort({ date: -1 }) // sorts descending
-    .then(locations => {
-      var approvedLocations = locations.filter(e => {
+    .then((locations) => {
+      var approvedLocations = locations.filter((e) => {
         return e["approved"] == true;
       });
       //console.log(approvedLocations);
@@ -56,7 +56,7 @@ router.post("/", (req, res) => {
     lon,
     email,
     phone,
-    website
+    website,
   } = req.body;
 
   // fixes urls
@@ -71,7 +71,7 @@ router.post("/", (req, res) => {
   //const approved = false;
 
   // Check for existing user
-  Location.findOne({ lat, lon }).then(location => {
+  Location.findOne({ lat, lon }).then((location) => {
     if (location) {
       console.log("Location already registered");
       return res.status(400).json({ msg: "Location already registered" });
@@ -90,17 +90,17 @@ router.post("/", (req, res) => {
       lon,
       email,
       phone,
-      website
+      website,
     });
 
-    newLocation.save().then(newLocation => {
+    newLocation.save().then((newLocation) => {
       // email function
 
       res.json({
         location: {
           id: newLocation.id,
-          name: newLocation.name
-        }
+          name: newLocation.name,
+        },
       });
       async function email() {
         let transporter = nodeMailer.createTransport({
@@ -110,8 +110,8 @@ router.post("/", (req, res) => {
           auth: {
             // should be replaced with real sender's account
             user: "matthewacreekmore@gmail.com",
-            pass: key
-          }
+            pass: key,
+          },
         });
 
         // send mail with defined transport object
@@ -160,7 +160,7 @@ router.post("/", (req, res) => {
             "</b> <br >" +
             "<b> Website: " +
             website +
-            "</b> <br >"
+            "</b> <br >",
         });
       }
       email().catch(console.error);
@@ -207,10 +207,13 @@ router.post("/update", (req, res) => {
     restaurant_outside_seating_bool,
     restaurant_take_out_bool,
     restaurant_curb_side_bool,
+    //bank info
+    bank_drive_through,
+    bank_atm,
     //basic location info
     location_occupancy,
     location_rating,
-    location_open_bool
+    location_open_bool,
   } = req.body;
 
   // replaces device date with server date to fix time zone discrepancies
@@ -225,15 +228,16 @@ router.post("/update", (req, res) => {
       bar_cover_bool: bar_cover_bool,
       bar_cover_charge: bar_cover_charge,
       bar_specials: bar_specials,
-      bar_styles: bar_styles
+      bar_styles: bar_styles,
     },
+    // restaurant info
     restaurant_update: {
       restaurant_wait,
       restaurant_specials,
       restaurant_inside_seating_bool,
       restaurant_outside_seating_bool,
       restaurant_take_out_bool,
-      restaurant_curb_side_bool
+      restaurant_curb_side_bool,
     },
     // grocery info
     grocery_update: {
@@ -242,7 +246,7 @@ router.post("/update", (req, res) => {
       grocery_non_perishable_bool: grocery_non_perishable_bool,
       grocery_toilet_paper_bool: grocery_toilet_paper_bool,
       grocery_disinfectants_bool: grocery_disinfectants_bool,
-      grocery_feminine_bool: grocery_feminine_bool
+      grocery_feminine_bool: grocery_feminine_bool,
     },
     // gas info
     gas_update: {
@@ -250,29 +254,34 @@ router.post("/update", (req, res) => {
       gas_plus_bool,
       gas_premium_bool,
       gas_diesel_bool,
-      gas_air_bool
+      gas_air_bool,
     },
     // pharmacy info
     pharmacy_update: {
       pharmacy_prescription_fill_bool,
       pharmacy_vaccinations_bool,
       pharmacy_drive_through_bool,
-      pharmacy_counseling_bool
+      pharmacy_counseling_bool,
+    },
+    // bank info
+    bank_update: {
+      bank_drive_through,
+      bank_atm,
     },
     //basic location info
     location_occupancy,
     location_rating,
-    location_open_bool
+    location_open_bool,
   });
 
   //console.log(newUpdate.bar_update.bar_cover_bool);
-  newUpdate.save().then(newUpdate => {
+  newUpdate.save().then((newUpdate) => {
     // response
     res.json({
       Update: {
         id: newUpdate.id,
-        name: newUpdate.name
-      }
+        name: newUpdate.name,
+      },
     });
     // process update information
     processUpdate(locationID);
@@ -284,11 +293,11 @@ module.exports = router;
 // updates all locations every 10 minutes
 var updateEveryTenMinutes = schedule.scheduleJob(
   "*/10 * * * *",
-  async function() {
+  async function () {
     console.log("Executing 10min update CRON...");
-    Location.find().then(locations => {
+    Location.find().then((locations) => {
       //console.log(locations[0]);
-      locations.forEach(location => {
+      locations.forEach((location) => {
         processUpdate(location._id);
       });
     });
@@ -298,12 +307,12 @@ var updateEveryTenMinutes = schedule.scheduleJob(
 // Looks at all types and delegates function for each update type
 async function processUpdate(locationID) {
   update_info = {
-    location_update_info: {}
+    location_update_info: {},
   };
 
   //console.log("Processing Info");
-  Location.findOne({ _id: locationID }).then(location => {
-    location.types.forEach(type => {
+  Location.findOne({ _id: locationID }).then((location) => {
+    location.types.forEach((type) => {
       processLocationUpdate(location);
       // bar update
       if (type.toString() == "Bar") {
@@ -325,6 +334,10 @@ async function processUpdate(locationID) {
       if (type.toString() == "Restaurant") {
         processRestaurantUpdate(location);
       }
+      // bank update
+      if (type.toString() == "Bank") {
+        processBankUpdate(location);
+      }
     });
     //location.save();
   });
@@ -332,7 +345,7 @@ async function processUpdate(locationID) {
 
 async function processLocationUpdate(location) {
   location = await LocationUpdate.find({ locationID: location._id }).then(
-    updates => {
+    (updates) => {
       var ONE_HOUR = 60 * 60 * 1000; /* ms */
       var ONE_DAY = 24 * 60 * 60 * 1000;
 
@@ -343,7 +356,7 @@ async function processLocationUpdate(location) {
       let location_open_day_bool_count = 0;
       let location_open_day_bool_true_count = 0;
 
-      updates.forEach(update => {
+      updates.forEach((update) => {
         var updateDate = new Date(update.date);
         // if within 24 hours
         if (new Date() - updateDate < ONE_DAY) {
@@ -394,7 +407,7 @@ async function processLocationUpdate(location) {
         open_hour_percent: open_hour_percent,
         open_day_percent: open_day_percent,
         update_count_day: update_count_day,
-        update_count_hour: update_count_hour
+        update_count_hour: update_count_hour,
       };
 
       // Update location document
@@ -402,8 +415,8 @@ async function processLocationUpdate(location) {
         { _id: location._id },
         {
           $set: {
-            update_info: location.update_info
-          }
+            update_info: location.update_info,
+          },
         },
         { new: true },
 
@@ -423,7 +436,7 @@ async function processLocationUpdate(location) {
 // Restaurant Update Processing
 async function processRestaurantUpdate(location) {
   location = await LocationUpdate.find({ locationID: location._id }).then(
-    updates => {
+    (updates) => {
       var ONE_HOUR = 60 * 60 * 1000; /* ms */
       var ONE_DAY = 24 * 60 * 60 * 1000;
 
@@ -451,7 +464,7 @@ async function processRestaurantUpdate(location) {
 
       // any time
 
-      updates.forEach(update => {
+      updates.forEach((update) => {
         var updateDate = new Date(update.date);
         // if within 24 hours
         if (new Date() - updateDate < ONE_DAY) {
@@ -619,7 +632,7 @@ async function processRestaurantUpdate(location) {
         restaurant_outside_seating_percent_hour,
         restaurant_take_out_percent_hour,
         restaurant_curb_side_percent_hour,
-        restaurant_wait_average
+        restaurant_wait_average,
       };
 
       // Update location document
@@ -627,8 +640,8 @@ async function processRestaurantUpdate(location) {
         { _id: location._id },
         {
           $set: {
-            update_info: location.update_info
-          }
+            update_info: location.update_info,
+          },
         },
         { new: true },
 
@@ -648,7 +661,7 @@ async function processRestaurantUpdate(location) {
 // Gas Update Processing
 async function processGasUpdate(location) {
   location = await LocationUpdate.find({ locationID: location._id }).then(
-    updates => {
+    (updates) => {
       var ONE_HOUR = 60 * 60 * 1000; /* ms */
       var ONE_DAY = 24 * 60 * 60 * 1000;
 
@@ -676,7 +689,7 @@ async function processGasUpdate(location) {
       let gas_air_bool_count = 0;
       let gas_air_bool_true_count = 0;
 
-      updates.forEach(update => {
+      updates.forEach((update) => {
         var updateDate = new Date(update.date);
         // if within 24 hours
         if (new Date() - updateDate < ONE_DAY) {
@@ -823,7 +836,7 @@ async function processGasUpdate(location) {
         gas_plus_percent_hour,
         gas_premium_percent_hour,
         gas_diesel_percent_hour,
-        gas_air_percent
+        gas_air_percent,
       };
 
       // Update location document
@@ -831,8 +844,8 @@ async function processGasUpdate(location) {
         { _id: location._id },
         {
           $set: {
-            update_info: location.update_info
-          }
+            update_info: location.update_info,
+          },
         },
         { new: true },
 
@@ -849,10 +862,10 @@ async function processGasUpdate(location) {
   return location;
 }
 
-// Gas Update Processing
+// Pharmacy Update Processing
 async function processPharmacyUpdate(location) {
   location = await LocationUpdate.find({ locationID: location._id }).then(
-    updates => {
+    (updates) => {
       var ONE_HOUR = 60 * 60 * 1000; /* ms */
       var ONE_DAY = 24 * 60 * 60 * 1000;
 
@@ -876,7 +889,7 @@ async function processPharmacyUpdate(location) {
       let pharmacy_drive_through_bool_count = 0;
       let pharmacy_drive_through_bool_true_count = 0;
 
-      updates.forEach(update => {
+      updates.forEach((update) => {
         var updateDate = new Date(update.date);
         // if within 24 hours
         if (new Date() - updateDate < ONE_DAY) {
@@ -1007,7 +1020,7 @@ async function processPharmacyUpdate(location) {
         pharmacy_prescription_fill_percent_hour,
         pharmacy_vaccinations_percent_hour,
         pharmacy_counseling_percent_hour,
-        pharmacy_drive_through_percent
+        pharmacy_drive_through_percent,
       };
 
       // Update location document
@@ -1015,8 +1028,127 @@ async function processPharmacyUpdate(location) {
         { _id: location._id },
         {
           $set: {
-            update_info: location.update_info
+            update_info: location.update_info,
+          },
+        },
+        { new: true },
+
+        (err, doc) => {
+          if (err) {
+            console.log(err);
           }
+          // console.log(doc);
+        }
+      );
+      return location;
+    }
+  );
+  return location;
+}
+
+// Bank Update Processing
+async function processBankUpdate(location) {
+  location = await LocationUpdate.find({ locationID: location._id }).then(
+    (updates) => {
+      var ONE_HOUR = 60 * 60 * 1000; /* ms */
+      var ONE_DAY = 24 * 60 * 60 * 1000;
+
+      // day
+      let bank_drive_through_count_day = 0;
+      let bank_drive_through_true_count_day = 0;
+      let bank_atm_count_day = 0;
+      let bank_atm_true_count_day = 0;
+
+      // hour
+      let bank_drive_through_count_hour = 0;
+      let bank_drive_through_true_count_hour = 0;
+      let bank_atm_count_hour = 0;
+      let bank_atm_true_count_hour = 0;
+
+      // any time
+
+      updates.forEach((update) => {
+        var updateDate = new Date(update.date);
+        // if within 24 hours
+        if (new Date() - updateDate < ONE_DAY) {
+          //bank_drive_through
+          if (update.bank_update.bank_drive_through != null) {
+            bank_drive_through_count_day++;
+            if (update.bank_update.bank_drive_through == true) {
+              bank_drive_through_true_count_day++;
+            }
+          }
+          //bank_atm
+          if (update.bank_update.bank_atm != null) {
+            bank_atm_count_day++;
+            if (update.bank_update.bank_atm == true) {
+              bank_atm_true_count_day++;
+            }
+          }
+        }
+        // if within 1 hour
+        if (new Date() - updateDate < ONE_HOUR) {
+          //bank_drive_through
+          if (update.bank_update.bank_drive_through != null) {
+            bank_drive_through_count_hour++;
+            if (update.bank_update.bank_drive_through == true) {
+              bank_drive_through_true_count_hour++;
+            }
+          }
+          //bank_atm
+          if (update.bank_update.bank_atm != null) {
+            bank_atm_count_hour++;
+            if (update.bank_update.bank_atm == true) {
+              bank_atm_true_count_hour++;
+            }
+          }
+        }
+        // regardless of time (all time)
+      });
+
+      // find average
+      // day
+      if (bank_drive_through_count_day > 0) {
+        bank_drive_through_percent_day =
+          (
+            bank_drive_through_true_count_day / bank_drive_through_count_day
+          ).toFixed(2) * 100;
+      } else bank_drive_through_percent_day = null;
+
+      if (bank_atm_count_day > 0) {
+        bank_atm_percent_day =
+          (bank_atm_true_count_day / bank_atm_count_day).toFixed(2) * 100;
+      } else bank_atm_percent_day = null;
+
+      // hour
+      if (bank_drive_through_count_hour > 0) {
+        bank_drive_through_percent_hour =
+          (
+            bank_drive_through_true_count_hour / bank_drive_through_count_hour
+          ).toFixed(2) * 100;
+      } else bank_drive_through_percent_hour = null;
+
+      if (bank_atm_count_hour > 0) {
+        bank_atm_percent_hour =
+          (bank_atm_true_count_hour / bank_atm_count_hour).toFixed(2) * 100;
+      } else bank_atm_percent_hour = null;
+
+      // of all time
+
+      location.update_info.bank_update_info = {
+        bank_drive_through_percent_day,
+        bank_drive_through_percent_hour,
+        bank_atm_percent_day,
+        bank_atm_percent_hour,
+      };
+
+      // Update location document
+      Location.findOneAndUpdate(
+        { _id: location._id },
+        {
+          $set: {
+            update_info: location.update_info,
+          },
         },
         { new: true },
 
@@ -1035,7 +1167,7 @@ async function processPharmacyUpdate(location) {
 
 // Bar Update Proccessing
 function processBarUpdate(location) {
-  LocationUpdate.find({ locationID: location._id }).then(updates => {
+  LocationUpdate.find({ locationID: location._id }).then((updates) => {
     var ONE_HOUR = 60 * 60 * 1000; /* ms */
     var ONE_DAY = 24 * 60 * 60 * 1000;
 
@@ -1054,7 +1186,7 @@ function processBarUpdate(location) {
     let bar_styles_count = 0;
     let bar_cover_bool_count = 0;
     let bar_cover_bool_true_count = 0;
-    updates.forEach(update => {
+    updates.forEach((update) => {
       var updateDate = new Date(update.date);
       // if within 24 hours
       if (new Date() - updateDate < ONE_DAY) {
@@ -1142,14 +1274,14 @@ function processBarUpdate(location) {
     let bar_styles_list = [
       {
         style: "College Bar",
-        percent: parseFloat(collegeBar) / bar_styles_count
+        percent: parseFloat(collegeBar) / bar_styles_count,
       },
       { style: "Sports Bar", percent: sportsBar / bar_styles_count },
       { style: "Dive Bar", percent: diveBar / bar_styles_count },
       { style: "Cigar Bar", percent: cigarBar / bar_styles_count },
       { style: "Wine Bar", percent: wineBar / bar_styles_count },
       { style: "Cocktail Bar", percent: cocktailBar / bar_styles_count },
-      { style: "Irish Pub", percent: irishPub / bar_styles_count }
+      { style: "Irish Pub", percent: irishPub / bar_styles_count },
     ];
 
     location.update_info.bar_update_info = {
@@ -1157,7 +1289,7 @@ function processBarUpdate(location) {
       bar_cover_charge_percent,
       bar_specials_list,
       bar_wait_average,
-      bar_styles_list
+      bar_styles_list,
     };
 
     // Update location document
@@ -1165,8 +1297,8 @@ function processBarUpdate(location) {
       { _id: location._id },
       {
         $set: {
-          update_info: location.update_info
-        }
+          update_info: location.update_info,
+        },
       },
       { new: true },
       (err, doc) => {
@@ -1184,7 +1316,7 @@ function processBarUpdate(location) {
 function processGroceryUpdate(location) {
   //console.log(location);
   LocationUpdate.find({ locationID: location._id }).then(
-    updates => {
+    (updates) => {
       var ONE_HOUR = 60 * 60 * 1000; /* ms */
       var ONE_DAY = 24 * 60 * 60 * 1000;
 
@@ -1215,7 +1347,7 @@ function processGroceryUpdate(location) {
       let grocery_feminine_bool_count_hour = 0;
       let grocery_feminine_bool_true_count_hour = 0;
 
-      updates.forEach(update => {
+      updates.forEach((update) => {
         groceryUpd = update.grocery_update;
         var updateDate = new Date(update.date);
         // if within 24 hours
@@ -1422,7 +1554,7 @@ function processGroceryUpdate(location) {
         grocery_disinfectants_percent_day,
         grocery_disinfectants_percent_hour,
         grocery_feminine_percent_day,
-        grocery_feminine_percent_hour
+        grocery_feminine_percent_hour,
       };
 
       // Update location document
@@ -1430,8 +1562,8 @@ function processGroceryUpdate(location) {
         { _id: location._id },
         {
           $set: {
-            update_info: location.update_info
-          }
+            update_info: location.update_info,
+          },
         },
         { new: true },
         (err, doc) => {

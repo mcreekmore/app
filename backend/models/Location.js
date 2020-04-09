@@ -5,270 +5,288 @@ const Schema = mongoose.Schema;
 const LocationSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   description: {
     type: String,
     required: false,
-    default: null
+    default: null,
   },
   types: {
     type: Array,
-    required: true
+    required: true,
   },
   country: {
     type: String,
-    required: true
+    required: true,
   },
   region: {
     type: String,
-    required: true
+    required: true,
   },
   city: {
     type: String,
-    required: true
+    required: true,
   },
   street: {
     type: String,
-    required: true
+    required: true,
   },
   zip: {
     type: String,
-    required: true
+    required: true,
   },
   lat: {
     type: Number,
-    required: true
+    required: true,
   },
   lon: {
     type: Number,
-    required: true
+    required: true,
   },
   email: {
     type: String,
-    required: true
+    required: true,
   },
   phone: {
     type: String,
-    required: true
+    required: true,
   },
   website: {
     type: String,
     required: false,
-    default: null
+    default: null,
   },
   approved: {
     type: Boolean,
     required: true,
-    default: true // change in prod!
+    default: true, // change in prod!
   },
 
   update_info: {
     location_update_info: {
       open_hour_percent: {
         type: Number,
-        default: null
+        default: null,
       },
       open_day_percent: {
         type: Number,
-        default: null
+        default: null,
       },
       update_count_hour: {
         type: Number,
-        default: null
+        default: null,
       },
       update_count_day: {
         type: Number,
-        default: null
-      }
+        default: null,
+      },
     },
     restaurant_update_info: {
       restaurant_inside_seating_percent_day: {
         type: Number,
-        default: null
+        default: null,
       },
       restaurant_outside_seating_percent_day: {
         type: Number,
-        default: null
+        default: null,
       },
       restaurant_take_out_percent_day: {
         type: Number,
-        default: null
+        default: null,
       },
       restaurant_curb_side_percent_day: {
         type: Number,
-        default: null
+        default: null,
       },
       restaurant_inside_seating_percent_hour: {
         type: Number,
-        default: null
+        default: null,
       },
       restaurant_outside_seating_percent_hour: {
         type: Number,
-        default: null
+        default: null,
       },
       restaurant_take_out_percent_hour: {
         type: Number,
-        default: null
+        default: null,
       },
       restaurant_curb_side_percent_hour: {
         type: Number,
-        default: null
+        default: null,
       },
       restaurant_wait_average: {
         type: Number,
-        default: null
-      }
+        default: null,
+      },
     },
     gas_update_info: {
       gas_regular_percent_day: {
         type: Number,
-        default: null
+        default: null,
       },
       gas_plus_percent_day: {
         type: Number,
-        default: null
+        default: null,
       },
       gas_premium_percent_day: {
         type: Number,
-        default: null
+        default: null,
       },
       gas_diesel_percent_day: {
         type: Number,
-        default: null
+        default: null,
       },
       gas_regular_percent_hour: {
         type: Number,
-        default: null
+        default: null,
       },
       gas_plus_percent_hour: {
         type: Number,
-        default: null
+        default: null,
       },
       gas_premium_percent_hour: {
         type: Number,
-        default: null
+        default: null,
       },
       gas_diesel_percent_hour: {
         type: Number,
-        default: null
+        default: null,
       },
       gas_air_percent: {
         type: Number,
-        default: null
-      }
+        default: null,
+      },
     },
     bar_update_info: {
       bar_cover_charge_average: {
         type: String,
-        default: null
+        default: null,
       },
       bar_cover_charge_percent: {
         type: String,
-        default: null
+        default: null,
       },
       bar_specials_list: {
         type: Array,
-        default: null
+        default: null,
       },
       bar_wait_average: {
         type: String,
-        default: null
+        default: null,
       },
       bar_styles_list: [
         {
           style: {
             type: String,
-            default: null
+            default: null,
           },
           percent: {
             type: String,
-            default: null
-          }
-        }
-      ]
+            default: null,
+          },
+        },
+      ],
     },
     pharmacy_update_info: {
       pharmacy_prescription_fill_percent_day: {
         type: Number,
-        default: null
+        default: null,
       },
       pharmacy_vaccinations_percent_day: {
         type: Number,
-        default: null
+        default: null,
       },
       pharmacy_counseling_percent_day: {
         type: Number,
-        default: null
+        default: null,
       },
       pharmacy_prescription_fill_percent_hour: {
         type: Number,
-        default: null
+        default: null,
       },
       pharmacy_vaccinations_percent_hour: {
         type: Number,
-        default: null
+        default: null,
       },
       pharmacy_counseling_percent_hour: {
         type: Number,
-        default: null
+        default: null,
       },
       pharmacy_drive_through_percent: {
         type: Number,
-        default: null
-      }
+        default: null,
+      },
+    },
+    bank_update_info: {
+      bank_drive_through_percent_day: {
+        type: Number,
+        default: null,
+      },
+      bank_drive_through_percent_hour: {
+        type: Number,
+        default: null,
+      },
+      bank_atm_percent_day: {
+        type: Number,
+        default: null,
+      },
+      bank_atm_percent_hour: {
+        type: Number,
+        default: null,
+      },
     },
     grocery_update_info: {
       grocery_water_percent_day: {
         type: Number,
-        default: null
+        default: null,
       },
       grocery_perishable_percent_day: {
         type: Number,
-        default: null
+        default: null,
       },
       grocery_non_perishable_percent_day: {
         type: Number,
-        default: null
+        default: null,
       },
       grocery_toilet_paper_percent_day: {
         type: Number,
-        default: null
+        default: null,
       },
       grocery_disinfectants_percent_day: {
         type: Number,
-        default: null
+        default: null,
       },
       grocery_feminine_percent_day: {
         type: Number,
-        default: null
+        default: null,
       },
       grocery_water_percent_hour: {
         type: Number,
-        default: null
+        default: null,
       },
       grocery_perishable_percent_hour: {
         type: Number,
-        default: null
+        default: null,
       },
       grocery_non_perishable_percent_hour: {
         type: Number,
-        default: null
+        default: null,
       },
       grocery_toilet_paper_percent_hour: {
         type: Number,
-        default: null
+        default: null,
       },
       grocery_disinfectants_percent_hour: {
         type: Number,
-        default: null
+        default: null,
       },
       grocery_feminine_percent_hour: {
         type: Number,
-        default: null
-      }
-    }
-  }
+        default: null,
+      },
+    },
+  },
 });
 
 module.exports = Location = mongoose.model("location", LocationSchema);

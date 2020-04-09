@@ -5,115 +5,124 @@ const Schema = mongoose.Schema;
 const LocationUpdateSchema = new Schema({
   locationID: {
     type: String,
-    required: true
+    required: true,
   },
   date: {
     type: String,
-    required: true
+    required: true,
   },
   // bar updates
   bar_update: {
     bar_wait: {
-      type: String
+      type: String,
     },
     bar_cover_bool: {
-      type: Boolean
+      type: Boolean,
     },
     bar_cover_charge: {
-      type: String
+      type: String,
     },
     bar_specials: {
-      type: String
+      type: String,
     },
     bar_styles: {
-      type: Array
-    }
+      type: Array,
+    },
   },
   // grocery updates
   grocery_update: {
     grocery_water_bool: {
-      type: Boolean
+      type: Boolean,
     },
     grocery_perishable_bool: {
-      type: Boolean
+      type: Boolean,
     },
     grocery_non_perishable_bool: {
-      type: Boolean
+      type: Boolean,
     },
     grocery_toilet_paper_bool: {
-      type: Boolean
+      type: Boolean,
     },
     grocery_disinfectants_bool: {
-      type: Boolean
+      type: Boolean,
     },
     grocery_feminine_bool: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   // gas update
   gas_update: {
     gas_regular_bool: {
-      type: Boolean
+      type: Boolean,
     },
     gas_plus_bool: {
-      type: Boolean
+      type: Boolean,
     },
     gas_premium_bool: {
-      type: Boolean
+      type: Boolean,
     },
     gas_diesel_bool: {
-      type: Boolean
+      type: Boolean,
     },
     gas_air_bool: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   // pharmacy update
   pharmacy_update: {
     pharmacy_prescription_fill_bool: {
-      type: Boolean
+      type: Boolean,
     },
     pharmacy_vaccinations_bool: {
-      type: Boolean
+      type: Boolean,
     },
     pharmacy_drive_through_bool: {
-      type: Boolean
+      type: Boolean,
     },
     pharmacy_counseling_bool: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   // restaurant update
   restaurant_update: {
     restaurant_wait: {
-      type: Number
+      type: Number,
     },
     restaurant_specials: {
-      type: String
+      type: String,
     },
     restaurant_inside_seating_bool: {
-      type: Boolean
+      type: Boolean,
     },
     restaurant_outside_seating_bool: {
-      type: Boolean
+      type: Boolean,
     },
     restaurant_take_out_bool: {
-      type: Boolean
+      type: Boolean,
     },
     restaurant_curb_side_bool: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
+  },
+  // bank update
+  bank_update: {
+    bank_drive_through: {
+      type: Boolean,
+    },
+    bank_atm: {
+      type: Boolean,
+    },
   },
   // basic location info
   location_occupancy: {
-    type: String
+    type: String,
   },
   location_rating: {
-    type: Number
+    type: Number,
   },
   location_open_bool: {
-    type: Boolean
-  }
+    type: Boolean,
+  },
 });
 
 module.exports = LocationUpdate = mongoose.model(
