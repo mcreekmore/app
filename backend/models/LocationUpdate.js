@@ -113,6 +113,87 @@ const LocationUpdateSchema = new Schema({
       type: Boolean,
     },
   },
+  // cafe update
+  cafe_update: {
+    cafe_tea_bool: {
+      type: Boolean,
+    },
+    cafe_coffee_bool: {
+      type: Boolean,
+    },
+    cafe_uncaffeinated_bool: {
+      type: Boolean,
+    },
+    cafe_breakfast_bool: {
+      type: Boolean,
+    },
+    cafe_lunch_bool: {
+      type: Boolean,
+    },
+    cafe_inside_bool: {
+      type: Boolean,
+    },
+    cafe_outside_bool: {
+      type: Boolean,
+    },
+    cafe_drive_through_bool: {
+      type: Boolean,
+    },
+    cafe_online_bool: {
+      type: Boolean,
+    },
+  },
+  // hotel update
+  hotel_update: {
+    hotel_vacancies_bool: {
+      type: Boolean,
+    },
+    hotel_wifi_bool: {
+      type: Boolean,
+    },
+    hotel_breakfast_bool: {
+      type: Boolean,
+    },
+    hotel_pool_bool: {
+      type: Boolean,
+    },
+    hotel_air_bool: {
+      type: Boolean,
+    },
+    hotel_bar_bool: {
+      type: Boolean,
+    },
+    hotel_pets_bool: {
+      type: Boolean,
+    },
+    hotel_wellness_bool: {
+      type: Boolean,
+    },
+  },
+  // music venue info
+  music_update: {
+    music_performance_bool: {
+      type: Boolean,
+    },
+    music_performer_name: {
+      type: String,
+    },
+    music_performance_date: {
+      type: Date,
+    },
+    music_18_bool: {
+      type: Boolean,
+    },
+    music_21_bool: {
+      type: Boolean,
+    },
+    music_alcohol_bool: {
+      type: Boolean,
+    },
+    music_atm_bool: {
+      type: Boolean,
+    },
+  },
   // basic location info
   location_occupancy: {
     type: String,

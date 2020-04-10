@@ -236,6 +236,160 @@ const LocationSchema = new Schema({
         default: null,
       },
     },
+    cafe_update_info: {
+      cafe_tea_percent: {
+        type: Number,
+        default: null,
+      },
+      cafe_tea_percent_day: {
+        type: Number,
+        default: null,
+      },
+      cafe_coffee_percent: {
+        type: Number,
+        default: null,
+      },
+      cafe_coffee_percent_day: {
+        type: Number,
+        default: null,
+      },
+      cafe_uncaffeinated_percent: {
+        type: Number,
+        default: null,
+      },
+      cafe_uncaffeinated_percent_day: {
+        type: Number,
+        default: null,
+      },
+      cafe_breakfast_percent: {
+        type: Number,
+        default: null,
+      },
+      cafe_breakfast_percent_day: {
+        type: Number,
+        default: null,
+      },
+      cafe_lunch_percent: {
+        type: Number,
+        default: null,
+      },
+      cafe_lunch_percent_day: {
+        type: Number,
+        default: null,
+      },
+      cafe_inside_percent: {
+        type: Number,
+        default: null,
+      },
+      cafe_inside_percent_day: {
+        type: Number,
+        default: null,
+      },
+      cafe_outside_percent: {
+        type: Number,
+        default: null,
+      },
+      cafe_outside_percent_day: {
+        type: Number,
+        default: null,
+      },
+      cafe_drive_through_percent: {
+        type: Number,
+        default: null,
+      },
+      cafe_drive_through_percent_day: {
+        type: Number,
+        default: null,
+      },
+      cafe_online_percent: {
+        type: Number,
+        default: null,
+      },
+      cafe_online_percent_day: {
+        type: Number,
+        default: null,
+      },
+    },
+    hotel_update_info: {
+      hotel_vacancies_bool_percent_day: {
+        type: Number,
+        default: null,
+      },
+      hotel_vacancies_bool_percent_hour: {
+        type: Number,
+        default: null,
+      },
+      hotel_wifi_percent: {
+        type: Number,
+        default: null,
+      },
+      hotel_breakfast_percent: {
+        type: Number,
+        default: null,
+      },
+      hotel_pool_percent: {
+        type: Number,
+        default: null,
+      },
+      hotel_air_percent: {
+        type: Number,
+        default: null,
+      },
+      hotel_bar_percent: {
+        type: Number,
+        default: null,
+      },
+      hotel_pets_percent: {
+        type: Number,
+        default: null,
+      },
+      hotel_wellness_percent: {
+        type: Number,
+        default: null,
+      },
+    },
+    music_update_info: {
+      music_performances: [
+        {
+          music_performer_name: {
+            type: String,
+            default: null,
+          },
+          music_performance_date: {
+            type: Date,
+            default: null,
+          },
+        },
+      ],
+      music_18_percent_day: {
+        type: Number,
+        default: null,
+      },
+      music_18_percent: {
+        type: Number,
+        default: null,
+      },
+      music_21_percent_day: {
+        type: Number,
+        default: null,
+      },
+      music_21_percent: {
+        type: Number,
+        default: null,
+      },
+      music_alcohol_percent_day: {
+        type: Number,
+        default: null,
+      },
+      music_alcohol_percent: {
+        type: Number,
+        default: null,
+      },
+      music_atm_percent: {
+        type: Number,
+        default: null,
+      },
+    },
     grocery_update_info: {
       grocery_water_percent_day: {
         type: Number,

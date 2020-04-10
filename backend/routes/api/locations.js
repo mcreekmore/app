@@ -210,6 +210,33 @@ router.post("/update", (req, res) => {
     //bank info
     bank_drive_through,
     bank_atm,
+    // cafe info
+    cafe_tea_bool,
+    cafe_coffee_bool,
+    cafe_uncaffeinated_bool,
+    cafe_breakfast_bool,
+    cafe_lunch_bool,
+    cafe_inside_bool,
+    cafe_outside_bool,
+    cafe_drive_through_bool,
+    cafe_online_bool,
+    // hotel info,
+    hotel_vacancies_bool,
+    hotel_wifi_bool,
+    hotel_breakfast_bool,
+    hotel_pool_bool,
+    hotel_air_bool,
+    hotel_bar_bool,
+    hotel_pets_bool,
+    hotel_wellness_bool,
+    // music venue info
+    music_performance_bool,
+    music_performer_name,
+    music_performance_date,
+    music_18_bool,
+    music_21_bool,
+    music_alcohol_bool,
+    music_atm_bool,
     //basic location info
     location_occupancy,
     location_rating,
@@ -267,6 +294,39 @@ router.post("/update", (req, res) => {
     bank_update: {
       bank_drive_through,
       bank_atm,
+    },
+    // cafe info
+    cafe_update: {
+      cafe_tea_bool,
+      cafe_coffee_bool,
+      cafe_uncaffeinated_bool,
+      cafe_breakfast_bool,
+      cafe_lunch_bool,
+      cafe_inside_bool,
+      cafe_outside_bool,
+      cafe_drive_through_bool,
+      cafe_online_bool,
+    },
+    // hotel info
+    hotel_update: {
+      hotel_vacancies_bool,
+      hotel_wifi_bool,
+      hotel_breakfast_bool,
+      hotel_pool_bool,
+      hotel_air_bool,
+      hotel_bar_bool,
+      hotel_pets_bool,
+      hotel_wellness_bool,
+    },
+    // music venue info
+    music_update: {
+      music_performance_bool,
+      music_performer_name,
+      music_performance_date,
+      music_18_bool,
+      music_21_bool,
+      music_alcohol_bool,
+      music_atm_bool,
     },
     //basic location info
     location_occupancy,
@@ -337,6 +397,18 @@ async function processUpdate(locationID) {
       // bank update
       if (type.toString() == "Bank") {
         processBankUpdate(location);
+      }
+      // cafe update
+      if (type.toString() == "Cafe") {
+        processCafeUpdate(location);
+      }
+      // hotel update
+      if (type.toString() == "Hotel") {
+        processHotelUpdate(location);
+      }
+      // music venue update
+      if (type.toString() == "Music Venue") {
+        processMusicUpdate(location);
       }
     });
     //location.save();
@@ -1141,6 +1213,748 @@ async function processBankUpdate(location) {
         bank_atm_percent_day,
         bank_atm_percent_hour,
       };
+
+      // Update location document
+      Location.findOneAndUpdate(
+        { _id: location._id },
+        {
+          $set: {
+            update_info: location.update_info,
+          },
+        },
+        { new: true },
+
+        (err, doc) => {
+          if (err) {
+            console.log(err);
+          }
+          // console.log(doc);
+        }
+      );
+      return location;
+    }
+  );
+  return location;
+}
+
+// Cafe Update Processing
+async function processCafeUpdate(location) {
+  location = await LocationUpdate.find({ locationID: location._id }).then(
+    (updates) => {
+      var ONE_HOUR = 60 * 60 * 1000; /* ms */
+      var ONE_DAY = 24 * 60 * 60 * 1000;
+
+      // day
+      let cafe_tea_bool_count_day = 0;
+      let cafe_tea_bool_true_count_day = 0;
+      let cafe_coffee_bool_count_day = 0;
+      let cafe_coffee_bool_true_count_day = 0;
+      let cafe_uncaffeinated_bool_count_day = 0;
+      let cafe_uncaffeinated_bool_true_count_day = 0;
+      let cafe_breakfast_bool_count_day = 0;
+      let cafe_breakfast_bool_true_count_day = 0;
+      let cafe_lunch_bool_count_day = 0;
+      let cafe_lunch_bool_true_count_day = 0;
+      let cafe_inside_bool_count_day = 0;
+      let cafe_inside_bool_true_count_day = 0;
+      let cafe_outside_bool_count_day = 0;
+      let cafe_outside_bool_true_count_day = 0;
+      let cafe_drive_through_bool_count_day = 0;
+      let cafe_drive_through_bool_true_count_day = 0;
+      let cafe_online_bool_count_day = 0;
+      let cafe_online_bool_true_count_day = 0;
+
+      // hour
+
+      // any time
+      let cafe_tea_bool_count = 0;
+      let cafe_tea_bool_true_count = 0;
+      let cafe_coffee_bool_count = 0;
+      let cafe_coffee_bool_true_count = 0;
+      let cafe_uncaffeinated_bool_count = 0;
+      let cafe_uncaffeinated_bool_true_count = 0;
+      let cafe_breakfast_bool_count = 0;
+      let cafe_breakfast_bool_true_count = 0;
+      let cafe_lunch_bool_count = 0;
+      let cafe_lunch_bool_true_count = 0;
+      let cafe_inside_bool_count = 0;
+      let cafe_inside_bool_true_count = 0;
+      let cafe_outside_bool_count = 0;
+      let cafe_outside_bool_true_count = 0;
+      let cafe_drive_through_bool_count = 0;
+      let cafe_drive_through_bool_true_count = 0;
+      let cafe_online_bool_count = 0;
+      let cafe_online_bool_true_count = 0;
+
+      updates.forEach((update) => {
+        var updateDate = new Date(update.date);
+        // if within 24 hours
+        if (new Date() - updateDate < ONE_DAY) {
+          //cafe_tea_bool
+          if (update.cafe_update.cafe_tea_bool != null) {
+            cafe_tea_bool_count_day++;
+            if (update.cafe_update.cafe_tea_bool == true) {
+              cafe_tea_bool_true_count_day++;
+            }
+          }
+          //cafe_coffee_bool
+          if (update.cafe_update.cafe_coffee_bool != null) {
+            cafe_coffee_bool_count_day++;
+            if (update.cafe_update.cafe_coffee_bool == true) {
+              cafe_coffee_bool_true_count_day++;
+            }
+          }
+          //cafe_uncaffeinated_bool
+          if (update.cafe_update.cafe_uncaffeinated_bool != null) {
+            cafe_uncaffeinated_bool_count_day++;
+            if (update.cafe_update.cafe_uncaffeinated_bool == true) {
+              cafe_uncaffeinated_bool_true_count_day++;
+            }
+          }
+          //cafe_breakfast_bool
+          if (update.cafe_update.cafe_breakfast_bool != null) {
+            cafe_breakfast_bool_count_day++;
+            if (update.cafe_update.cafe_breakfast_bool == true) {
+              cafe_breakfast_bool_true_count_day++;
+            }
+          }
+          //cafe_lunch_bool
+          if (update.cafe_update.cafe_lunch_bool != null) {
+            cafe_lunch_bool_count_day++;
+            if (update.cafe_update.cafe_lunch_bool == true) {
+              cafe_lunch_bool_true_count_day++;
+            }
+          }
+          //cafe_inside_bool
+          if (update.cafe_update.cafe_inside_bool != null) {
+            cafe_inside_bool_count_day++;
+            if (update.cafe_update.cafe_inside_bool == true) {
+              cafe_inside_bool_true_count_day++;
+            }
+          }
+          //cafe_outside_bool
+          if (update.cafe_update.cafe_outside_bool != null) {
+            cafe_outside_bool_count_day++;
+            if (update.cafe_update.cafe_outside_bool == true) {
+              cafe_outside_bool_true_count_day++;
+            }
+          }
+          //cafe_drive_through_bool
+          if (update.cafe_update.cafe_drive_through_bool != null) {
+            cafe_drive_through_bool_count_day++;
+            if (update.cafe_update.cafe_drive_through_bool == true) {
+              cafe_drive_through_bool_true_count_day++;
+            }
+          }
+          //cafe_online_bool
+          if (update.cafe_update.cafe_online_bool != null) {
+            cafe_online_bool_count_day++;
+            if (update.cafe_update.cafe_online_bool == true) {
+              cafe_online_bool_true_count_day++;
+            }
+          }
+        }
+        // if within 1 hour
+        if (new Date() - updateDate < ONE_HOUR) {
+        }
+        // regardless of time (all time)
+        //cafe_tea_bool
+        if (update.cafe_update.cafe_tea_bool != null) {
+          cafe_tea_bool_count++;
+          if (update.cafe_update.cafe_tea_bool == true) {
+            cafe_tea_bool_true_count++;
+          }
+        }
+        //cafe_coffee_bool
+        if (update.cafe_update.cafe_coffee_bool != null) {
+          cafe_coffee_bool_count++;
+          if (update.cafe_update.cafe_coffee_bool == true) {
+            cafe_coffee_bool_true_count++;
+          }
+        }
+        //cafe_uncaffeinated_bool
+        if (update.cafe_update.cafe_uncaffeinated_bool != null) {
+          cafe_uncaffeinated_bool_count++;
+          if (update.cafe_update.cafe_uncaffeinated_bool == true) {
+            cafe_uncaffeinated_bool_true_count++;
+          }
+        }
+        //cafe_breakfast_bool
+        if (update.cafe_update.cafe_breakfast_bool != null) {
+          cafe_breakfast_bool_count++;
+          if (update.cafe_update.cafe_breakfast_bool == true) {
+            cafe_breakfast_bool_true_count++;
+          }
+        }
+        //cafe_lunch_bool
+        if (update.cafe_update.cafe_lunch_bool != null) {
+          cafe_lunch_bool_count++;
+          if (update.cafe_update.cafe_lunch_bool == true) {
+            cafe_lunch_bool_true_count++;
+          }
+        }
+        //cafe_inside_bool
+        if (update.cafe_update.cafe_inside_bool != null) {
+          cafe_inside_bool_count++;
+          if (update.cafe_update.cafe_inside_bool == true) {
+            cafe_inside_bool_true_count++;
+          }
+        }
+        //cafe_outside_bool
+        if (update.cafe_update.cafe_outside_bool != null) {
+          cafe_outside_bool_count++;
+          if (update.cafe_update.cafe_outside_bool == true) {
+            cafe_outside_bool_true_count++;
+          }
+        }
+        //cafe_drive_through_bool
+        if (update.cafe_update.cafe_drive_through_bool != null) {
+          cafe_drive_through_bool_count++;
+          if (update.cafe_update.cafe_drive_through_bool == true) {
+            cafe_drive_through_bool_true_count++;
+          }
+        }
+        //cafe_online_bool
+        if (update.cafe_update.cafe_online_bool != null) {
+          cafe_online_bool_count++;
+          if (update.cafe_update.cafe_online_bool == true) {
+            cafe_online_bool_true_count++;
+          }
+        }
+      });
+
+      // find average
+      // day
+      if (cafe_tea_bool_count_day > 0) {
+        cafe_tea_percent_day =
+          (cafe_tea_bool_true_count_day / cafe_tea_bool_count_day).toFixed(2) *
+          100;
+      } else cafe_tea_percent_day = null;
+
+      if (cafe_coffee_bool_count_day > 0) {
+        cafe_coffee_percent_day =
+          (
+            cafe_coffee_bool_true_count_day / cafe_coffee_bool_count_day
+          ).toFixed(2) * 100;
+      } else cafe_coffee_percent_day = null;
+
+      if (cafe_uncaffeinated_bool_count_day > 0) {
+        cafe_uncaffeinated_percent_day =
+          (
+            cafe_uncaffeinated_bool_true_count_day /
+            cafe_uncaffeinated_bool_count_day
+          ).toFixed(2) * 100;
+      } else cafe_uncaffeinated_percent_day = null;
+
+      if (cafe_breakfast_bool_count_day > 0) {
+        cafe_breakfast_percent_day =
+          (
+            cafe_breakfast_bool_true_count_day / cafe_breakfast_bool_count_day
+          ).toFixed(2) * 100;
+      } else cafe_breakfast_percent_day = null;
+
+      if (cafe_lunch_bool_count_day > 0) {
+        cafe_lunch_percent_day =
+          (cafe_lunch_bool_true_count_day / cafe_lunch_bool_count_day).toFixed(
+            2
+          ) * 100;
+      } else cafe_lunch_percent_day = null;
+
+      if (cafe_inside_bool_count_day > 0) {
+        cafe_inside_percent_day =
+          (
+            cafe_inside_bool_true_count_day / cafe_inside_bool_count_day
+          ).toFixed(2) * 100;
+      } else cafe_inside_percent_day = null;
+
+      if (cafe_outside_bool_count_day > 0) {
+        cafe_outside_percent_day =
+          (
+            cafe_outside_bool_true_count_day / cafe_outside_bool_count_day
+          ).toFixed(2) * 100;
+      } else cafe_outside_percent_day = null;
+
+      if (cafe_drive_through_bool_count_day > 0) {
+        cafe_drive_through_percent_day =
+          (
+            cafe_drive_through_bool_true_count_day /
+            cafe_drive_through_bool_count_day
+          ).toFixed(2) * 100;
+      } else cafe_drive_through_percent_day = null;
+
+      if (cafe_online_bool_count_day > 0) {
+        cafe_online_percent_day =
+          (
+            cafe_online_bool_true_count_day / cafe_online_bool_count_day
+          ).toFixed(2) * 100;
+      } else cafe_online_percent_day = null;
+
+      // hour
+
+      // of all time
+      if (cafe_tea_bool_count > 0) {
+        cafe_tea_percent =
+          (cafe_tea_bool_true_count / cafe_tea_bool_count).toFixed(2) * 100;
+      } else cafe_tea_percent = null;
+
+      if (cafe_coffee_bool_count > 0) {
+        cafe_coffee_percent =
+          (cafe_coffee_bool_true_count / cafe_coffee_bool_count).toFixed(2) *
+          100;
+      } else cafe_coffee_percent = null;
+
+      if (cafe_uncaffeinated_bool_count > 0) {
+        cafe_uncaffeinated_percent =
+          (
+            cafe_uncaffeinated_bool_true_count / cafe_uncaffeinated_bool_count
+          ).toFixed(2) * 100;
+      } else cafe_uncaffeinated_percent = null;
+
+      if (cafe_breakfast_bool_count > 0) {
+        cafe_breakfast_percent =
+          (cafe_breakfast_bool_true_count / cafe_breakfast_bool_count).toFixed(
+            2
+          ) * 100;
+      } else cafe_breakfast_percent = null;
+
+      if (cafe_lunch_bool_count > 0) {
+        cafe_lunch_percent =
+          (cafe_lunch_bool_true_count / cafe_lunch_bool_count).toFixed(2) * 100;
+      } else cafe_lunch_percent = null;
+
+      if (cafe_inside_bool_count > 0) {
+        cafe_inside_percent =
+          (cafe_inside_bool_true_count / cafe_inside_bool_count).toFixed(2) *
+          100;
+      } else cafe_inside_percent = null;
+
+      if (cafe_outside_bool_count > 0) {
+        cafe_outside_percent =
+          (cafe_outside_bool_true_count / cafe_outside_bool_count).toFixed(2) *
+          100;
+      } else cafe_outside_percent = null;
+
+      if (cafe_drive_through_bool_count > 0) {
+        cafe_drive_through_percent =
+          (
+            cafe_drive_through_bool_true_count / cafe_drive_through_bool_count
+          ).toFixed(2) * 100;
+      } else cafe_drive_through_percent = null;
+
+      if (cafe_online_bool_count > 0) {
+        cafe_online_percent =
+          (cafe_online_bool_true_count / cafe_online_bool_count).toFixed(2) *
+          100;
+      } else cafe_online_percent = null;
+
+      location.update_info.cafe_update_info = {
+        cafe_tea_percent,
+        cafe_tea_percent_day,
+        cafe_coffee_percent,
+        cafe_coffee_percent_day,
+        cafe_uncaffeinated_percent,
+        cafe_uncaffeinated_percent_day,
+        cafe_breakfast_percent,
+        cafe_breakfast_percent_day,
+        cafe_lunch_percent,
+        cafe_lunch_percent_day,
+        cafe_inside_percent,
+        cafe_inside_percent_day,
+        cafe_outside_percent,
+        cafe_outside_percent_day,
+        cafe_drive_through_percent,
+        cafe_drive_through_percent_day,
+        cafe_online_percent,
+        cafe_online_percent_day,
+      };
+
+      // Update location document
+      Location.findOneAndUpdate(
+        { _id: location._id },
+        {
+          $set: {
+            update_info: location.update_info,
+          },
+        },
+        { new: true },
+
+        (err, doc) => {
+          if (err) {
+            console.log(err);
+          }
+          // console.log(doc);
+        }
+      );
+      return location;
+    }
+  );
+  return location;
+}
+
+// Hotel Update Processing
+async function processHotelUpdate(location) {
+  location = await LocationUpdate.find({ locationID: location._id }).then(
+    (updates) => {
+      var ONE_HOUR = 60 * 60 * 1000; /* ms */
+      var ONE_DAY = 24 * 60 * 60 * 1000;
+
+      // day
+      let hotel_vacancies_bool_count_day = 0;
+      let hotel_vacancies_bool_true_count_day = 0;
+
+      // hour
+      let hotel_vacancies_bool_count_hour = 0;
+      let hotel_vacancies_bool_true_count_hour = 0;
+
+      // any time
+      let hotel_wifi_bool_count = 0;
+      let hotel_wifi_bool_true_count = 0;
+      let hotel_breakfast_bool_count = 0;
+      let hotel_breakfast_bool_true_count = 0;
+      let hotel_pool_bool_count = 0;
+      let hotel_pool_bool_true_count = 0;
+      let hotel_air_bool_count = 0;
+      let hotel_air_bool_true_count = 0;
+      let hotel_bar_bool_count = 0;
+      let hotel_bar_bool_true_count = 0;
+      let hotel_pets_bool_count = 0;
+      let hotel_pets_bool_true_count = 0;
+      let hotel_wellness_bool_count = 0;
+      let hotel_wellness_bool_true_count = 0;
+
+      updates.forEach((update) => {
+        var updateDate = new Date(update.date);
+        // if within 24 hours
+        if (new Date() - updateDate < ONE_DAY) {
+          //hotel_vacancies_bool
+          if (update.hotel_update.hotel_vacancies_bool != null) {
+            hotel_vacancies_bool_count_day++;
+            if (update.hotel_update.hotel_vacancies_bool == true) {
+              hotel_vacancies_bool_true_count_day++;
+            }
+          }
+        }
+        // if within 1 hour
+        if (new Date() - updateDate < ONE_HOUR) {
+          //hotel_vacancies_bool
+          if (update.hotel_update.hotel_vacancies_bool != null) {
+            hotel_vacancies_bool_count_hour++;
+            if (update.hotel_update.hotel_vacancies_bool == true) {
+              hotel_vacancies_bool_true_count_hour++;
+            }
+          }
+        }
+        // regardless of time (all time)
+        //hotel_wifi_bool
+        if (update.hotel_update.hotel_wifi_bool != null) {
+          hotel_wifi_bool_count++;
+          if (update.hotel_update.hotel_wifi_bool == true) {
+            hotel_wifi_bool_true_count++;
+          }
+        }
+        //hotel_breakfast_bool
+        if (update.hotel_update.hotel_breakfast_bool != null) {
+          hotel_breakfast_bool_count++;
+          if (update.hotel_update.hotel_breakfast_bool == true) {
+            hotel_breakfast_bool_true_count++;
+          }
+        }
+        //hotel_pool_bool
+        if (update.hotel_update.hotel_pool_bool != null) {
+          hotel_pool_bool_count++;
+          if (update.hotel_update.hotel_pool_bool == true) {
+            hotel_pool_bool_true_count++;
+          }
+        }
+        //hotel_air_bool
+        if (update.hotel_update.hotel_air_bool != null) {
+          hotel_air_bool_count++;
+          if (update.hotel_update.hotel_air_bool == true) {
+            hotel_air_bool_true_count++;
+          }
+        }
+        //hotel_bar_bool
+        if (update.hotel_update.hotel_bar_bool != null) {
+          hotel_bar_bool_count++;
+          if (update.hotel_update.hotel_bar_bool == true) {
+            hotel_bar_bool_true_count++;
+          }
+        }
+        //hotel_pets_bool
+        if (update.hotel_update.hotel_pets_bool != null) {
+          hotel_pets_bool_count++;
+          if (update.hotel_update.hotel_pets_bool == true) {
+            hotel_pets_bool_true_count++;
+          }
+        }
+        //hotel_wellness_bool
+        if (update.hotel_update.hotel_wellness_bool != null) {
+          hotel_wellness_bool_count++;
+          if (update.hotel_update.hotel_wellness_bool == true) {
+            hotel_wellness_bool_true_count++;
+          }
+        }
+      });
+
+      // find average
+      // day
+      // hotel_vacancies_bool
+      if (hotel_vacancies_bool_count_day > 0) {
+        hotel_vacancies_bool_percent_day =
+          (
+            hotel_vacancies_bool_true_count_day / hotel_vacancies_bool_count_day
+          ).toFixed(2) * 100;
+      } else hotel_vacancies_bool_percent_day = null;
+
+      // hour
+      // hotel_vacancies_bool
+      if (hotel_vacancies_bool_count_hour > 0) {
+        hotel_vacancies_bool_percent_hour =
+          (
+            hotel_vacancies_bool_true_count_hour /
+            hotel_vacancies_bool_count_hour
+          ).toFixed(2) * 100;
+      } else hotel_vacancies_bool_percent_hour = null;
+
+      // of all time
+      // hotel_wifi
+      if (hotel_wifi_bool_count > 0) {
+        hotel_wifi_percent =
+          (hotel_wifi_bool_true_count / hotel_wifi_bool_count).toFixed(2) * 100;
+      } else hotel_wifi_percent = null;
+
+      // hotel_breakfast
+      if (hotel_breakfast_bool_count > 0) {
+        hotel_breakfast_percent =
+          (
+            hotel_breakfast_bool_true_count / hotel_breakfast_bool_count
+          ).toFixed(2) * 100;
+      } else hotel_breakfast_percent = null;
+
+      // hotel_pool
+      if (hotel_pool_bool_count > 0) {
+        hotel_pool_percent =
+          (hotel_pool_bool_true_count / hotel_pool_bool_count).toFixed(2) * 100;
+      } else hotel_pool_percent = null;
+
+      // hotel_air
+      if (hotel_air_bool_count > 0) {
+        hotel_air_percent =
+          (hotel_air_bool_true_count / hotel_air_bool_count).toFixed(2) * 100;
+      } else hotel_air_percent = null;
+
+      // hotel_bar
+      if (hotel_bar_bool_count > 0) {
+        hotel_bar_percent =
+          (hotel_bar_bool_true_count / hotel_bar_bool_count).toFixed(2) * 100;
+      } else hotel_bar_percent = null;
+
+      // hotel_pets
+      if (hotel_pets_bool_count > 0) {
+        hotel_pets_percent =
+          (hotel_pets_bool_true_count / hotel_pets_bool_count).toFixed(2) * 100;
+      } else hotel_pets_percent = null;
+
+      // hotel_wellness
+      if (hotel_wellness_bool_count > 0) {
+        hotel_wellness_percent =
+          (hotel_wellness_bool_true_count / hotel_wellness_bool_count).toFixed(
+            2
+          ) * 100;
+      } else hotel_wellness_percent = null;
+
+      location.update_info.hotel_update_info = {
+        hotel_vacancies_bool_percent_day,
+        hotel_vacancies_bool_percent_hour,
+        hotel_wifi_percent,
+        hotel_breakfast_percent,
+        hotel_pool_percent,
+        hotel_air_percent,
+        hotel_bar_percent,
+        hotel_pets_percent,
+        hotel_wellness_percent,
+      };
+
+      // Update location document
+      Location.findOneAndUpdate(
+        { _id: location._id },
+        {
+          $set: {
+            update_info: location.update_info,
+          },
+        },
+        { new: true },
+
+        (err, doc) => {
+          if (err) {
+            console.log(err);
+          }
+          // console.log(doc);
+        }
+      );
+      return location;
+    }
+  );
+  return location;
+}
+
+// Music Venue Update Processing
+async function processMusicUpdate(location) {
+  location = await LocationUpdate.find({ locationID: location._id }).then(
+    (updates) => {
+      var ONE_HOUR = 60 * 60 * 1000; /* ms */
+      var ONE_DAY = 24 * 60 * 60 * 1000;
+
+      // performances
+      let music_performances = [];
+
+      // day
+      let music_18_count_day = 0;
+      let music_18_true_count_day = 0;
+      let music_21_count_day = 0;
+      let music_21_true_count_day = 0;
+      let music_alcohol_count_day = 0;
+      let music_alcohol_true_count_day = 0;
+
+      // hour
+
+      // any time
+      let music_18_count = 0;
+      let music_18_true_count = 0;
+      let music_21_count = 0;
+      let music_21_true_count = 0;
+      let music_alcohol_count = 0;
+      let music_alcohol_true_count = 0;
+      let music_atm_count = 0;
+      let music_atm_true_count = 0;
+
+      updates.forEach((update) => {
+        // if the user has added a performance
+        if (update.music_update.music_performance_bool) {
+          if (update.music_update.music_performer_name != null) {
+            //console.log(update.music_update.music_performer_name);
+            let obj = {
+              music_performer_name: update.music_update.music_performer_name,
+              music_performance_date:
+                update.music_update.music_performance_date,
+            };
+            //console.log(obj);
+            music_performances.push(obj);
+          }
+        }
+
+        var updateDate = new Date(update.date);
+        // if within 24 hours
+        if (new Date() - updateDate < ONE_DAY) {
+          //music_18_bool
+          if (update.music_update.music_18_bool != null) {
+            music_18_count_day++;
+            if (update.music_update.music_18_bool == true) {
+              music_18_true_count_day++;
+            }
+          }
+          //music_21_bool
+          if (update.music_update.music_21_bool != null) {
+            music_21_count_day++;
+            if (update.music_update.music_21_bool == true) {
+              music_21_true_count_day++;
+            }
+          }
+          //music_alcohol_bool
+          if (update.music_update.music_alcohol_bool != null) {
+            music_alcohol_count_day++;
+            if (update.music_update.music_alcohol_bool == true) {
+              music_alcohol_true_count_day++;
+            }
+          }
+        }
+        // if within 1 hour
+        if (new Date() - updateDate < ONE_HOUR) {
+        }
+        // regardless of time (all time)
+        //music_18_bool
+        if (update.music_update.music_18_bool != null) {
+          music_18_count++;
+          if (update.music_update.music_18_bool == true) {
+            music_18_true_count++;
+          }
+        }
+        //music_21_bool
+        if (update.music_update.music_21_bool != null) {
+          music_21_count++;
+          if (update.music_update.music_21_bool == true) {
+            music_21_true_count++;
+          }
+        }
+        //music_alcohol_bool
+        if (update.music_update.music_alcohol_bool != null) {
+          music_alcohol_count++;
+          if (update.music_update.music_alcohol_bool == true) {
+            music_alcohol_true_count++;
+          }
+        }
+        //music_atm_bool
+        if (update.music_update.music_atm_bool != null) {
+          music_atm_count++;
+          if (update.music_update.music_atm_bool == true) {
+            music_atm_true_count++;
+          }
+        }
+      });
+
+      // find average
+      // day
+      if (music_18_count_day > 0) {
+        music_18_percent_day =
+          (music_18_true_count_day / music_18_count_day).toFixed(2) * 100;
+      } else music_18_percent_day = null;
+
+      if (music_21_count_day > 0) {
+        music_21_percent_day =
+          (music_21_true_count_day / music_21_count_day).toFixed(2) * 100;
+      } else music_21_percent_day = null;
+
+      if (music_alcohol_count_day > 0) {
+        music_alcohol_percent_day =
+          (music_alcohol_true_count_day / music_alcohol_count_day).toFixed(2) *
+          100;
+      } else music_alcohol_percent_day = null;
+
+      // hour
+
+      // of all time
+      if (music_18_count > 0) {
+        music_18_percent =
+          (music_18_true_count / music_18_count).toFixed(2) * 100;
+      } else music_18_percent = null;
+
+      if (music_21_count > 0) {
+        music_21_percent =
+          (music_21_true_count / music_21_count).toFixed(2) * 100;
+      } else music_21_percent = null;
+
+      if (music_alcohol_count > 0) {
+        music_alcohol_percent =
+          (music_alcohol_true_count / music_alcohol_count).toFixed(2) * 100;
+      } else music_alcohol_percent = null;
+
+      if (music_atm_count > 0) {
+        music_atm_percent =
+          (music_atm_true_count / music_atm_count).toFixed(2) * 100;
+      } else music_atm_percent = null;
+
+      location.update_info.music_update_info = {
+        music_18_percent_day,
+        music_18_percent,
+        music_21_percent_day,
+        music_21_percent,
+        music_alcohol_percent_day,
+        music_alcohol_percent,
+        music_atm_percent,
+        music_performances,
+      };
+
+      console.log(music_performances);
 
       // Update location document
       Location.findOneAndUpdate(
