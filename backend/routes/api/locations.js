@@ -1832,14 +1832,19 @@ async function processMusicUpdate(location) {
         // if the user has added a performance
         if (update.music_update.music_performance_bool) {
           if (update.music_update.music_performer_name != null) {
-            //console.log(update.music_update.music_performer_name);
-            let obj = {
-              music_performer_name: update.music_update.music_performer_name,
-              music_performance_date:
-                update.music_update.music_performance_date,
-            };
-            //console.log(obj);
-            music_performances.push(obj);
+            if (
+              new Date() - update.music_update.music_performance_date <
+              ONE_DAY
+            ) {
+              //console.log(update.music_update.music_performer_name);
+              let obj = {
+                music_performer_name: update.music_update.music_performer_name,
+                music_performance_date:
+                  update.music_update.music_performance_date,
+              };
+              //console.log(obj);
+              music_performances.push(obj);
+            }
           }
         }
 
