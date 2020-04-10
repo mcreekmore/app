@@ -194,6 +194,18 @@ const LocationUpdateSchema = new Schema({
       type: Boolean,
     },
   },
+  // post office info
+  post_update: {
+    post_parcel_bool: {
+      type: Boolean,
+    },
+    post_outside_bool: {
+      type: Boolean,
+    },
+    post_po_bool: {
+      type: Boolean,
+    },
+  },
   // basic location info
   location_occupancy: {
     type: String,

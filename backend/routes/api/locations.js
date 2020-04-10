@@ -237,6 +237,10 @@ router.post("/update", (req, res) => {
     music_21_bool,
     music_alcohol_bool,
     music_atm_bool,
+    // post office info
+    post_parcel_bool,
+    post_outside_bool,
+    post_po_bool,
     //basic location info
     location_occupancy,
     location_rating,
@@ -328,6 +332,12 @@ router.post("/update", (req, res) => {
       music_alcohol_bool,
       music_atm_bool,
     },
+    // post office info
+    post_update: {
+      post_parcel_bool,
+      post_outside_bool,
+      post_po_bool,
+    },
     //basic location info
     location_occupancy,
     location_rating,
@@ -409,6 +419,11 @@ async function processUpdate(locationID) {
       // music venue update
       if (type.toString() == "Music Venue") {
         processMusicUpdate(location);
+      }
+
+      // post office update
+      if (type.toString() == "Post Office") {
+        processPostUpdate(location);
       }
     });
     //location.save();
@@ -1959,8 +1974,6 @@ async function processMusicUpdate(location) {
         music_performances,
       };
 
-      console.log(music_performances);
-
       // Update location document
       Location.findOneAndUpdate(
         { _id: location._id },
@@ -2398,6 +2411,158 @@ function processGroceryUpdate(location) {
         console.log(err);
       }
       //console.log(doc);
+    }
+  );
+  return location;
+}
+
+// Post Office Update Processing
+async function processPostUpdate(location) {
+  location = await LocationUpdate.find({ locationID: location._id }).then(
+    (updates) => {
+      var ONE_HOUR = 60 * 60 * 1000; /* ms */
+      var ONE_DAY = 24 * 60 * 60 * 1000;
+
+      // day
+      let post_parcel_bool_count_day = 0;
+      let post_parcel_bool_true_count_day = 0;
+      let post_outside_bool_count_day = 0;
+      let post_outside_bool_true_count_day = 0;
+      let post_po_bool_count_day = 0;
+      let post_po_bool_true_count_day = 0;
+
+      // hour
+
+      // any time
+      let post_parcel_bool_count = 0;
+      let post_parcel_bool_true_count = 0;
+      let post_outside_bool_count = 0;
+      let post_outside_bool_true_count = 0;
+      let post_po_bool_count = 0;
+      let post_po_bool_true_count = 0;
+
+      updates.forEach((update) => {
+        var updateDate = new Date(update.date);
+        // if within 24 hours
+        if (new Date() - updateDate < ONE_DAY) {
+          //post_parcel_bool
+          if (update.post_update.post_parcel_bool != null) {
+            post_parcel_bool_count_day++;
+            if (update.post_update.post_parcel_bool == true) {
+              post_parcel_bool_true_count_day++;
+            }
+          }
+          //post_outside_bool
+          if (update.post_update.post_outside_bool != null) {
+            post_outside_bool_count_day++;
+            if (update.post_update.post_outside_bool == true) {
+              post_outside_bool_true_count_day++;
+            }
+          }
+          //post_po_bool
+          if (update.post_update.post_po_bool != null) {
+            post_po_bool_count_day++;
+            if (update.post_update.post_po_bool == true) {
+              post_po_bool_true_count_day++;
+            }
+          }
+        }
+        // if within 1 hour
+        if (new Date() - updateDate < ONE_HOUR) {
+        }
+        // regardless of time (all time)
+        //post_parcel_bool
+        if (update.post_update.post_parcel_bool != null) {
+          post_parcel_bool_count++;
+          if (update.post_update.post_parcel_bool == true) {
+            post_parcel_bool_true_count++;
+          }
+        }
+        //post_outside_bool
+        if (update.post_update.post_outside_bool != null) {
+          post_outside_bool_count++;
+          if (update.post_update.post_outside_bool == true) {
+            post_outside_bool_true_count++;
+          }
+        }
+        //post_po_bool
+        if (update.post_update.post_po_bool != null) {
+          post_po_bool_count++;
+          if (update.post_update.post_po_bool == true) {
+            post_po_bool_true_count++;
+          }
+        }
+      });
+
+      // find average
+      // day
+      if (post_parcel_bool_count_day > 0) {
+        post_parcel_percent_day =
+          (
+            post_parcel_bool_true_count_day / post_parcel_bool_count_day
+          ).toFixed(2) * 100;
+      } else post_parcel_percent_day = null;
+
+      if (post_outside_bool_count_day > 0) {
+        post_outside_percent_day =
+          (
+            post_outside_bool_true_count_day / post_outside_bool_count_day
+          ).toFixed(2) * 100;
+      } else post_outside_percent_day = null;
+
+      if (post_po_bool_count_day > 0) {
+        post_po_percent_day =
+          (post_po_bool_true_count_day / post_po_bool_count_day).toFixed(2) *
+          100;
+      } else post_po_percent_day = null;
+
+      // hour
+
+      // of all time
+      if (post_parcel_bool_count > 0) {
+        post_parcel_percent =
+          (post_parcel_bool_true_count / post_parcel_bool_count).toFixed(2) *
+          100;
+      } else post_parcel_percent = null;
+
+      if (post_outside_bool_count > 0) {
+        post_outside_percent =
+          (post_outside_bool_true_count / post_outside_bool_count).toFixed(2) *
+          100;
+      } else post_outside_percent = null;
+
+      if (post_po_bool_count > 0) {
+        post_po_percent =
+          (post_po_bool_true_count / post_po_bool_count).toFixed(2) * 100;
+      } else post_po_percent = null;
+
+      location.update_info.post_update_info = {
+        post_parcel_percent,
+        post_outside_percent,
+        post_po_percent,
+        post_parcel_percent_day,
+        post_outside_percent_day,
+        post_po_percent_day,
+      };
+
+      // Update location document
+      Location.findOneAndUpdate(
+        { _id: location._id },
+        {
+          $set: {
+            update_info: location.update_info,
+          },
+        },
+        { new: true },
+
+        (err, doc) => {
+          if (err) {
+            console.log(err);
+          }
+          // console.log(doc);
+        }
+      );
+      return location;
     }
   );
   return location;

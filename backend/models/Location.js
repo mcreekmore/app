@@ -390,6 +390,32 @@ const LocationSchema = new Schema({
         default: null,
       },
     },
+    post_update_info: {
+      post_parcel_percent: {
+        type: Number,
+        default: null,
+      },
+      post_outside_percent: {
+        type: Number,
+        default: null,
+      },
+      post_po_percent: {
+        type: Number,
+        default: null,
+      },
+      post_parcel_percent_day: {
+        type: Number,
+        default: null,
+      },
+      post_outside_percent_day: {
+        type: Number,
+        default: null,
+      },
+      post_po_percent_day: {
+        type: Number,
+        default: null,
+      },
+    },
     grocery_update_info: {
       grocery_water_percent_day: {
         type: Number,
