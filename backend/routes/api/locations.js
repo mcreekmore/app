@@ -417,7 +417,7 @@ async function processUpdate(locationID) {
         processHotelUpdate(location);
       }
       // music venue update
-      if (type.toString() == "Music Venue") {
+      if (type.toString() == "Music Venue") { 
         processMusicUpdate(location);
       }
 
