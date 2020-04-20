@@ -417,7 +417,7 @@ async function processUpdate(locationID) {
         processHotelUpdate(location);
       }
       // music venue update
-      if (type.toString() == "Music Venue") { 
+      if (type.toString() == "Music Venue") {
         processMusicUpdate(location);
       }
 
@@ -2106,14 +2106,32 @@ function processBarUpdate(location) {
     let bar_styles_list = [
       {
         style: "College Bar",
-        percent: parseFloat(collegeBar) / bar_styles_count,
+        percent: (collegeBar / bar_styles_count).toFixed(2) * 100,
       },
-      { style: "Sports Bar", percent: sportsBar / bar_styles_count },
-      { style: "Dive Bar", percent: diveBar / bar_styles_count },
-      { style: "Cigar Bar", percent: cigarBar / bar_styles_count },
-      { style: "Wine Bar", percent: wineBar / bar_styles_count },
-      { style: "Cocktail Bar", percent: cocktailBar / bar_styles_count },
-      { style: "Irish Pub", percent: irishPub / bar_styles_count },
+      {
+        style: "Sports Bar",
+        percent: (sportsBar / bar_styles_count).toFixed(2) * 100,
+      },
+      {
+        style: "Dive Bar",
+        percent: (diveBar / bar_styles_count).toFixed(2) * 100,
+      },
+      {
+        style: "Cigar Bar",
+        percent: (cigarBar / bar_styles_count).toFixed(2) * 100,
+      },
+      {
+        style: "Wine Bar",
+        percent: (wineBar / bar_styles_count).toFixed(2) * 100,
+      },
+      {
+        style: "Cocktail Bar",
+        percent: (cocktailBar / bar_styles_count).toFixed(2) * 100,
+      },
+      {
+        style: "Irish Pub",
+        percent: (irishPub / bar_styles_count).toFixed(2) * 100,
+      },
     ];
 
     location.update_info.bar_update_info = {
