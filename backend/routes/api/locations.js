@@ -57,6 +57,7 @@ router.post("/", (req, res) => {
     email,
     phone,
     website,
+    user_id,
   } = req.body;
 
   // fixes urls
@@ -91,6 +92,7 @@ router.post("/", (req, res) => {
       email,
       phone,
       website,
+      user_id,
     });
 
     newLocation.save().then((newLocation) => {
@@ -108,7 +110,6 @@ router.post("/", (req, res) => {
           port: 465,
           secure: true,
           auth: {
-            // should be replaced with real sender's account
             user: "matthewacreekmore@gmail.com",
             pass: key,
           },
@@ -160,12 +161,45 @@ router.post("/", (req, res) => {
             "</b> <br >" +
             "<b> Website: " +
             website +
+            "</b> <br >" +
+            "<b> User ID: " +
+            user_id +
             "</b> <br >",
         });
       }
       email().catch(console.error);
     });
   });
+});
+
+// @route   POST /api/locations/report
+// @desc    report a location
+// @access  Public
+router.post("/report", (req, res) => {
+  let { id } = req.body;
+
+  async function email() {
+    let transporter = nodeMailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        user: "matthewacreekmore@gmail.com",
+        pass: key,
+      },
+    });
+
+    // send mail with defined transport object
+    let info = await transporter.sendMail({
+      from: "matthewacreekmore@gmail.com", // sender address
+      to: "matthewacreekmore@gmail.com", // list of receivers
+      subject: "creekmore.io: Location Reported", // Subject line
+      text: req.body.name,
+      // html body
+      html: "<b>Reported Location ID: " + id,
+    });
+  }
+  email().catch(console.error);
 });
 
 // @route   POST /api/locations
