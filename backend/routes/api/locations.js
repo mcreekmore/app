@@ -209,6 +209,7 @@ router.post("/update", (req, res) => {
   console.log("User submitted update processing...");
   const {
     locationID,
+    userID,
     //date,
     // bar info
     bar_wait,
@@ -287,6 +288,7 @@ router.post("/update", (req, res) => {
   const newUpdate = new LocationUpdate({
     locationID,
     date,
+    userID,
     // bar info
     bar_update: {
       bar_wait: bar_wait,
