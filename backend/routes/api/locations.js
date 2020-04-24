@@ -57,7 +57,7 @@ router.post("/", (req, res) => {
     email,
     phone,
     website,
-    user_id,
+    userID,
   } = req.body;
 
   // fixes urls
@@ -92,7 +92,7 @@ router.post("/", (req, res) => {
       email,
       phone,
       website,
-      user_id,
+      userID,
     });
 
     newLocation.save().then((newLocation) => {
@@ -163,7 +163,7 @@ router.post("/", (req, res) => {
             website +
             "</b> <br >" +
             "<b> User ID: " +
-            user_id +
+            userID +
             "</b> <br >",
         });
       }
