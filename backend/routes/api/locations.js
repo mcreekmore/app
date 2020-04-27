@@ -57,6 +57,7 @@ router.post("/", (req, res) => {
     email,
     phone,
     website,
+    userID,
   } = req.body;
 
   // fixes urls
@@ -91,6 +92,7 @@ router.post("/", (req, res) => {
       email,
       phone,
       website,
+      userID,
     });
 
     newLocation.save().then((newLocation) => {
@@ -108,7 +110,6 @@ router.post("/", (req, res) => {
           port: 465,
           secure: true,
           auth: {
-            // should be replaced with real sender's account
             user: "matthewacreekmore@gmail.com",
             pass: key,
           },
@@ -160,12 +161,45 @@ router.post("/", (req, res) => {
             "</b> <br >" +
             "<b> Website: " +
             website +
+            "</b> <br >" +
+            "<b> User ID: " +
+            userID +
             "</b> <br >",
         });
       }
       email().catch(console.error);
     });
   });
+});
+
+// @route   POST /api/locations/report
+// @desc    report a location
+// @access  Public
+router.post("/report", (req, res) => {
+  let { id } = req.body;
+
+  async function email() {
+    let transporter = nodeMailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        user: "matthewacreekmore@gmail.com",
+        pass: key,
+      },
+    });
+
+    // send mail with defined transport object
+    let info = await transporter.sendMail({
+      from: "matthewacreekmore@gmail.com", // sender address
+      to: "matthewacreekmore@gmail.com", // list of receivers
+      subject: "creekmore.io: Location Reported", // Subject line
+      text: req.body.name,
+      // html body
+      html: "<b>Reported Location ID: " + id,
+    });
+  }
+  email().catch(console.error);
 });
 
 // @route   POST /api/locations
@@ -175,6 +209,7 @@ router.post("/update", (req, res) => {
   console.log("User submitted update processing...");
   const {
     locationID,
+    userID,
     //date,
     // bar info
     bar_wait,
@@ -253,6 +288,7 @@ router.post("/update", (req, res) => {
   const newUpdate = new LocationUpdate({
     locationID,
     date,
+    userID,
     // bar info
     bar_update: {
       bar_wait: bar_wait,
@@ -2106,14 +2142,32 @@ function processBarUpdate(location) {
     let bar_styles_list = [
       {
         style: "College Bar",
-        percent: parseFloat(collegeBar) / bar_styles_count,
+        percent: (collegeBar / bar_styles_count).toFixed(2) * 100,
       },
-      { style: "Sports Bar", percent: sportsBar / bar_styles_count },
-      { style: "Dive Bar", percent: diveBar / bar_styles_count },
-      { style: "Cigar Bar", percent: cigarBar / bar_styles_count },
-      { style: "Wine Bar", percent: wineBar / bar_styles_count },
-      { style: "Cocktail Bar", percent: cocktailBar / bar_styles_count },
-      { style: "Irish Pub", percent: irishPub / bar_styles_count },
+      {
+        style: "Sports Bar",
+        percent: (sportsBar / bar_styles_count).toFixed(2) * 100,
+      },
+      {
+        style: "Dive Bar",
+        percent: (diveBar / bar_styles_count).toFixed(2) * 100,
+      },
+      {
+        style: "Cigar Bar",
+        percent: (cigarBar / bar_styles_count).toFixed(2) * 100,
+      },
+      {
+        style: "Wine Bar",
+        percent: (wineBar / bar_styles_count).toFixed(2) * 100,
+      },
+      {
+        style: "Cocktail Bar",
+        percent: (cocktailBar / bar_styles_count).toFixed(2) * 100,
+      },
+      {
+        style: "Irish Pub",
+        percent: (irishPub / bar_styles_count).toFixed(2) * 100,
+      },
     ];
 
     location.update_info.bar_update_info = {

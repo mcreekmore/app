@@ -7,6 +7,7 @@ import About from "./views/About.vue"; // about
 import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
 import Profile from "./views/Profile.vue";
+import Projects from "./views/Projects.vue";
 import MainNavbar from "./layout/MainNavbar.vue";
 import MainFooter from "./layout/MainFooter.vue";
 
@@ -21,8 +22,8 @@ const router = new Router({
       props: {
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: "black" },
-        auth: { loggedOut: false }
-      }
+        auth: { loggedOut: false },
+      },
     },
     {
       path: "/index",
@@ -30,12 +31,12 @@ const router = new Router({
       components: {
         default: IndexOriginal,
         header: MainNavbar,
-        footer: MainFooter
+        footer: MainFooter,
       },
       props: {
         header: { colorOnScroll: 400 },
-        footer: { backgroundColor: "black" }
-      }
+        footer: { backgroundColor: "black" },
+      },
     },
     {
       path: "/landing",
@@ -43,24 +44,33 @@ const router = new Router({
       components: { default: Landing, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 },
-        footer: { backgroundColor: "black" }
-      }
+        footer: { backgroundColor: "black" },
+      },
+    },
+    {
+      path: "/projects",
+      name: "projects",
+      components: { default: Projects, header: MainNavbar, footer: MainFooter },
+      props: {
+        header: { colorOnScroll: 400 },
+        footer: { backgroundColor: "black" },
+      },
     },
     {
       path: "/login",
       name: "login",
       components: { default: Login, header: MainNavbar, footer: MainFooter },
       props: {
-        header: { colorOnScroll: 400 }
-      }
+        header: { colorOnScroll: 400 },
+      },
     },
     {
       path: "/register",
       name: "register",
       components: { default: Register, header: MainNavbar, footer: MainFooter },
       props: {
-        header: { colorOnScroll: 400 }
-      }
+        header: { colorOnScroll: 400 },
+      },
     },
     {
       path: "/user/profile",
@@ -68,8 +78,8 @@ const router = new Router({
       components: { default: Profile, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 },
-        footer: { backgroundColor: "black" }
-      }
+        footer: { backgroundColor: "black" },
+      },
     },
     {
       path: "/about",
@@ -77,21 +87,28 @@ const router = new Router({
       components: { default: About, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 },
-        footer: { backgroundColor: "black" }
-      }
-    }
+        footer: { backgroundColor: "black" },
+      },
+    },
   ],
-  scrollBehavior: to => {
+  scrollBehavior: (to) => {
     if (to.hash) {
       return { selector: to.hash };
     } else {
       return { x: 0, y: 0 };
     }
-  }
+  },
 });
 
 // public routes that do not require auth
-const openRoutes = ["login", "register", "index", "eSports", "about"];
+const openRoutes = [
+  "login",
+  "register",
+  "index",
+  "eSports",
+  "about",
+  "projects",
+];
 
 // if route is open, continue
 // if route is private and a token is available, continue

@@ -62,7 +62,10 @@ const LocationSchema = new Schema({
     required: true,
     default: true, // change in prod!
   },
-
+  userID: {
+    type: String,
+    required: true,
+  },
   update_info: {
     location_update_info: {
       open_hour_percent: {
