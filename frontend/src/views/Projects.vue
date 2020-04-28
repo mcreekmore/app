@@ -14,10 +14,10 @@
     <div class="main">
       <div class="section text-center">
         <div class="container">
-          <h2 class="title">Project Stack</h2>
+          <h2 class="title">Coming soon</h2>
           <div class="team">
-            <div class="md-layout">
-              <div class="md-layout-item md-medium-size-33 md-small-size-100">
+            <!--<div class="md-layout">
+               <div class="md-layout-item md-medium-size-33 md-small-size-100">
                 <div class="team-player">
                   <md-card class="md-card-plain">
                     <div class="md-layout-item md-size-50 mx-auto">
@@ -181,7 +181,7 @@
                   </md-card>
                 </div>
               </div>
-            </div>
+            </div>-->
           </div>
         </div>
       </div>
