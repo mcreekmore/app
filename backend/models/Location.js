@@ -61,7 +61,7 @@ const LocationSchema = new Schema({
   approved: {
     type: Boolean,
     required: true,
-    default: true, // change in prod!
+    default: false,
   },
   userID: {
     type: String,
