@@ -46,7 +46,8 @@ const LocationSchema = new Schema({
   },
   email: {
     type: String,
-    required: true,
+    //required: true,
+    default: null,
   },
   phone: {
     type: String,
