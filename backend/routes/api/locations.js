@@ -69,8 +69,6 @@ router.post("/", (req, res) => {
     }
   }
 
-  //const approved = false;
-
   // Check for existing user
   Location.findOne({ lat, lon }).then((location) => {
     if (location) {

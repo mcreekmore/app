@@ -46,7 +46,8 @@ const LocationSchema = new Schema({
   },
   email: {
     type: String,
-    required: true,
+    required: false,
+    default: null,
   },
   phone: {
     type: String,
@@ -60,7 +61,7 @@ const LocationSchema = new Schema({
   approved: {
     type: Boolean,
     required: true,
-    default: true, // change in prod!
+    default: false,
   },
   userID: {
     type: String,

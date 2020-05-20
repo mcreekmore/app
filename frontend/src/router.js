@@ -10,6 +10,7 @@ import Profile from "./views/Profile.vue";
 import Projects from "./views/Projects.vue";
 import MainNavbar from "./layout/MainNavbar.vue";
 import MainFooter from "./layout/MainFooter.vue";
+import PrivacyPolicy from "./views/PrivacyPolicy.vue";
 
 Vue.use(Router);
 
@@ -90,6 +91,20 @@ const router = new Router({
         footer: { backgroundColor: "black" },
       },
     },
+    {
+      path: "/moves/privacy",
+      name: "privacy",
+      components: {
+        default: PrivacyPolicy,
+        header: MainNavbar,
+        footer: MainFooter,
+      },
+
+      props: {
+        header: { colorOnScroll: 400 },
+        footer: { backgroundColor: "black" },
+      },
+    },
   ],
   scrollBehavior: (to) => {
     if (to.hash) {
@@ -108,6 +123,7 @@ const openRoutes = [
   "eSports",
   "about",
   "projects",
+  "privacy",
 ];
 
 // if route is open, continue
