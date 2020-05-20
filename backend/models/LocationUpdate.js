@@ -11,6 +11,10 @@ const LocationUpdateSchema = new Schema({
     type: String,
     required: true,
   },
+  userID: {
+    type: String,
+    required: true,
+  },
   // bar updates
   bar_update: {
     bar_wait: {

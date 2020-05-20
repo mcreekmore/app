@@ -46,7 +46,11 @@ const LocationSchema = new Schema({
   },
   email: {
     type: String,
+<<<<<<< HEAD
     required: false,
+=======
+    //required: true,
+>>>>>>> 761c6ef2da25298581b5deff3cd3abdb521e9c14
     default: null,
   },
   phone: {
@@ -61,9 +65,12 @@ const LocationSchema = new Schema({
   approved: {
     type: Boolean,
     required: true,
-    default: true, // change in prod!
+    default: false,
   },
-
+  userID: {
+    type: String,
+    required: true,
+  },
   update_info: {
     location_update_info: {
       open_hour_percent: {

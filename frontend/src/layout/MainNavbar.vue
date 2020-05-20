@@ -65,6 +65,11 @@
                 <p>Home</p>
               </md-list-item>
 
+              <md-list-item href="#/projects">
+                <i class="material-icons">folder</i>
+                <p>Projects</p>
+              </md-list-item>
+
               <!-- Not Authenticated v-if="!showAuthenticated"-->
               <md-list-item href="#/login" v-if="!loggedIn">
                 <i class="material-icons">lock</i>
@@ -139,20 +144,12 @@
               >
                 <i class="fab fa-linkedin"></i>
                 <p class="hidden-lg">LinkedIn</p>
-                <md-tooltip md-direction="bottom"
-                  >Connect with me on LinkedIn</md-tooltip
-                >
+                <md-tooltip md-direction="bottom">Connect with me on LinkedIn</md-tooltip>
               </md-list-item>
-              <md-list-item
-                href="https://github.com/mcreekmore/"
-                target="_blank"
-                rel="noopener"
-              >
+              <md-list-item href="https://github.com/mcreekmore/" target="_blank" rel="noopener">
                 <i class="fab fa-github"></i>
                 <p class="hidden-lg">GitHub</p>
-                <md-tooltip md-direction="bottom"
-                  >Chek me out on GitHub</md-tooltip
-                >
+                <md-tooltip md-direction="bottom">Chek me out on GitHub</md-tooltip>
               </md-list-item>
               <md-list-item
                 href="https://www.instagram.com/matthewcreekmore/"
@@ -161,9 +158,7 @@
               >
                 <i class="fab fa-instagram"></i>
                 <p class="hidden-lg">Instagram</p>
-                <md-tooltip md-direction="bottom"
-                  >Follow me on Instagram</md-tooltip
-                >
+                <md-tooltip md-direction="bottom">Follow me on Instagram</md-tooltip>
               </md-list-item>
             </md-list>
           </div>
