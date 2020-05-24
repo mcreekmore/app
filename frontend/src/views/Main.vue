@@ -9,8 +9,28 @@
               Welcome to my page. I'm an aspiring software developer interested
               in full-stack web development, automation, data analytics, machine
               learning, hardware, and much more.
+              <br />
+              <br />Check out my lastest project: Moves!
+              <br />It's available on iOS and Android
             </h4>
             <br />
+            <!-- ios store -->
+            <a
+              href="https://apps.apple.com/us/app/moves-io/id1510664612?mt=8"
+              style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=2013-06-06&kind=iossoftware&bubble=ios_apps)
+               no-repeat;width:135px;height:40px"
+            ></a>
+            <!-- play store -->
+            <a
+              href="https://play.google.com/store/apps/details?id=io.creekmore.moves&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
+            >
+              <div class>
+                <div class style="width:135px">
+                  <img alt="Get it on Google Play" :src="googlePlayButton" style="right:100px" />
+                </div>
+              </div>
+            </a>
+
             <!-- <md-button
               href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
               class="md-success md-lg"
@@ -113,7 +133,6 @@
                         learning new things. This website is the central
                         location for me to test out projects and new features.
                       </p>
-                      <p class="card-description">Its not quite finished yet...</p>
                     </md-card-content>
 
                     <md-card-actions class="text-center">
@@ -138,180 +157,9 @@
                       </md-button>
                     </md-card-actions>
                   </md-card>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="section text-center" id="projectStack">
-        <div class="container">
-          <h2 class="title">Project Stack</h2>
-          <div class="team">
-            <div class="md-layout">
-              <div class="md-layout-item md-medium-size-33 md-small-size-100">
-                <div class="team-player">
-                  <md-card class="md-card-plain">
-                    <div class="md-layout-item md-size-50 mx-auto">
-                      <img :src="vueImg" alt="Image of Vue Java Script" class="img-fluid" />
-                    </div>
-                    <h4 class="card-title">
-                      Vue
-                      <br />
-                      <small class="card-description text-muted">Frontend framework</small>
-                    </h4>
-
-                    <md-card-content>
-                      <p class="card-description">
-                        VueJS with Vuex for state-management and vue-router. JWT
-                        (JSON Web Tokens) are used for authentication. Thanks to
-                        the developers of
-                        <a
-                          href="https://vuejs.org/"
-                        >Vue</a> and
-                        <a
-                          href="https://www.creative-tim.com/product/vue-material-kit"
-                        >Vue Material Kit</a>, the front end dev felt effortless.
-                      </p>
-                    </md-card-content>
-                  </md-card>
-                </div>
-              </div>
-              <div class="md-layout-item md-medium-size-33 md-small-size-100">
-                <div class="team-player">
-                  <md-card class="md-card-plain">
-                    <div class="md-layout-item md-size-50 mx-auto">
-                      <img :src="nodeImg" alt="Image of Node Java Script" class="img-fluid" />
-                    </div>
-                    <h4 class="card-title">
-                      Node
-                      <br />
-                      <small class="card-description text-muted">Backend</small>
-                    </h4>
-
-                    <md-card-content>
-                      <p class="card-description">
-                        <a href="https://nodejs.org/en/">Node.js</a> is running
-                        on its own container, using nginx as a reverse proxy to
-                        route /api/ requests.
-                      </p>
-                    </md-card-content>
-                  </md-card>
-                </div>
-              </div>
-              <div class="md-layout-item md-medium-size-33 md-small-size-100">
-                <div class="team-player">
-                  <md-card class="md-card-plain">
-                    <div class="md-layout-item md-size-50 mx-auto">
-                      <img :src="expressImg" alt="Image of Express Java Script" class="img-fluid" />
-                    </div>
-                    <h4 class="card-title">
-                      Express
-                      <br />
-                      <small class="card-description text-muted">API framework</small>
-                    </h4>
-
-                    <md-card-content>
-                      <p class="card-description">
-                        All API requests are directed to /api and are
-                        asynchronous. This project is using
-                        <a
-                          href="https://mongoosejs.com/"
-                        >mongoose</a> to
-                        interface with mongo. Depending on how the project
-                        evolves, I may add a SQL database.
-                      </p>
-                    </md-card-content>
-                  </md-card>
-                </div>
-              </div>
-              <div class="md-layout-item md-medium-size-33 md-small-size-100">
-                <div class="team-player">
-                  <md-card class="md-card-plain">
-                    <div class="md-layout-item md-size-50 mx-auto">
-                      <img :src="mongodbImg" alt="Image of Mongo Database " class="img-fluid" />
-                    </div>
-                    <h4 class="card-title">
-                      MongoDB
-                      <br />
-                      <small class="card-description text-muted">Database</small>
-                    </h4>
-
-                    <md-card-content>
-                      <p class="card-description">
-                        MongoDB is classified as a 'nosql' database that houses
-                        all incoming messages and
-                        <a
-                          href="#/login"
-                        >user profiles</a>. All passwords are
-                        hashed.
-                      </p>
-                    </md-card-content>
-                  </md-card>
-                </div>
-              </div>
-              <div class="md-layout-item md-medium-size-33 md-small-size-100">
-                <div class="team-player">
-                  <md-card class="md-card-plain">
-                    <div class="md-layout-item md-size-50 mx-auto">
-                      <img
-                        :src="nginxImg"
-                        alt="Image of Nginx (pronounced engine X)"
-                        class="img-fluid"
-                      />
-                    </div>
-                    <h4 class="card-title">
-                      NGINX
-                      <br />
-                      <small class="card-description text-muted">Web server</small>
-                    </h4>
-
-                    <md-card-content>
-                      <p class="card-description">
-                        Previously hosted from a Raspberry Pi 3 Model B. Now I'm
-                        using a DigitalOcean droplet. The pi's ARMv7 cpu was
-                        causing a lot of incompatibility with dokcer images.
-                        <a
-                          href="https://letsencrypt.org/"
-                        >Let's Encrypt</a>
-                        is giving me problems within docker. https coming
-                        soon...
-                      </p>
-                    </md-card-content>
-                  </md-card>
-                </div>
-              </div>
-              <div class="md-layout-item md-medium-size-33 md-small-size-100">
-                <div class="team-player">
-                  <md-card class="md-card-plain">
-                    <div class="md-layout-item md-size-50 mx-auto">
-                      <img
-                        :src="dockerImg"
-                        alt="Image of Docker, the containerization software"
-                        class="img-fluid"
-                      />
-                    </div>
-                    <h4 class="card-title">
-                      Docker
-                      <br />
-                      <small class="card-description text-muted">Containerization</small>
-                    </h4>
-
-                    <md-card-content>
-                      <p class="card-description">
-                        <a href="https://www.docker.com/">Docker</a>
-                        is a container virtualization tool that's perfect for a
-                        micro-services architecture. Using docker-compose, I'm
-                        able to seamlessly run multiple containers in-sync on
-                        the same network. Currently, I'm testing a
-                        <a
-                          href="https://kubernetes.io/"
-                        >Kubernetes</a>
-                        implementation
-                      </p>
-                    </md-card-content>
-                  </md-card>
+                  <div class="md-layout-item md-size-33 mx-auto text-center">
+                    <md-button href="#/projects" class="md-success">My Projects</md-button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -442,6 +290,10 @@ export default {
     mattProfile: {
       type: String,
       default: require("@/assets/img/faces/matt.jpg")
+    },
+    googlePlayButton: {
+      type: String,
+      default: require("@/assets/img/google-play-badge.png")
     },
     vueImg: {
       type: String,

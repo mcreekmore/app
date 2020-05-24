@@ -4,20 +4,76 @@
       <div class="container">
         <div class="md-layout">
           <div class="md-layout-item md-size-50 md-small-size-70 md-xsmall-size-100">
-            <h1 class="title">Projects</h1>
-            <h4>...</h4>
+            <h1 class="title">My Projects</h1>
+            <h4>Checkout what I've done!</h4>
             <br />
           </div>
         </div>
       </div>
     </parallax>
     <div class="main">
-      <div class="section text-center">
+      <div class="section text-center" id="projectStack">
         <div class="container">
-          <h2 class="title">Coming soon</h2>
+          <h1 class="title">Moves: Full Stack, Cross Platform App</h1>
+          <div class="md-layout-item md-size-33 mx-auto text-center">
+            <md-button href="#/moves" class="md-success">Moves Landing Page</md-button>
+          </div>
+          <h2 class="title">Project Stack</h2>
           <div class="team">
-            <!--<div class="md-layout">
-               <div class="md-layout-item md-medium-size-33 md-small-size-100">
+            <div class="md-layout">
+              <div class="md-layout-item md-medium-size-33 md-small-size-100">
+                <div class="team-player">
+                  <md-card class="md-card-plain">
+                    <div class="md-layout-item md-size-50 mx-auto">
+                      <img :src="flutterImg" alt="Image of Vue Java Script" class="img-fluid" />
+                    </div>
+                    <h4 class="card-title">
+                      Flutter
+                      <br />
+                      <small class="card-description text-muted">Frontend framework</small>
+                    </h4>
+
+                    <md-card-content>
+                      <p class="card-description">
+                        <a href="https://flutter.dev/">Flutter</a> is Googles multi-platform mobile development framework that made it quick and easy to learn and hit the ground
+                        running. Also with their already flourishing community, there was no shortage of packages that I couldn't have done this without.
+                      </p>
+                    </md-card-content>
+                  </md-card>
+                </div>
+              </div>
+              <div class="md-layout-item md-medium-size-33 md-small-size-100">
+                <div class="team-player">
+                  <md-card class="md-card-plain">
+                    <div class="md-layout-item md-size-50 mx-auto">
+                      <img :src="nodeImg" alt="Image of Node Java Script" class="img-fluid" />
+                    </div>
+                    <h4 class="card-title">
+                      Node, Express, MongoDB, NGINX
+                      <br />
+                      <small class="card-description text-muted">Backend</small>
+                    </h4>
+
+                    <md-card-content>
+                      <p class="card-description">
+                        Thanks to all of the work that I put in on this website previously,
+                        I was able to leverage the existing backend architecture to support all of my logic and database functions.
+                      </p>
+                    </md-card-content>
+                  </md-card>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section text-center" id="projectStack">
+        <div class="container">
+          <h1 class="title">creekmore.io</h1>
+          <h2 class="title">Project Stack</h2>
+          <div class="team">
+            <div class="md-layout">
+              <div class="md-layout-item md-medium-size-33 md-small-size-100">
                 <div class="team-player">
                   <md-card class="md-card-plain">
                     <div class="md-layout-item md-size-50 mx-auto">
@@ -181,7 +237,7 @@
                   </md-card>
                 </div>
               </div>
-            </div>-->
+            </div>
           </div>
         </div>
       </div>
@@ -233,6 +289,10 @@ export default {
     dockerImg: {
       type: String,
       default: require("@/assets/img/stack/docker.jpg")
+    },
+    flutterImg: {
+      type: String,
+      default: require("@/assets/img/stack/flutter.png")
     }
   },
   data() {
