@@ -15,9 +15,9 @@
       <div class="section text-center" id="projectStack">
         <div class="container">
           <h1 class="title">Moves: Full Stack, Cross Platform App</h1>
-          <div class="md-layout-item md-size-33 mx-auto text-center">
+          <!-- <div class="md-layout-item md-size-33 mx-auto text-center">
             <md-button href="#/moves" class="md-success">Moves Landing Page</md-button>
-          </div>
+          </div>-->
           <h2 class="title">Project Stack</h2>
           <div class="team">
             <div class="md-layout">
