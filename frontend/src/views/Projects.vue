@@ -266,7 +266,7 @@ export default {
     },
     header: {
       type: String,
-      default: require("@/assets/img/space-bg.png")
+      default: require("@/assets/img/bg8.jpg")
     },
     mattProfile: {
       type: String,
