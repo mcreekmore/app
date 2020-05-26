@@ -250,7 +250,7 @@
       <div
         class="section text-center"
         id="projectStack"
-        style="background-color:#40916C"
+        style="background-color:#95D5B2"
         :style="{
           backgroundImage:
             'url(' + require('@/assets/img/90sgraphicsedited.png') + ')',

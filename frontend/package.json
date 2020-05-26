@@ -2,7 +2,7 @@
   "name": "vue-material-kit",
   "author": "Creative Tim https://www.creative-tim.com/",
   "description": "Vue Material Kit",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --open",
