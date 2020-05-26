@@ -208,7 +208,7 @@
       <div
         class="section text-center"
         id="projectStack"
-        style="background-color:#74C69D"
+        style="background-color:#b7e4c7"
         :style="{
           backgroundImage:
             'url(' + require('@/assets/img/90sgraphicsedited.png') + ')',
@@ -250,7 +250,7 @@
       <div
         class="section text-center"
         id="projectStack"
-        style="background-color:#95D5B2"
+        style="background-color:#d8f3dc"
         :style="{
           backgroundImage:
             'url(' + require('@/assets/img/90sgraphicsedited.png') + ')',
