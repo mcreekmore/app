@@ -14,6 +14,13 @@
               <br />It's available on iOS and Android
             </h4>
             <br />
+            <div class="margin:auto">
+              <md-button
+                href="#/moves"
+                class="md-success"
+                style="justify-content:center;align-items:center"
+              >Moves Landing Page</md-button>
+            </div>
 
             <!-- <md-button
               href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
