@@ -109,7 +109,7 @@
             </div>
           </div>
           <h3 class="title">
-            With Google Maps integration, its easier than ever to find the
+            With Google Maps integration, it's easier than ever to find the
             places nearest you that have what you need.
           </h3>
         </div>
@@ -170,8 +170,7 @@
       >
         <div class="container">
           <h2 class="title">
-            Completely Safe
-            <br />& <br />Free
+            Completely Safe & Free
           </h2>
           <div class="team">
             <div class="md-layout">
