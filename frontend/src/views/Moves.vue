@@ -3,11 +3,16 @@
     <parallax
       class="section page-header header-filter"
       style="background-color:#40916C"
-      :style="{ backgroundImage: 'url(' + require('@/assets/img/90sgraphicsedited.png') + ')' }"
+      :style="{
+        backgroundImage:
+          'url(' + require('@/assets/img/90sgraphicsedited.png') + ')',
+      }"
     >
       <div class="container">
         <div class="md-layout">
-          <div class="md-layout-item md-size-50 md-small-size-70 md-xsmall-size-100">
+          <div
+            class="md-layout-item md-size-50 md-small-size-70 md-xsmall-size-100"
+          >
             <h1 class="title">Moves</h1>
             <h5>Important information on all your important places</h5>
             <!-- ios store -->
@@ -22,7 +27,11 @@
             >
               <div class>
                 <div class style="width:135px">
-                  <img alt="Get it on Google Play" :src="googlePlayButton" style="right:100px" />
+                  <img
+                    alt="Get it on Google Play"
+                    :src="googlePlayButton"
+                    style="right:100px"
+                  />
                 </div>
               </div>
             </a>
@@ -61,17 +70,25 @@
         class="section text-center"
         id="projectStack"
         style="background-color:#d8f3dc"
-        :style="{ backgroundImage: 'url(' + require('@/assets/img/90sgraphicsedited.png') + ')' }"
+        :style="{
+          backgroundImage:
+            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')',
+        }"
       >
         <div class="container">
-          <h2 class="title">Need toilet paper but not sure where it's in stock?</h2>
+          <h2 class="title">
+            Need toilet paper but not sure where it's in stock?
+          </h2>
 
           <h1 class="title">We got you.</h1>
           <div class="team">
             <div class="md-layout">
               <div class="md-layout-item md-medium-size-33 md-small-size-100">
                 <div class="team-player">
-                  <div v-if="!isMobile()" class="md-layout-item md-size-40 mx-auto">
+                  <div
+                    v-if="!isMobile()"
+                    class="md-layout-item md-size-40 mx-auto"
+                  >
                     <img
                       :src="screenshot2"
                       alt="Screen shot of app Maps page"
@@ -91,28 +108,36 @@
               </div>
             </div>
           </div>
-          <h3
-            class="title"
-          >With Google Maps integration, its easier than ever to find the closest places near you that have what you need.</h3>
+          <h3 class="title">
+            With Google Maps integration, its easier than ever to find the
+            places nearest you that have what you need.
+          </h3>
         </div>
       </div>
       <div
         class="section text-center"
         id="projectStack"
         style="background-color:#b7e4c7"
-        :style="{ backgroundImage: 'url(' + require('@/assets/img/90sgraphicsedited.png') + ')' }"
+        :style="{
+          backgroundImage:
+            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')',
+        }"
       >
         <div class="container">
           <h2 class="title">But we didn't just stop with toilet paper...</h2>
-          <h3
-            class="title"
-          >In these unprecedented times, some products are more important now than ever.</h3>
-          <h3 class="title">We got those too.</h3>
+          <h3 class="title">
+            In these unprecedented times, some products are more important now
+            than ever.
+          </h3>
+          <h3 class="title">We've got those too.</h3>
           <div class="team">
             <div class="md-layout">
               <div class="md-layout-item md-medium-size-33 md-small-size-100">
                 <div class="team-player">
-                  <div v-if="!isMobile()" class="md-layout-item md-size-40 mx-auto">
+                  <div
+                    v-if="!isMobile()"
+                    class="md-layout-item md-size-40 mx-auto"
+                  >
                     <img
                       :src="screenshot3"
                       alt="Screen shot of app Maps page"
@@ -138,19 +163,24 @@
         class="section text-center"
         id="projectStack"
         style="background-color:#95D5B2"
-        :style="{ backgroundImage: 'url(' + require('@/assets/img/90sgraphicsedited.png') + ')' }"
+        :style="{
+          backgroundImage:
+            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')',
+        }"
       >
         <div class="container">
           <h2 class="title">
             Completely Safe
-            <br />&
-            <br />Fully Free
+            <br />& <br />Free
           </h2>
           <div class="team">
             <div class="md-layout">
               <div class="md-layout-item md-medium-size-33 md-small-size-100">
                 <div class="team-player">
-                  <div v-if="!isMobile()" class="md-layout-item md-size-40 mx-auto">
+                  <div
+                    v-if="!isMobile()"
+                    class="md-layout-item md-size-40 mx-auto"
+                  >
                     <img
                       :src="screenshot4"
                       alt="Screen shot of app Maps page"
@@ -170,7 +200,9 @@
               </div>
             </div>
           </div>
-          <h3 class="title">Your location is never recorded and sign in data is encrypted.</h3>
+          <h3 class="title">
+            Your location is never recorded and sign in data is encrypted.
+          </h3>
           <h3 class="title">No pesky ads either ;)</h3>
         </div>
       </div>
@@ -178,7 +210,10 @@
         class="section text-center"
         id="projectStack"
         style="background-color:#74C69D"
-        :style="{ backgroundImage: 'url(' + require('@/assets/img/90sgraphicsedited.png') + ')' }"
+        :style="{
+          backgroundImage:
+            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')',
+        }"
       >
         <div class="container">
           <h2 class="title">User Powered.</h2>
@@ -187,7 +222,10 @@
             <div class="md-layout">
               <div class="md-layout-item md-medium-size-33 md-small-size-100">
                 <div class="team-player">
-                  <div v-if="!isMobile()" class="md-layout-item md-size-40 mx-auto">
+                  <div
+                    v-if="!isMobile()"
+                    class="md-layout-item md-size-40 mx-auto"
+                  >
                     <img
                       :src="screenshot5"
                       alt="Screen shot of app Maps page"
@@ -207,14 +245,17 @@
               </div>
             </div>
           </div>
-          <h3 class="title">Your location is never recorded and sign in data is encrypted.</h3>
+          <!-- <h3 class="title">Your location is never recorded and sign in data is encrypted.</h3> -->
         </div>
       </div>
       <div
         class="section text-center"
         id="projectStack"
         style="background-color:#40916C"
-        :style="{ backgroundImage: 'url(' + require('@/assets/img/90sgraphicsedited.png') + ')' }"
+        :style="{
+          backgroundImage:
+            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')',
+        }"
       >
         <div class="container">
           <h2 class="title">Download today!</h2>
@@ -233,7 +274,11 @@
           >
             <div class>
               <div class style="width:135px">
-                <img alt="Get it on Google Play" :src="googlePlayButton" style="right:100px" />
+                <img
+                  alt="Get it on Google Play"
+                  :src="googlePlayButton"
+                  style="right:100px"
+                />
               </div>
             </div>
           </a>
@@ -244,11 +289,22 @@
             <div class="md-layout">
               <div class="md-layout-item md-medium-size-33 md-small-size-100">
                 <div class="team-player">
-                  <div v-if="!isMobile()" class="md-layout-item md-size-40 mx-auto">
-                    <img :src="movesCircle" alt="Screen shot of app Maps page" class="img-fluid" />
+                  <div
+                    v-if="!isMobile()"
+                    class="md-layout-item md-size-40 mx-auto"
+                  >
+                    <img
+                      :src="movesCircle"
+                      alt="Screen shot of app Maps page"
+                      class="img-fluid"
+                    />
                   </div>
                   <div v-else class="md-layout-item md-size-90 mx-auto">
-                    <img :src="movesCircle" alt="Screen shot of app Maps page" class="img-fluid" />
+                    <img
+                      :src="movesCircle"
+                      alt="Screen shot of app Maps page"
+                      class="img-fluid"
+                    />
                   </div>
                 </div>
               </div>
@@ -262,7 +318,8 @@
             href="#/moves/privacy"
             class="md-success"
             style="justify-content:center;align-items:center"
-          >Privacy Policy</md-button>
+            >Privacy Policy</md-button
+          >
         </div>
       </div>
     </div>
@@ -271,7 +328,8 @@
       <a
         href="https://www.vecteezy.com/free-vector/1980s"
         style="text-align: center;"
-      >1980s Vectors by Vecteezy</a>
+        >1980s Vectors by Vecteezy</a
+      >
     </div>
   </div>
 </template>
@@ -287,76 +345,76 @@ export default {
   bodyClass: "landing-page",
   props: {
     auth: {
-      loggedOut: false
+      loggedOut: false,
     },
     header: {
       type: String,
-      default: require("@/assets/img/bg-2.jpg")
+      default: require("@/assets/img/bg-2.jpg"),
     },
     mattProfile: {
       type: String,
-      default: require("@/assets/img/faces/matt.jpg")
+      default: require("@/assets/img/faces/matt.jpg"),
     },
     vueImg: {
       type: String,
-      default: require("@/assets/img/stack/vue.png")
+      default: require("@/assets/img/stack/vue.png"),
     },
     nodeImg: {
       type: String,
-      default: require("@/assets/img/stack/node.png")
+      default: require("@/assets/img/stack/node.png"),
     },
     expressImg: {
       type: String,
-      default: require("@/assets/img/stack/express.png")
+      default: require("@/assets/img/stack/express.png"),
     },
     mongodbImg: {
       type: String,
-      default: require("@/assets/img/stack/mongodb.png")
+      default: require("@/assets/img/stack/mongodb.png"),
     },
     nginxImg: {
       type: String,
-      default: require("@/assets/img/stack/nginx.jpg")
+      default: require("@/assets/img/stack/nginx.jpg"),
     },
     dockerImg: {
       type: String,
-      default: require("@/assets/img/stack/docker.jpg")
+      default: require("@/assets/img/stack/docker.jpg"),
     },
     flutterImg: {
       type: String,
-      default: require("@/assets/img/stack/flutter.png")
+      default: require("@/assets/img/stack/flutter.png"),
     },
     googlePlayButton: {
       type: String,
-      default: require("@/assets/img/google-play-badge.png")
+      default: require("@/assets/img/google-play-badge.png"),
     },
     screenshot1: {
       type: String,
-      default: require("@/assets/img/screenshots/iphone8screenshot1.png")
+      default: require("@/assets/img/screenshots/iphone8screenshot1.png"),
     },
     screenshot2: {
       type: String,
-      default: require("@/assets/img/screenshots/iphone8screenshot2.png")
+      default: require("@/assets/img/screenshots/iphone8screenshot2.png"),
     },
     screenshot3: {
       type: String,
-      default: require("@/assets/img/screenshots/iphone8screenshot3.png")
+      default: require("@/assets/img/screenshots/iphone8screenshot3.png"),
     },
     screenshot4: {
       type: String,
-      default: require("@/assets/img/screenshots/iphone8screenshot4.png")
+      default: require("@/assets/img/screenshots/iphone8screenshot4.png"),
     },
     screenshot5: {
       type: String,
-      default: require("@/assets/img/screenshots/iphone8screenshot5.png")
+      default: require("@/assets/img/screenshots/iphone8screenshot5.png"),
     },
     graphics: {
       type: String,
-      default: require("@/assets/img/90sgraphicsedited.png")
+      default: require("@/assets/img/90sgraphicsedited.png"),
     },
     movesCircle: {
       type: String,
-      default: require("@/assets/img/m-circle.png")
-    }
+      default: require("@/assets/img/m-circle.png"),
+    },
   },
   data() {
     return {
@@ -367,15 +425,15 @@ export default {
       showSuccessAlert: false,
       showWarningAlert: false,
       showErrorAlert: false,
-      warningAlertMessage: ""
+      warningAlertMessage: "",
     };
   },
   computed: {
     headerStyle() {
       return {
-        backgroundImage: `url(${this.header})`
+        backgroundImage: `url(${this.header})`,
       };
-    }
+    },
   },
   methods: {
     isMobile() {
@@ -410,11 +468,11 @@ export default {
       const messageSent = {
         name,
         email,
-        message
+        message,
       };
 
       this.sendEmail(messageSent)
-        .then(res => {
+        .then((res) => {
           //console.log(res.data);
           //console.log(res.status);
           if (res.status == 200) {
@@ -433,7 +491,7 @@ export default {
             this.showErrorAlert = true;
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           this.nameAlert = name;
           this.showErrorAlert = true;
@@ -447,8 +505,8 @@ export default {
     },
     isEmailValid(email) {
       return EmailValidator.validate(email);
-    }
-  }
+    },
+  },
 };
 </script>
 
