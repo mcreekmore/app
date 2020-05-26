@@ -1,6 +1,10 @@
 <template>
   <div class="wrapper">
-    <parallax class="section page-header header-filter" :style="headerStyle">
+    <parallax
+      class="section page-header header-filter"
+      style="background-color:#40916C"
+      :style="{ backgroundImage: 'url(' + require('@/assets/img/90sgraphicsedited.png') + ')' }"
+    >
       <div class="container">
         <div class="md-layout">
           <div class="md-layout-item md-size-50 md-small-size-70 md-xsmall-size-100">

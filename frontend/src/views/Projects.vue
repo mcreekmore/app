@@ -266,7 +266,7 @@ export default {
     },
     header: {
       type: String,
-      default: require("@/assets/img/bg8.jpg")
+      default: require("@/assets/img/bg-2.jpg")
     },
     mattProfile: {
       type: String,
