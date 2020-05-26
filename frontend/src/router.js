@@ -8,6 +8,7 @@ import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
 import Profile from "./views/Profile.vue";
 import Projects from "./views/Projects.vue";
+import Moves from "./views/Moves.vue";
 import MainNavbar from "./layout/MainNavbar.vue";
 import MainFooter from "./layout/MainFooter.vue";
 import PrivacyPolicy from "./views/PrivacyPolicy.vue";
@@ -52,6 +53,15 @@ const router = new Router({
       path: "/projects",
       name: "projects",
       components: { default: Projects, header: MainNavbar, footer: MainFooter },
+      props: {
+        header: { colorOnScroll: 400 },
+        footer: { backgroundColor: "black" },
+      },
+    },
+    {
+      path: "/moves",
+      name: "moves",
+      components: { default: Moves, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: "black" },
@@ -124,6 +134,7 @@ const openRoutes = [
   "about",
   "projects",
   "privacy",
+  "moves",
 ];
 
 // if route is open, continue

@@ -14,11 +14,17 @@
     <div class="main">
       <div class="section text-center" id="projectStack">
         <div class="container">
-          <h1 class="title">Moves: Full Stack, Cross Platform App</h1>
-          <!-- <div class="md-layout-item md-size-33 mx-auto text-center">
-            <md-button href="#/moves" class="md-success">Moves Landing Page</md-button>
-          </div>-->
-          <h2 class="title">Project Stack</h2>
+          <h1 class="title">Moves</h1>
+          <h2 class="title">Full Stack, Cross Platform App</h2>
+
+          <div class="margin:auto">
+            <md-button
+              href="#/moves"
+              class="md-success"
+              style="justify-content:center;align-items:center"
+            >Moves Landing Page</md-button>
+          </div>
+          <h3 class="title">Project Stack</h3>
           <div class="team">
             <div class="md-layout">
               <div class="md-layout-item md-medium-size-33 md-small-size-100">
@@ -70,7 +76,7 @@
       <div class="section text-center" id="projectStack">
         <div class="container">
           <h1 class="title">creekmore.io</h1>
-          <h2 class="title">Project Stack</h2>
+          <h3 class="title">Project Stack</h3>
           <div class="team">
             <div class="md-layout">
               <div class="md-layout-item md-medium-size-33 md-small-size-100">

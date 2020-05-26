@@ -14,22 +14,6 @@
               <br />It's available on iOS and Android
             </h4>
             <br />
-            <!-- ios store -->
-            <a
-              href="https://apps.apple.com/us/app/moves-io/id1510664612?mt=8"
-              style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=2013-06-06&kind=iossoftware&bubble=ios_apps)
-               no-repeat;width:135px;height:40px"
-            ></a>
-            <!-- play store -->
-            <a
-              href="https://play.google.com/store/apps/details?id=io.creekmore.moves&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
-            >
-              <div class>
-                <div class style="width:135px">
-                  <img alt="Get it on Google Play" :src="googlePlayButton" style="right:100px" />
-                </div>
-              </div>
-            </a>
 
             <!-- <md-button
               href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -157,9 +141,8 @@
                       </md-button>
                     </md-card-actions>
                   </md-card>
-                  <div class="md-layout-item md-size-33 mx-auto text-center">
-                    <md-button href="#/projects" class="md-success">My Projects</md-button>
-                  </div>
+
+                  <md-button href="#/projects" class="md-success" style="margin:auto">My Projects</md-button>
                 </div>
               </div>
             </div>
@@ -200,13 +183,13 @@
                   <md-textarea v-model="message"></md-textarea>
                 </md-field>
                 <div class="md-layout">
-                  <div class="md-layout-item md-size-33 mx-auto text-center">
-                    <md-button
-                      class="md-success"
-                      v-on:click="createMessage(name, email, message)"
-                    >Send Message</md-button>
-                  </div>
+                  <md-button
+                    class="md-success"
+                    style="margin:auto"
+                    v-on:click="createMessage(name, email, message)"
+                  >Send Message</md-button>
                 </div>
+
                 <br />
               </form>
               <div class="alert alert-success" id="emailAlert" v-show="showSuccessAlert">
@@ -290,10 +273,6 @@ export default {
     mattProfile: {
       type: String,
       default: require("@/assets/img/faces/matt.jpg")
-    },
-    googlePlayButton: {
-      type: String,
-      default: require("@/assets/img/google-play-badge.png")
     },
     vueImg: {
       type: String,
