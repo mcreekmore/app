@@ -185,7 +185,7 @@
                 <i class="fab fa-linkedin"></i>
                 <p class="hidden-lg">LinkedIn</p>
                 <md-tooltip md-direction="bottom"
-                  >Connect with me on LinkedIn</md-tooltip
+                  >Find me on LinkedIn</md-tooltip
                 >
               </md-list-item>
               <md-list-item
@@ -196,7 +196,7 @@
                 <i class="fab fa-github"></i>
                 <p class="hidden-lg">GitHub</p>
                 <md-tooltip md-direction="bottom"
-                  >Chek me out on GitHub</md-tooltip
+                  >Check me out on GitHub</md-tooltip
                 >
               </md-list-item>
               <md-list-item
