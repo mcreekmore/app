@@ -99,8 +99,10 @@
         :style="{ backgroundImage: 'url(' + require('@/assets/img/90sgraphicsedited.png') + ')' }"
       >
         <div class="container">
-          <h2 class="title">But we didn't just stop with toiletpaper...</h2>
-          <h3 class="title">In these unprecedented times theres lots you need.</h3>
+          <h2 class="title">But we didn't just stop with toilet paper...</h2>
+          <h3
+            class="title"
+          >In these unprecedented times, some products are more important now than ever.</h3>
           <h3 class="title">We got those too.</h3>
           <div class="team">
             <div class="md-layout">
