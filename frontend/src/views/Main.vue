@@ -3,16 +3,15 @@
     <parallax class="section page-header header-filter" :style="headerStyle">
       <div class="container">
         <div class="md-layout">
-          <div
-            class="md-layout-item md-size-50 md-small-size-70 md-xsmall-size-100"
-          >
+          <div class="md-layout-item md-size-50 md-small-size-70 md-xsmall-size-100">
             <h1 class="title">Matt Creekmore</h1>
             <h4>
               Welcome to my page. I'm an aspiring software developer interested
               in full-stack web development, automation, data analytics, machine
               learning, hardware, and much more.
               <br />
-              <br />Check out my lastest project: Moves! <br />It's available on
+              <br />Check out my lastest project: Moves!
+              <br />It's available on
               iOS and Android
             </h4>
             <br />
@@ -21,8 +20,7 @@
                 href="#/moves"
                 class="md-success"
                 style="justify-content:center;align-items:center"
-                >Moves Landing Page</md-button
-              >
+              >Moves Landing Page</md-button>
             </div>
 
             <!-- <md-button
@@ -115,16 +113,14 @@
                     <h4 class="card-title">
                       Matt Creekmore
                       <br />
-                      <small class="card-description text-muted"
-                        >Developer in training</small
-                      >
+                      <small class="card-description text-muted">Developer in training</small>
                     </h4>
 
                     <md-card-content>
                       <p class="card-description">
-                        Thanks for visiting my page! I am an undergraduate
-                        studying Management Information Systems and Business
-                        Analytics at the University of North Carolina
+                        Thanks for visiting my page! I'm an graduate of
+                        Management Information Systems and Business
+                        Analytics from the University of North Carolina
                         Wilmington. I've always had a passion for technology and
                         learning new things. This website is the central
                         location for me to test out projects and new features.
@@ -154,12 +150,7 @@
                     </md-card-actions>
                   </md-card>
 
-                  <md-button
-                    href="#/projects"
-                    class="md-success"
-                    style="margin:auto"
-                    >My Projects</md-button
-                  >
+                  <md-button href="#/projects" class="md-success" style="margin:auto">My Projects</md-button>
                 </div>
               </div>
             </div>
@@ -172,9 +163,9 @@
           <div class="md-layout">
             <div class="md-layout-item md-size-66 md-xsmall-size-100 mx-auto">
               <h2 class="text-center title">Contact Me</h2>
-              <h4 class="text-center description">
-                Ask a question. Share something interesting. Tell me a secret...
-              </h4>
+              <h4
+                class="text-center description"
+              >Ask a question. Share something interesting. Tell me a secret...</h4>
               <h4 class="text-center description">
                 This form will send me an email with your message! I'll respond
                 to you as soon as possible.
@@ -204,17 +195,12 @@
                     class="md-success"
                     style="margin:auto"
                     v-on:click="createMessage(name, email, message)"
-                    >Send Message</md-button
-                  >
+                  >Send Message</md-button>
                 </div>
 
                 <br />
               </form>
-              <div
-                class="alert alert-success"
-                id="emailAlert"
-                v-show="showSuccessAlert"
-              >
+              <div class="alert alert-success" id="emailAlert" v-show="showSuccessAlert">
                 <div class="container">
                   <button
                     type="button"
@@ -249,11 +235,7 @@
                   : {{ warningAlertMessage }}
                 </div>
               </div>
-              <div
-                class="alert alert-danger"
-                id="emailErrorAlert"
-                v-show="showErrorAlert"
-              >
+              <div class="alert alert-danger" id="emailErrorAlert" v-show="showErrorAlert">
                 <div class="container">
                   <button
                     type="button"
@@ -290,40 +272,40 @@ export default {
   bodyClass: "landing-page",
   props: {
     auth: {
-      loggedOut: false,
+      loggedOut: false
     },
     header: {
       type: String,
-      default: require("@/assets/img/space-bg.png"),
+      default: require("@/assets/img/space-bg.png")
     },
     mattProfile: {
       type: String,
-      default: require("@/assets/img/faces/matt.jpg"),
+      default: require("@/assets/img/faces/matt.jpg")
     },
     vueImg: {
       type: String,
-      default: require("@/assets/img/stack/vue.png"),
+      default: require("@/assets/img/stack/vue.png")
     },
     nodeImg: {
       type: String,
-      default: require("@/assets/img/stack/node.png"),
+      default: require("@/assets/img/stack/node.png")
     },
     expressImg: {
       type: String,
-      default: require("@/assets/img/stack/express.png"),
+      default: require("@/assets/img/stack/express.png")
     },
     mongodbImg: {
       type: String,
-      default: require("@/assets/img/stack/mongodb.png"),
+      default: require("@/assets/img/stack/mongodb.png")
     },
     nginxImg: {
       type: String,
-      default: require("@/assets/img/stack/nginx.jpg"),
+      default: require("@/assets/img/stack/nginx.jpg")
     },
     dockerImg: {
       type: String,
-      default: require("@/assets/img/stack/docker.jpg"),
-    },
+      default: require("@/assets/img/stack/docker.jpg")
+    }
   },
   data() {
     return {
@@ -334,15 +316,15 @@ export default {
       showSuccessAlert: false,
       showWarningAlert: false,
       showErrorAlert: false,
-      warningAlertMessage: "",
+      warningAlertMessage: ""
     };
   },
   computed: {
     headerStyle() {
       return {
-        backgroundImage: `url(${this.header})`,
+        backgroundImage: `url(${this.header})`
       };
-    },
+    }
   },
   methods: {
     ...mapActions(["sendEmail"]),
@@ -366,11 +348,11 @@ export default {
       const messageSent = {
         name,
         email,
-        message,
+        message
       };
 
       this.sendEmail(messageSent)
-        .then((res) => {
+        .then(res => {
           //console.log(res.data);
           //console.log(res.status);
           if (res.status == 200) {
@@ -389,7 +371,7 @@ export default {
             this.showErrorAlert = true;
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           this.nameAlert = name;
           this.showErrorAlert = true;
@@ -403,8 +385,8 @@ export default {
     },
     isEmailValid(email) {
       return EmailValidator.validate(email);
-    },
-  },
+    }
+  }
 };
 </script>
 
