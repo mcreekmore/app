@@ -5,7 +5,7 @@
       style="background-color:#40916C"
       :style="{
         backgroundImage:
-          'url(' + require('@/assets/img/90sgraphicsedited.png') + ')',
+          'url(' + require('@/assets/img/90sgraphicsedited.png') + ')'
       }"
     >
       <div class="container">
@@ -72,7 +72,7 @@
         style="background-color:#d8f3dc"
         :style="{
           backgroundImage:
-            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')',
+            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')'
         }"
       >
         <div class="container">
@@ -120,7 +120,7 @@
         style="background-color:#b7e4c7"
         :style="{
           backgroundImage:
-            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')',
+            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')'
         }"
       >
         <div class="container">
@@ -165,7 +165,7 @@
         style="background-color:#95D5B2"
         :style="{
           backgroundImage:
-            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')',
+            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')'
         }"
       >
         <div class="container">
@@ -211,7 +211,7 @@
         style="background-color:#b7e4c7"
         :style="{
           backgroundImage:
-            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')',
+            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')'
         }"
       >
         <div class="container">
@@ -253,7 +253,7 @@
         style="background-color:#d8f3dc"
         :style="{
           backgroundImage:
-            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')',
+            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')'
         }"
       >
         <div class="container">
@@ -344,76 +344,76 @@ export default {
   bodyClass: "landing-page",
   props: {
     auth: {
-      loggedOut: false,
+      loggedOut: false
     },
     header: {
       type: String,
-      default: require("@/assets/img/bg-2.jpg"),
+      default: require("@/assets/img/bg-2.jpg")
     },
     mattProfile: {
       type: String,
-      default: require("@/assets/img/faces/matt.jpg"),
+      default: require("@/assets/img/faces/matt.jpg")
     },
     vueImg: {
       type: String,
-      default: require("@/assets/img/stack/vue.png"),
+      default: require("@/assets/img/stack/vue.png")
     },
     nodeImg: {
       type: String,
-      default: require("@/assets/img/stack/node.png"),
+      default: require("@/assets/img/stack/node.png")
     },
     expressImg: {
       type: String,
-      default: require("@/assets/img/stack/express.png"),
+      default: require("@/assets/img/stack/express.png")
     },
     mongodbImg: {
       type: String,
-      default: require("@/assets/img/stack/mongodb.png"),
+      default: require("@/assets/img/stack/mongodb.png")
     },
     nginxImg: {
       type: String,
-      default: require("@/assets/img/stack/nginx.jpg"),
+      default: require("@/assets/img/stack/nginx.jpg")
     },
     dockerImg: {
       type: String,
-      default: require("@/assets/img/stack/docker.jpg"),
+      default: require("@/assets/img/stack/docker.jpg")
     },
     flutterImg: {
       type: String,
-      default: require("@/assets/img/stack/flutter.png"),
+      default: require("@/assets/img/stack/flutter.png")
     },
     googlePlayButton: {
       type: String,
-      default: require("@/assets/img/google-play-badge.png"),
+      default: require("@/assets/img/google-play-badge.png")
     },
     screenshot1: {
       type: String,
-      default: require("@/assets/img/screenshots/iphone8screenshot1.png"),
+      default: require("@/assets/img/screenshots/iphone8screenshot1.png")
     },
     screenshot2: {
       type: String,
-      default: require("@/assets/img/screenshots/iphone8screenshot2.png"),
+      default: require("@/assets/img/screenshots/iphone8screenshot2.png")
     },
     screenshot3: {
       type: String,
-      default: require("@/assets/img/screenshots/iphone8screenshot3.png"),
+      default: require("@/assets/img/screenshots/iphone8screenshot3.png")
     },
     screenshot4: {
       type: String,
-      default: require("@/assets/img/screenshots/iphone8screenshot4.png"),
+      default: require("@/assets/img/screenshots/iphone8screenshot4.png")
     },
     screenshot5: {
       type: String,
-      default: require("@/assets/img/screenshots/iphone8screenshot5.png"),
+      default: require("@/assets/img/screenshots/iphone8screenshot5.png")
     },
     graphics: {
       type: String,
-      default: require("@/assets/img/90sgraphicsedited.png"),
+      default: require("@/assets/img/90sgraphicsedited.png")
     },
     movesCircle: {
       type: String,
-      default: require("@/assets/img/m-circle.png"),
-    },
+      default: require("@/assets/img/m-circle.png")
+    }
   },
   data() {
     return {
@@ -424,15 +424,15 @@ export default {
       showSuccessAlert: false,
       showWarningAlert: false,
       showErrorAlert: false,
-      warningAlertMessage: "",
+      warningAlertMessage: ""
     };
   },
   computed: {
     headerStyle() {
       return {
-        backgroundImage: `url(${this.header})`,
+        backgroundImage: `url(${this.header})`
       };
-    },
+    }
   },
   methods: {
     isMobile() {
@@ -467,11 +467,11 @@ export default {
       const messageSent = {
         name,
         email,
-        message,
+        message
       };
 
       this.sendEmail(messageSent)
-        .then((res) => {
+        .then(res => {
           //console.log(res.data);
           //console.log(res.status);
           if (res.status == 200) {
@@ -490,7 +490,7 @@ export default {
             this.showErrorAlert = true;
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           this.nameAlert = name;
           this.showErrorAlert = true;
@@ -504,8 +504,8 @@ export default {
     },
     isEmailValid(email) {
       return EmailValidator.validate(email);
-    },
-  },
+    }
+  }
 };
 </script>
 
