@@ -10,9 +10,7 @@
     >
       <div class="container">
         <div class="md-layout">
-          <div
-            class="md-layout-item md-size-50 md-small-size-70 md-xsmall-size-100"
-          >
+          <div class="md-layout-item md-size-50 md-small-size-70 md-xsmall-size-100">
             <h1 class="title">Moves</h1>
             <h5>Important information on all your important places</h5>
             <!-- ios store -->
@@ -27,11 +25,7 @@
             >
               <div class>
                 <div class style="width:135px">
-                  <img
-                    alt="Get it on Google Play"
-                    :src="googlePlayButton"
-                    style="right:100px"
-                  />
+                  <img alt="Get it on Google Play" :src="googlePlayButton" style="right:100px" />
                 </div>
               </div>
             </a>
@@ -76,19 +70,14 @@
         }"
       >
         <div class="container">
-          <h2 class="title">
-            Need toilet paper but not sure where it's in stock?
-          </h2>
+          <h2 class="title">Need toilet paper but not sure where it's in stock?</h2>
 
           <h1 class="title">We got you.</h1>
           <div class="team">
             <div class="md-layout">
               <div class="md-layout-item md-medium-size-33 md-small-size-100">
                 <div class="team-player">
-                  <div
-                    v-if="!isMobile()"
-                    class="md-layout-item md-size-40 mx-auto"
-                  >
+                  <div v-if="!isMobile()" class="md-layout-item md-size-40 mx-auto">
                     <img
                       :src="screenshot2"
                       alt="Screen shot of app Maps page"
@@ -134,10 +123,7 @@
             <div class="md-layout">
               <div class="md-layout-item md-medium-size-33 md-small-size-100">
                 <div class="team-player">
-                  <div
-                    v-if="!isMobile()"
-                    class="md-layout-item md-size-40 mx-auto"
-                  >
+                  <div v-if="!isMobile()" class="md-layout-item md-size-40 mx-auto">
                     <img
                       :src="screenshot3"
                       alt="Screen shot of app Maps page"
@@ -169,17 +155,12 @@
         }"
       >
         <div class="container">
-          <h2 class="title">
-            Completely Safe & Free
-          </h2>
+          <h2 class="title">Completely Safe & Free</h2>
           <div class="team">
             <div class="md-layout">
               <div class="md-layout-item md-medium-size-33 md-small-size-100">
                 <div class="team-player">
-                  <div
-                    v-if="!isMobile()"
-                    class="md-layout-item md-size-40 mx-auto"
-                  >
+                  <div v-if="!isMobile()" class="md-layout-item md-size-40 mx-auto">
                     <img
                       :src="screenshot4"
                       alt="Screen shot of app Maps page"
@@ -199,9 +180,7 @@
               </div>
             </div>
           </div>
-          <h3 class="title">
-            Your location is never recorded and sign in data is encrypted.
-          </h3>
+          <h3 class="title">Your location is never recorded and sign in data is encrypted.</h3>
           <h3 class="title">No pesky ads either ;)</h3>
         </div>
       </div>
@@ -221,10 +200,7 @@
             <div class="md-layout">
               <div class="md-layout-item md-medium-size-33 md-small-size-100">
                 <div class="team-player">
-                  <div
-                    v-if="!isMobile()"
-                    class="md-layout-item md-size-40 mx-auto"
-                  >
+                  <div v-if="!isMobile()" class="md-layout-item md-size-40 mx-auto">
                     <img
                       :src="screenshot5"
                       alt="Screen shot of app Maps page"
@@ -273,11 +249,7 @@
           >
             <div class>
               <div class style="width:135px">
-                <img
-                  alt="Get it on Google Play"
-                  :src="googlePlayButton"
-                  style="right:100px"
-                />
+                <img alt="Get it on Google Play" :src="googlePlayButton" style="right:100px" />
               </div>
             </div>
           </a>
@@ -288,22 +260,11 @@
             <div class="md-layout">
               <div class="md-layout-item md-medium-size-33 md-small-size-100">
                 <div class="team-player">
-                  <div
-                    v-if="!isMobile()"
-                    class="md-layout-item md-size-40 mx-auto"
-                  >
-                    <img
-                      :src="movesCircle"
-                      alt="Screen shot of app Maps page"
-                      class="img-fluid"
-                    />
+                  <div v-if="!isMobile()" class="md-layout-item md-size-40 mx-auto">
+                    <img :src="movesCircle" alt="Screen shot of app Maps page" class="img-fluid" />
                   </div>
                   <div v-else class="md-layout-item md-size-90 mx-auto">
-                    <img
-                      :src="movesCircle"
-                      alt="Screen shot of app Maps page"
-                      class="img-fluid"
-                    />
+                    <img :src="movesCircle" alt="Screen shot of app Maps page" class="img-fluid" />
                   </div>
                 </div>
               </div>
@@ -317,8 +278,7 @@
             href="#/moves/privacy"
             class="md-success"
             style="justify-content:center;align-items:center"
-            >Privacy Policy</md-button
-          >
+          >Privacy Policy</md-button>
         </div>
       </div>
     </div>
@@ -327,8 +287,7 @@
       <a
         href="https://www.vecteezy.com/free-vector/1980s"
         style="text-align: center;"
-        >1980s Vectors by Vecteezy</a
-      >
+      >1980s Vectors by Vecteezy</a>
     </div>
   </div>
 </template>
