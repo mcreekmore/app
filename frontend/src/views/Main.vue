@@ -22,6 +22,13 @@
                 style="justify-content:center;align-items:center"
               >Moves Landing Page</md-button>
             </div>
+            <div class="margin:auto">
+              <md-button
+                href="#/projects"
+                class="md-secondary"
+                style="justify-content:center;align-items:center"
+              >My Projects</md-button>
+            </div>
 
             <!-- <md-button
               href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -272,40 +279,40 @@ export default {
   bodyClass: "landing-page",
   props: {
     auth: {
-      loggedOut: false
+      loggedOut: false,
     },
     header: {
       type: String,
-      default: require("@/assets/img/space-bg.png")
+      default: require("@/assets/img/space-bg.png"),
     },
     mattProfile: {
       type: String,
-      default: require("@/assets/img/faces/matt.jpg")
+      default: require("@/assets/img/faces/matt.jpg"),
     },
     vueImg: {
       type: String,
-      default: require("@/assets/img/stack/vue.png")
+      default: require("@/assets/img/stack/vue.png"),
     },
     nodeImg: {
       type: String,
-      default: require("@/assets/img/stack/node.png")
+      default: require("@/assets/img/stack/node.png"),
     },
     expressImg: {
       type: String,
-      default: require("@/assets/img/stack/express.png")
+      default: require("@/assets/img/stack/express.png"),
     },
     mongodbImg: {
       type: String,
-      default: require("@/assets/img/stack/mongodb.png")
+      default: require("@/assets/img/stack/mongodb.png"),
     },
     nginxImg: {
       type: String,
-      default: require("@/assets/img/stack/nginx.jpg")
+      default: require("@/assets/img/stack/nginx.jpg"),
     },
     dockerImg: {
       type: String,
-      default: require("@/assets/img/stack/docker.jpg")
-    }
+      default: require("@/assets/img/stack/docker.jpg"),
+    },
   },
   data() {
     return {
@@ -316,15 +323,15 @@ export default {
       showSuccessAlert: false,
       showWarningAlert: false,
       showErrorAlert: false,
-      warningAlertMessage: ""
+      warningAlertMessage: "",
     };
   },
   computed: {
     headerStyle() {
       return {
-        backgroundImage: `url(${this.header})`
+        backgroundImage: `url(${this.header})`,
       };
-    }
+    },
   },
   methods: {
     ...mapActions(["sendEmail"]),
@@ -348,11 +355,11 @@ export default {
       const messageSent = {
         name,
         email,
-        message
+        message,
       };
 
       this.sendEmail(messageSent)
-        .then(res => {
+        .then((res) => {
           //console.log(res.data);
           //console.log(res.status);
           if (res.status == 200) {
@@ -371,7 +378,7 @@ export default {
             this.showErrorAlert = true;
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           this.nameAlert = name;
           this.showErrorAlert = true;
@@ -385,8 +392,8 @@ export default {
     },
     isEmailValid(email) {
       return EmailValidator.validate(email);
-    }
-  }
+    },
+  },
 };
 </script>
 
