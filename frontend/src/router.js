@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Router from "vue-router";
-import IndexOriginal from "./views/Index.vue";
 import Index from "./views/Main.vue"; // my custom page
 import Landing from "./views/Landing.vue";
 import About from "./views/About.vue"; // about
@@ -12,6 +11,7 @@ import Moves from "./views/Moves.vue";
 import MainNavbar from "./layout/MainNavbar.vue";
 import MainFooter from "./layout/MainFooter.vue";
 import PrivacyPolicy from "./views/PrivacyPolicy.vue";
+import ICO from "./views/ICO.vue";
 
 Vue.use(Router);
 
@@ -25,19 +25,6 @@ const router = new Router({
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: "black" },
         auth: { loggedOut: false },
-      },
-    },
-    {
-      path: "/index",
-      name: "indexOriginal",
-      components: {
-        default: IndexOriginal,
-        header: MainNavbar,
-        footer: MainFooter,
-      },
-      props: {
-        header: { colorOnScroll: 400 },
-        footer: { backgroundColor: "black" },
       },
     },
     {
@@ -109,7 +96,15 @@ const router = new Router({
         header: MainNavbar,
         footer: MainFooter,
       },
-
+      props: {
+        header: { colorOnScroll: 400 },
+        footer: { backgroundColor: "black" },
+      },
+    },
+    {
+      path: "/ico",
+      name: "ICO",
+      components: { default: ICO, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: "black" },
@@ -135,6 +130,7 @@ const openRoutes = [
   "projects",
   "privacy",
   "moves",
+  "ICO",
 ];
 
 // if route is open, continue

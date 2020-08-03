@@ -5,7 +5,7 @@
       style="background-color:#40916C"
       :style="{
         backgroundImage:
-          'url(' + require('@/assets/img/90sgraphicsedited.png') + ')',
+          'url(' + require('@/assets/img/90sgraphicsedited.png') + ')'
       }"
     >
       <div class="container">
@@ -66,7 +66,7 @@
         style="background-color:#d8f3dc"
         :style="{
           backgroundImage:
-            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')',
+            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')'
         }"
       >
         <div class="container">
@@ -109,7 +109,7 @@
         style="background-color:#b7e4c7"
         :style="{
           backgroundImage:
-            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')',
+            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')'
         }"
       >
         <div class="container">
@@ -151,7 +151,7 @@
         style="background-color:#95D5B2"
         :style="{
           backgroundImage:
-            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')',
+            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')'
         }"
       >
         <div class="container">
@@ -190,7 +190,7 @@
         style="background-color:#b7e4c7"
         :style="{
           backgroundImage:
-            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')',
+            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')'
         }"
       >
         <div class="container">
@@ -229,7 +229,7 @@
         style="background-color:#d8f3dc"
         :style="{
           backgroundImage:
-            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')',
+            'url(' + require('@/assets/img/90sgraphicsedited.png') + ')'
         }"
       >
         <div class="container">

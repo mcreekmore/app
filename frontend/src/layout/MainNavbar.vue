@@ -236,7 +236,7 @@ import MobileMenu from "@/layout/MobileMenu";
 import { mapGetters, mapActions } from "vuex";
 export default {
   components: {
-    MobileMenu,
+    MobileMenu
   },
   props: {
     type: {
@@ -250,24 +250,24 @@ export default {
           "danger",
           "success",
           "warning",
-          "info",
+          "info"
         ].includes(value);
-      },
+      }
     },
     colorOnScroll: {
       type: Number,
-      default: 0,
-    },
+      default: 0
+    }
   },
   data() {
     return {
       extraNavClasses: "",
       toggledClass: false,
-      auth: false,
+      auth: false
     };
   },
   computed: {
-    ...mapGetters(["getAuthenticatedUser", "loggedIn"]),
+    ...mapGetters(["getAuthenticatedUser", "loggedIn"])
   },
   // watch: {
   //   loggedIn: function(val, oldVal) {
@@ -321,7 +321,7 @@ export default {
       if (element_id) {
         element_id.scrollIntoView({ block: "end", behavior: "smooth" });
       }
-    },
+    }
   },
   mounted() {
     document.addEventListener("scroll", this.scrollListener);
@@ -331,6 +331,6 @@ export default {
   // },
   beforeDestroy() {
     document.removeEventListener("scroll", this.scrollListener);
-  },
+  }
 };
 </script>
