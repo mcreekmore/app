@@ -94,7 +94,7 @@
       </div>
       <div class="section text-center" id="projectStack">
         <div class="container">
-          <h1 class="title" id="creekmoreio">Move Coin: Cryptocurrency ICO</h1>
+          <h1 class="title" id="movecoin">Move Coin: Cryptocurrency ICO</h1>
           <h3 class="description">(Work In Progress)</h3>
           <div class="margin:auto">
             <md-button
@@ -391,7 +391,7 @@
       </div>
       <div class="section text-center" id="projectStack">
         <div class="container">
-          <h1 class="title" id="creekmoreio">
+          <h1 class="title" id="contrack">
             ConTrack: Personal Contract Tracing App
           </h1>
           <h3 class="description">(Work In Progress)</h3>
