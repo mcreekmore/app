@@ -1,7 +1,5 @@
-FROM node:lts-alpine
-
-# install simple http server for serving static content
-#RUN npm install -g http-server
+# Stage 1: build dist
+FROM node:lts-alpine as builder
 
 # make the 'frontend' folder the current working directory
 WORKDIR /app
@@ -15,11 +13,17 @@ RUN npm install
 # copy project files and folders to the current working directory (i.e. 'app' folder)
 COPY . .
 
-ENV VUE_APP_API_URL=server:3000
+# ENV VUE_APP_API_URL=server:3000
 
 # build app for production with minification
 RUN npm run build 
 
-#EXPOSE 80
+# Stage 2: deploy with NGINX
+FROM nginx:1.23.1-alpine
+
+COPY --from=builder /app/dist /var/www
+COPY nginx.conf /etc/nginx/nginx.conf
+
 EXPOSE 3000
-#CMD [ "http-server", "dist", "-p", "80" ]
+
+ENTRYPOINT [ "nginx", "-g", "daemon off;" ]

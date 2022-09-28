@@ -1,27 +1,36 @@
 version: "3"
 
 services:
-  nginx:
-    build: ./nginx
-    image: mattcreekmore/nginx
-    links:
-      - backend
+  frontend:
+    build:
+      context: "frontend/"
+    image: frontend
+    # env_file:
+    #   - "./vue/.env"
     ports:
-      - "80:80"
-      - "443:443"
-      #- "3000:3000"
-    volumes:
-      - ./frontend/dist:/usr/share/nginx/html
-      # DEV: nginx.dev.conf
-      # PROD: nginx.ssh.conf
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      #- ./nginx/default:/etc/nginx/sites-available/default
-      # CERTS
-      #- /etc/letsencrypt:/etc/letsencrypt
-      # CERTBOT
-      #- ./data/certbot/conf:/etc/letsencrypt
-      #- ./data/certbot/www:/var/www/certbot
-    command: [nginx-debug, "-g", "daemon off;"]
+      - 6000:3000
+
+  # nginx:
+  #   build: ./nginx
+  #   image: mattcreekmore/nginx
+  #   links:
+  #     - backend
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #     #- "3000:3000"
+  #   volumes:
+  #     - ./frontend/dist:/usr/share/nginx/html
+  #     # DEV: nginx.dev.conf
+  #     # PROD: nginx.ssh.conf
+  #     - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+  #     #- ./nginx/default:/etc/nginx/sites-available/default
+  #     # CERTS
+  #     #- /etc/letsencrypt:/etc/letsencrypt
+  #     # CERTBOT
+  #     #- ./data/certbot/conf:/etc/letsencrypt
+  #     #- ./data/certbot/www:/var/www/certbot
+  #   command: [nginx-debug, "-g", "daemon off;"]
 
   #certbot:
   #  image: certbot/certbot
@@ -29,25 +38,25 @@ services:
   #    - ./data/certbot/conf:/etc/letsencrypt
   #    - ./data/certbot/www:/var/www/certbot
 
-  backend:
-    build: ./backend
-    image: mattcreekmore/backend
-    volumes:
-      - ./backend:/data
-    depends_on:
-      - mongo
-    ports:
-      - "3000:3000"
-    expose:
-      - "3000"
-    environment:
-      - DATABASE_URL=mongo:27017
-  mongo:
-    image: mongo
-    ports:
-      - 27017:27017
-    volumes:
-      - ./db:/data/db
+  # backend:
+  #   build: ./backend
+  #   image: mattcreekmore/backend
+  #   volumes:
+  #     - ./backend:/data
+  #   depends_on:
+  #     - mongo
+  #   ports:
+  #     - "3000:3000"
+  #   expose:
+  #     - "3000"
+  #   environment:
+  #     - DATABASE_URL=mongo:27017
+  # mongo:
+  #   image: mongo
+  #   ports:
+  #     - 27017:27017
+  #   volumes:
+  #     - ./db:/data/db
   # client:
   #   build: ./frontend
   #   image: mattcreekmore/client
