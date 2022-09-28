@@ -4,11 +4,11 @@ services:
   frontend:
     build:
       context: "frontend/"
-    image: frontend
+    image: creekmore.io
     # env_file:
     #   - "./vue/.env"
     ports:
-      - 6000:3000
+      - 1337:3000
 
   # nginx:
   #   build: ./nginx
