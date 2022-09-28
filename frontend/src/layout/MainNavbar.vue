@@ -65,10 +65,62 @@
                 <p>Home</p>
               </md-list-item>
 
-              <md-list-item href="#/projects">
+              <!-- <md-list-item href="#/projects">
                 <i class="material-icons">folder</i>
                 <p>Projects</p>
-              </md-list-item>
+              </md-list-item>-->
+
+              <li class="md-list-item">
+                <a
+                  href="javascript:void(0)"
+                  class="md-list-item-router md-list-item-container md-button-clean dropdown"
+                >
+                  <div class="md-list-item-content">
+                    <drop-down direction="down">
+                      <md-button
+                        slot="title"
+                        class="md-button md-button-link md-white md-simple dropdown-toggle"
+                        data-toggle="dropdown"
+                      >
+                        <i class="material-icons">folder</i>
+                        <p>Projects</p>
+                      </md-button>
+                      <ul class="dropdown-menu dropdown-with-icons">
+                        <li>
+                          <a href="#/projects">
+                            <i class="material-icons">layers</i>
+                            <p>All Projects</p>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#/moves">
+                            <i class="material-icons">phone_android</i>
+                            <p>Moves</p>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#/projects#movecoin">
+                            <i class="material-icons">web</i>
+                            <p>Move Coin</p>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#/projects#creekmoreio">
+                            <i class="material-icons">web</i>
+                            <p>creekmore.io</p>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#/projects#contrack">
+                            <i class="material-icons">phone_android</i>
+                            <p>ConTrack</p>
+                          </a>
+                        </li>
+                      </ul>
+                    </drop-down>
+                  </div>
+                </a>
+              </li>
 
               <!-- Not Authenticated v-if="!showAuthenticated"-->
               <md-list-item href="#/login" v-if="!loggedIn">
@@ -144,12 +196,20 @@
               >
                 <i class="fab fa-linkedin"></i>
                 <p class="hidden-lg">LinkedIn</p>
-                <md-tooltip md-direction="bottom">Connect with me on LinkedIn</md-tooltip>
+                <md-tooltip md-direction="bottom"
+                  >Find me on LinkedIn</md-tooltip
+                >
               </md-list-item>
-              <md-list-item href="https://github.com/mcreekmore/" target="_blank" rel="noopener">
+              <md-list-item
+                href="https://github.com/mcreekmore/"
+                target="_blank"
+                rel="noopener"
+              >
                 <i class="fab fa-github"></i>
                 <p class="hidden-lg">GitHub</p>
-                <md-tooltip md-direction="bottom">Chek me out on GitHub</md-tooltip>
+                <md-tooltip md-direction="bottom"
+                  >Check me out on GitHub</md-tooltip
+                >
               </md-list-item>
               <md-list-item
                 href="https://www.instagram.com/matthewcreekmore/"
@@ -158,7 +218,9 @@
               >
                 <i class="fab fa-instagram"></i>
                 <p class="hidden-lg">Instagram</p>
-                <md-tooltip md-direction="bottom">Follow me on Instagram</md-tooltip>
+                <md-tooltip md-direction="bottom"
+                  >Follow me on Instagram</md-tooltip
+                >
               </md-list-item>
             </md-list>
           </div>
@@ -186,7 +248,7 @@ import MobileMenu from "@/layout/MobileMenu";
 import { mapGetters, mapActions } from "vuex";
 export default {
   components: {
-    MobileMenu
+    MobileMenu,
   },
   props: {
     type: {
@@ -200,24 +262,24 @@ export default {
           "danger",
           "success",
           "warning",
-          "info"
+          "info",
         ].includes(value);
-      }
+      },
     },
     colorOnScroll: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   data() {
     return {
       extraNavClasses: "",
       toggledClass: false,
-      auth: false
+      auth: false,
     };
   },
   computed: {
-    ...mapGetters(["getAuthenticatedUser", "loggedIn"])
+    ...mapGetters(["getAuthenticatedUser", "loggedIn"]),
   },
   // watch: {
   //   loggedIn: function(val, oldVal) {
@@ -271,7 +333,7 @@ export default {
       if (element_id) {
         element_id.scrollIntoView({ block: "end", behavior: "smooth" });
       }
-    }
+    },
   },
   mounted() {
     document.addEventListener("scroll", this.scrollListener);
@@ -281,6 +343,6 @@ export default {
   // },
   beforeDestroy() {
     document.removeEventListener("scroll", this.scrollListener);
-  }
+  },
 };
 </script>

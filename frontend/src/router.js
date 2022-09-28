@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Router from "vue-router";
-import IndexOriginal from "./views/Index.vue";
 import Index from "./views/Main.vue"; // my custom page
 import Landing from "./views/Landing.vue";
 import About from "./views/About.vue"; // about
@@ -8,9 +7,11 @@ import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
 import Profile from "./views/Profile.vue";
 import Projects from "./views/Projects.vue";
+import Moves from "./views/Moves.vue";
 import MainNavbar from "./layout/MainNavbar.vue";
 import MainFooter from "./layout/MainFooter.vue";
 import PrivacyPolicy from "./views/PrivacyPolicy.vue";
+import ICO from "./views/ICO.vue";
 
 Vue.use(Router);
 
@@ -27,19 +28,6 @@ const router = new Router({
       },
     },
     {
-      path: "/index",
-      name: "indexOriginal",
-      components: {
-        default: IndexOriginal,
-        header: MainNavbar,
-        footer: MainFooter,
-      },
-      props: {
-        header: { colorOnScroll: 400 },
-        footer: { backgroundColor: "black" },
-      },
-    },
-    {
       path: "/landing",
       name: "landing",
       components: { default: Landing, header: MainNavbar, footer: MainFooter },
@@ -52,6 +40,15 @@ const router = new Router({
       path: "/projects",
       name: "projects",
       components: { default: Projects, header: MainNavbar, footer: MainFooter },
+      props: {
+        header: { colorOnScroll: 400 },
+        footer: { backgroundColor: "black" },
+      },
+    },
+    {
+      path: "/moves",
+      name: "moves",
+      components: { default: Moves, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: "black" },
@@ -99,7 +96,15 @@ const router = new Router({
         header: MainNavbar,
         footer: MainFooter,
       },
-
+      props: {
+        header: { colorOnScroll: 400 },
+        footer: { backgroundColor: "black" },
+      },
+    },
+    {
+      path: "/ico",
+      name: "ICO",
+      components: { default: ICO, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: "black" },
@@ -124,6 +129,8 @@ const openRoutes = [
   "about",
   "projects",
   "privacy",
+  "moves",
+  "ICO",
 ];
 
 // if route is open, continue
