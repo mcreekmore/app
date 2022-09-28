@@ -9,9 +9,11 @@
             <h1 class="title">Matt Creekmore</h1>
 
             <h4>
-              Welcome to my page. I'm an aspiring software developer interested
-              in full-stack web development, automation, data analytics, machine
-              learning, hardware, and much more.
+              Welcome to my page. I'm a software developer building a career
+              in web development, linux automation, data analytics, hardware, and much more.
+              <br />
+              <br />
+              I currently work as a solo full-stack web developer consuming web3/ethereum projects. Visit my <a href="https://www.linkedin.com/in/creekmore/">LinkedIn</a> for more.
               <br />
               <br />Check out my lastest project: Moves!
               <br />It's available on
@@ -109,7 +111,7 @@
       <div class="section text-center">
         <div class="container">
           <h2 class="title">About Me</h2>
-          <div class="team">
+
             <div class="md-layout">
               <div class="md-layout-item md-medium-size-33 md-small-size-100">
                 <div class="team-player">
@@ -125,7 +127,7 @@
                       Matt Creekmore
                       <br />
                       <small class="card-description text-muted"
-                        >Developer in training</small
+                        >full-stack web developer</small
                       >
                     </h4>
 
@@ -134,7 +136,10 @@
                         Thanks for visiting my page! I'm an graduate of
                         Management Information Systems and Business
                         Analytics from the University of North Carolina
-                        Wilmington. I've always had a passion for technology and
+                        Wilmington. 
+                        <br />
+                        <br />
+                        I've always had a passion for technology and
                         learning new things. This website is the central
                         location for me to test out projects and new features.
                       </p>
@@ -170,7 +175,7 @@
                 </div>
               </div>
             </div>
-          </div>
+
         </div>
       </div>
 
