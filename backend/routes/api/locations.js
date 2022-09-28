@@ -1,3 +1,9 @@
+// WARNING TO ANYONE WHO IS ABOUT TO READ THIS FILE
+// TURN BACK NOW
+// THERES NOTHING OF VALUE HERE
+// I CAN'T BE BOTHERED TO REFACTOR THIS MESS
+// YES I KNOW HOW TERRIBLE THIS IS
+
 const express = require("express");
 const router = express.Router();
 const nodeMailer = require("nodemailer"); //mail

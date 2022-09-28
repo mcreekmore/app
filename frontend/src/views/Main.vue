@@ -3,8 +3,11 @@
     <parallax class="section page-header header-filter" :style="headerStyle">
       <div class="container">
         <div class="md-layout">
-          <div class="md-layout-item md-size-50 md-small-size-70 md-xsmall-size-100">
+          <div
+            class="md-layout-item md-size-50 md-small-size-70 md-xsmall-size-100"
+          >
             <h1 class="title">Matt Creekmore</h1>
+
             <h4>
               Welcome to my page. I'm an aspiring software developer interested
               in full-stack web development, automation, data analytics, machine
@@ -14,6 +17,7 @@
               <br />It's available on
               iOS and Android
             </h4>
+
             <br />
             <div class="margin:auto">
               <md-button
@@ -120,7 +124,9 @@
                     <h4 class="card-title">
                       Matt Creekmore
                       <br />
-                      <small class="card-description text-muted">Developer in training</small>
+                      <small class="card-description text-muted"
+                        >Developer in training</small
+                      >
                     </h4>
 
                     <md-card-content>
@@ -132,6 +138,7 @@
                         learning new things. This website is the central
                         location for me to test out projects and new features.
                       </p>
+
                     </md-card-content>
 
                     <md-card-actions class="text-center">
@@ -157,7 +164,9 @@
                     </md-card-actions>
                   </md-card>
 
+
                   <md-button href="#/projects" class="md-success" style="margin:auto">My Projects</md-button>
+
                 </div>
               </div>
             </div>
@@ -170,9 +179,9 @@
           <div class="md-layout">
             <div class="md-layout-item md-size-66 md-xsmall-size-100 mx-auto">
               <h2 class="text-center title">Contact Me</h2>
-              <h4
-                class="text-center description"
-              >Ask a question. Share something interesting. Tell me a secret...</h4>
+              <h4 class="text-center description">
+                Ask a question. Share something interesting. Tell me a secret...
+              </h4>
               <h4 class="text-center description">
                 This form will send me an email with your message! I'll respond
                 to you as soon as possible.
@@ -198,16 +207,22 @@
                   <md-textarea v-model="message"></md-textarea>
                 </md-field>
                 <div class="md-layout">
+
                   <md-button
                     class="md-success"
                     style="margin:auto"
                     v-on:click="createMessage(name, email, message)"
                   >Send Message</md-button>
+
                 </div>
 
                 <br />
               </form>
-              <div class="alert alert-success" id="emailAlert" v-show="showSuccessAlert">
+              <div
+                class="alert alert-success"
+                id="emailAlert"
+                v-show="showSuccessAlert"
+              >
                 <div class="container">
                   <button
                     type="button"
@@ -242,7 +257,11 @@
                   : {{ warningAlertMessage }}
                 </div>
               </div>
-              <div class="alert alert-danger" id="emailErrorAlert" v-show="showErrorAlert">
+              <div
+                class="alert alert-danger"
+                id="emailErrorAlert"
+                v-show="showErrorAlert"
+              >
                 <div class="container">
                   <button
                     type="button"
@@ -281,9 +300,15 @@ export default {
     auth: {
       loggedOut: false,
     },
+    // header: {
+    //   type: String,
+    //   default: require("@/assets/img/space-bg.png")
+    // },
     header: {
       type: String,
+
       default: require("@/assets/img/space-bg.png"),
+
     },
     mattProfile: {
       type: String,
