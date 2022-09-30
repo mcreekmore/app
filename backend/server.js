@@ -9,12 +9,6 @@ const config = require("config");
 // const http = require("http");
 const fs = require("fs");
 
-// SSL certs
-// const options = {
-//   key: fs.readFileSync("./certs/domain.key"),
-//   cert: fs.readFileSync("./certs/domain.crt")
-// };
-
 const app = express();
 
 // middleware
